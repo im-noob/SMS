@@ -6,6 +6,7 @@
 package Student;
 
 import java.awt.Dimension;
+import java.util.List;
 
 /**
  *
@@ -16,8 +17,10 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     /**
      * Creates new form StudentAdmissionStage2
      */
+
     public StudentAdmissionStage2() {
         initComponents();
+        
     }
     
      public StudentAdmissionStage2(Dimension size) {
@@ -76,13 +79,13 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel37 = new javax.swing.JLabel();
         religion = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        ph1 = new javax.swing.JTextField();
+        roll = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        ph3 = new javax.swing.JTextField();
+        ph1 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        studclass = new javax.swing.JComboBox<>();
+        sec = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -92,10 +95,26 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setAutoscrolls(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField1.setText("jTextField1");
         jTextField1.setNextFocusableComponent(jButton1);
         getContentPane().add(jTextField1);
         jTextField1.setBounds(90, 35, 206, 23);
@@ -107,6 +126,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(326, 34, 90, 30);
 
@@ -143,7 +167,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel16);
         jLabel16.setBounds(540, 80, 57, 17);
 
-        refByID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(refByID);
         refByID.setBounds(600, 80, 244, 20);
 
@@ -280,6 +303,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel11.setBounds(40, 370, 43, 17);
 
         jTextField9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField9);
         jTextField9.setBounds(100, 370, 251, 23);
 
@@ -297,18 +325,18 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(380, 420, 87, 17);
 
-        ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(ph1);
-        ph1.setBounds(110, 520, 251, 23);
+        roll.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(roll);
+        roll.setBounds(110, 520, 251, 23);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Class :");
         getContentPane().add(jLabel17);
         jLabel17.setBounds(30, 570, 83, 17);
 
-        ph3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(ph3);
-        ph3.setBounds(100, 420, 251, 23);
+        ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(ph1);
+        ph1.setBounds(100, 420, 251, 23);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Mobile No. 1 :");
@@ -320,15 +348,14 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(10, 520, 59, 17);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(110, 570, 250, 23);
+        studclass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(studclass);
+        studclass.setBounds(110, 570, 250, 23);
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", " " }));
-        getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(460, 570, 250, 23);
+        sec.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        sec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", " " }));
+        getContentPane().add(sec);
+        sec.setBounds(460, 570, 250, 23);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Sec. :");
@@ -337,11 +364,21 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Reset");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(220, 633, 110, 30);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Done");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(70, 635, 100, 30);
 
@@ -359,6 +396,134 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private void pinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pinActionPerformed
+    int studentID = 0 ;
+    String RegNo = "0";
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        StudentDaoImpl sdi = new StudentDaoImpl();
+        List nonTeachingList = sdi.getNonTeachingList();
+        System.out.print("getting list"+nonTeachingList.size());
+        for(int i = 0 ; i < nonTeachingList.size(); i++){
+            System.out.print( nonTeachingList.get(i).toString());
+            refByID.addItem(nonTeachingList.get(i).toString());
+        }
+        
+        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
+        List classList = sadi.getNonTeachingList();
+        System.out.print("getting list"+classList.size());
+        for(int i = 0 ; i < classList.size(); i++){
+            System.out.print( classList.get(i).toString());
+            studclass.addItem(classList.get(i).toString());
+        }
+        
+        System.out.print("Form open studien admsjion steg 2 Form opened");
+    }//GEN-LAST:event_formInternalFrameOpened
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
+        RegNo = jTextField1.getText();
+        Student student = sadi.getStudentData(RegNo);
+        
+        refByID.setSelectedIndex(Integer.valueOf(student.getRefBy()));
+        if(student.getGender() == "1"){
+            jRadioButton2.isSelected();
+        }else if(student.getGender() == "2"){
+            jRadioButton1.isSelected();
+        }
+        jDateChooser1.setDate(student.getDob());            
+        
+        studentID = student.getStudentID();
+        id.setText(String.valueOf(studentID));
+        regID.setText(student.getRegID());
+        name.setText(student.getName());
+        father.setText(student.getFather());            
+        mother.setText(student.getMother());            
+        at.setText(student.getAt());            
+        po.setText(student.getPo());            
+        ps.setText(student.getPs());            
+        dist.setText(student.getDist());            
+        pin.setText(student.getPin());            
+        state.setText(student.getState());            
+        nationality.setText(student.getNationality());            
+        jTextField9.setText(student.getCaste());            
+        religion.setText(student.getReligion());            
+        ph1.setText(student.getPh1());
+        ph2.setText(student.getPh2());
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
+
+        Student student = new Student();
+
+        student.setRegID(regID.getText());
+        student.setRefBy(refByID.getSelectedItem().toString());
+        String studGender = null;
+        if(jRadioButton2.isSelected()){
+            studGender = "1";
+        }else if(jRadioButton1.isSelected()){
+            studGender = "2";
+        }
+        student.setGender(studGender);
+        student.setName(name.getText());
+        student.setFather(father.getText());
+
+        java.util.Date studdob = jDateChooser1.getDate();
+//            java.sql.Date studsqldob = new java.sql.Date(studdob.getTime());
+        student.setDob(studdob);
+
+        String studmother = mother.getText();
+        student.setMother(studmother);
+
+        String studat = at.getText();
+        student.setAt(studat);
+
+        String studpo = po.getText();
+        student.setPo(studpo);
+
+        String studps = ps.getText();
+        student.setPs(studps);
+
+        String studdist = dist.getText();
+        student.setDist(studdist);
+
+        String studpin = pin.getText();
+        student.setPin(studpin);
+
+        String studstate = state.getText();
+        student.setState(studstate);
+
+        String studnationality = nationality.getText();
+        student.setNationality(studnationality);
+
+        String studcast = jTextField9.getText();
+        student.setCaste(studcast);
+
+        String studreligion = religion.getText();
+        student.setReligion(studreligion);
+
+        String studph1 = ph1.getText();
+        student.setPh1(studph1);
+
+        String studph2 = ph2.getText();
+        student.setPh2(studph2);
+        
+        String studroll = roll.getText();
+        int studstudclass = studclass.getSelectedIndex();
+        String studsec = sec.getSelectedItem().toString();
+
+//        sadi.updateStudent(student, studentID );
+        sadi.insertNewAdmission(studentID, RegNo, studroll,studstudclass,studsec);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        roll.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -370,8 +535,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -405,13 +568,15 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField nationality;
     private javax.swing.JTextField ph1;
     private javax.swing.JTextField ph2;
-    private javax.swing.JTextField ph3;
     private javax.swing.JTextField pin;
     private javax.swing.JTextField po;
     private javax.swing.JTextField ps;
     private javax.swing.JComboBox<String> refByID;
     private javax.swing.JTextField regID;
     private javax.swing.JTextField religion;
+    private javax.swing.JTextField roll;
+    private javax.swing.JComboBox<String> sec;
     private javax.swing.JTextField state;
+    private javax.swing.JComboBox<String> studclass;
     // End of variables declaration//GEN-END:variables
 }

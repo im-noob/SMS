@@ -7,6 +7,9 @@ package Student;
 
 import Database.DBConnection;
 import java.awt.Dimension;
+import java.awt.PopupMenu;
+import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -17,15 +20,17 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
     /**
      * Creates new form StudentAdmission
      */
+
     public StudentAdmission() {
         initComponents();
         
+        
     }
-    
+   
      public StudentAdmission(Dimension size) {
         initComponents();
         setBounds(0,0,size.width-10, size.height-10);
-      setVisible(true);
+        setVisible(true);
     }
 
     /**
@@ -126,6 +131,24 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         setAutoscrolls(true);
         setFont(new java.awt.Font("Aharoni", 0, 14)); // NOI18N
         setMinimumSize(getMinimumSize());
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -282,7 +305,6 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel16);
         jLabel16.setBounds(570, 20, 57, 17);
 
-        refByID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(refByID);
         refByID.setBounds(630, 22, 244, 20);
 
@@ -518,6 +540,11 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(350, 463, 220, 30);
 
@@ -526,6 +553,11 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
@@ -558,6 +590,107 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         new DBConnection().connectDB();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        StudentDaoImpl sdi = new StudentDaoImpl();
+        List nonTeachingList = sdi.getNonTeachingList();
+        System.out.print("getting list"+nonTeachingList.size());
+        for(int i = 0 ; i < nonTeachingList.size(); i++){
+            System.out.print( nonTeachingList.get(i).toString());
+            refByID.addItem(nonTeachingList.get(i).toString());
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        System.out.print("Form open studien admsjion steg 1 Form Activated");
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        try{
+            StudentDaoImpl sdi = new StudentDaoImpl();;
+
+            Student student = new Student();
+            
+            student.setRegID(regID.getText());
+            student.setRefBy(String.valueOf(refByID.getSelectedIndex()));
+            String studGender = null;
+            if(jRadioButton2.isSelected()){
+                studGender = "1";
+            }else if(jRadioButton1.isSelected()){
+                studGender = "2";
+            }
+            student.setGender(studGender);
+            student.setName(name.getText());
+            student.setFather(father.getText());
+            
+            java.util.Date studdob = jDateChooser1.getDate();
+//            java.sql.Date studsqldob = new java.sql.Date(studdob.getTime());
+            student.setDob(studdob);
+            
+            String studmother = mother.getText();
+            student.setMother(studmother);
+            
+            String studat = at.getText();
+            student.setAt(studat);
+            
+            String studpo = po.getText();
+            student.setPo(studpo);
+            
+            String studps = ps.getText();
+            student.setPs(studps);
+            
+            String studdist = dist.getText();
+            student.setDist(studdist);
+            
+            String studpin = pin.getText();
+            student.setPin(studpin);
+            
+            String studstate = state.getText();
+            student.setState(studstate);
+            
+            String studnationality = nationality.getText();
+            student.setNationality(studnationality);
+            
+            String studcast = jTextField9.getText();
+            student.setCaste(studcast);
+            
+            String studreligion = religion.getText();
+            student.setReligion(studreligion);
+            
+            String studph1 = ph1.getText();
+            student.setPh1(studph1);
+            
+            String studph2 = ph2.getText();
+            student.setPh2(studph2);
+            
+            sdi.insertStudent(student);
+            
+//        }
+//        catch(Exception e){
+//            System.out.print("erro in takign iniput:"+e.getMessage());
+//        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        regID.setText("");
+        name.setText("");
+        father.setText("");
+        jDateChooser1.getDate();
+        jDateChooser1.setDateFormatString("");
+        at.setText("");
+        po.setText("");
+        ps.setText("");
+        dist.setText("");
+        pin.setText("");
+        state.setText("");
+        nationality.setText("");
+        jTextField9.setText("");
+        religion.setText("");
+        ph1.setText("");
+        ph2.setText("");
+        mother.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

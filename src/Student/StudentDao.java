@@ -7,8 +7,11 @@ package Student;
 
 /**
  *
- * @author kumar
+ * @author kumar 
  */
 public interface StudentDao {
-    int insertStudent(Student student);
+    int insertStudent(Student classes);
+//     Student[] selectStudent();
+//    int updateStudent(Student classes);
+    int getIDForNewAdmission();
 }
