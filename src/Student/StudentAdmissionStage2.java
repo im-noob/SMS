@@ -7,6 +7,7 @@ package Student;
 
 import java.awt.Dimension;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +18,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     /**
      * Creates new form StudentAdmissionStage2
      */
+    List nonTeachingList = null;
 
     public StudentAdmissionStage2() {
         initComponents();
@@ -399,13 +401,21 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     int studentID = 0 ;
     String RegNo = "0";
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        
         StudentDaoImpl sdi = new StudentDaoImpl();
-        List nonTeachingList = sdi.getNonTeachingList();
+        nonTeachingList = sdi.getNonTeachingList();
         System.out.print("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            System.out.print( nonTeachingList.get(i).toString());
-            refByID.addItem(nonTeachingList.get(i).toString());
+            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+            
+            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                Integer key = entry.getKey();
+                String value = entry.getValue();
+                refByID.addItem(value);
+                System.out.println("key:"+key+" value:"+value);
+            }
         }
+        
         
         StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
         List classList = sadi.getNonTeachingList();
@@ -422,7 +432,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         RegNo = jTextField1.getText();
         Student student = sadi.getStudentData(RegNo);
         
-        refByID.setSelectedIndex(Integer.valueOf(student.getRefBy()));
+        String selected_refid = null;
+        Integer Selected_refIDint = Integer.valueOf(student.getRefBy()) ;
+        for(int i = 0 ; i < nonTeachingList.size(); i++){
+            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+
+            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                if(Selected_refIDint == entry.getKey())
+                    selected_refid = entry.getValue();
+
+            }
+        }
+        refByID.setSelectedItem(selected_refid);
+        
+        
         if(student.getGender() == "1"){
             jRadioButton2.isSelected();
         }else if(student.getGender() == "2"){
@@ -458,7 +481,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         Student student = new Student();
 
         student.setRegID(regID.getText());
-        student.setRefBy(refByID.getSelectedItem().toString());
+        
+        String selected_refid = refByID.getSelectedItem().toString();
+        Integer Selected_refIDint = 0 ;
+        for(int i = 0 ; i < nonTeachingList.size(); i++){
+            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+
+            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                if(selected_refid == entry.getValue())
+                    Selected_refIDint = entry.getKey();
+
+            }
+        }
+        
+        student.setRefBy(Selected_refIDint.toString());
         String studGender = null;
         if(jRadioButton2.isSelected()){
             studGender = "1";

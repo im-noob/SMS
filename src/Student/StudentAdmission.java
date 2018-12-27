@@ -9,7 +9,9 @@ import Database.DBConnection;
 import java.awt.Dimension;
 import java.awt.PopupMenu;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -26,7 +28,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         
         
     }
-   
+    List nonTeachingList = null;
      public StudentAdmission(Dimension size) {
         initComponents();
         setBounds(0,0,size.width-10, size.height-10);
@@ -593,11 +595,17 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         StudentDaoImpl sdi = new StudentDaoImpl();
-        List nonTeachingList = sdi.getNonTeachingList();
+        nonTeachingList = sdi.getNonTeachingList();
         System.out.print("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            System.out.print( nonTeachingList.get(i).toString());
-            refByID.addItem(nonTeachingList.get(i).toString());
+            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+            
+            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                Integer key = entry.getKey();
+                String value = entry.getValue();
+                refByID.addItem(value);
+                System.out.println("key:"+key+" value:"+value);
+            }
         }
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -612,7 +620,18 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
             Student student = new Student();
             
             student.setRegID(regID.getText());
-            student.setRefBy(String.valueOf(refByID.getSelectedIndex()));
+            String selected_refid = refByID.getSelectedItem().toString();
+            Integer Selected_refIDint = 0 ;
+            for(int i = 0 ; i < nonTeachingList.size(); i++){
+                Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+
+                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                    if(selected_refid == entry.getValue())
+                        Selected_refIDint = entry.getKey();
+                    
+                }
+            }
+            student.setRefBy(String.valueOf(Selected_refIDint));
             String studGender = null;
             if(jRadioButton2.isSelected()){
                 studGender = "1";

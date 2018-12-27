@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -169,18 +171,21 @@ public class StudentDaoImpl implements StudentDao {
 
     List getNonTeachingList() {
         int i = -1;
-        List<Integer> arrIdList = new ArrayList<Integer>();
-               List<String> arrNameList = new ArrayList<String>();
+        List<Map<Integer, String>> maps = new ArrayList<Map<Integer, String>>();
+
+        
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
                 String sql = "SELECT * FROM `employtable` WHERE type = \"Non-Teaching\"";
-               Statement stmt=con.createStatement(); 
-               
-               
+                Statement stmt=con.createStatement(); 
+        
                 ResultSet rs=stmt.executeQuery(sql);
+                
                 while(rs.next()){
-                   arrNameList.add(rs.getString("name"));
+                   Map<Integer, String> Data = new HashMap<>();
+                   Data.put( rs.getInt("EmpID"), rs.getString("name"));
+                   maps.add(Data);
                 }
                 
             } catch (SQLException ex) {
@@ -196,7 +201,7 @@ public class StudentDaoImpl implements StudentDao {
             }
          }
        
-        return arrNameList;
+        return maps;
     }
 
    
