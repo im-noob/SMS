@@ -5,8 +5,12 @@
  */
 package Student;
 
+import DataType.Classes.Classes;
+import DataType.Classes.ClassesDaoImpl;
 import java.awt.Dimension;
 import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -112,8 +116,6 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel3.setText("Class :");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(487, 23, 39, 17);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(544, 23, 154, 20);
 
@@ -124,18 +126,18 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         STUDCLASS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
         getContentPane().add(STUDCLASS);
-        STUDCLASS.setBounds(105, 65, 154, 20);
+        STUDCLASS.setBounds(90, 60, 154, 20);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(327, 61, 53, 25);
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(330, 60, 150, 25);
+
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
@@ -276,17 +278,69 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         System.out.print("Student Acound loded");
     }//GEN-LAST:event_formInternalFrameActivated
-
+    List classList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
-        List classList = sadi.getNonTeachingList();
-        System.out.print("getting list"+classList.size());
-        for(int i = 0 ; i < classList.size(); i++){
-            System.out.print( classList.get(i).toString());
-            STUDCLASS.addItem(classList.get(i).toString());
+        ClassesDaoImpl cdi = new ClassesDaoImpl();
+        Classes cls[] = cdi.selectClasses();
+        for(int i = 0 ; i < cls.length; i++){
+            if(cls[i] == null)
+                System.out.println("null ");
+            else
+                cls[i].getName();
         }
         
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String RegNo = ID.getText();
+        String StudName = ID1.getText();
+        String StudSec = STUDCLASS.getSelectedItem().toString();
+        
+        String selected_refid = jComboBox1.getSelectedItem().toString();
+            Integer Selected_refIDint = 0 ;
+            for(int i = 0 ; i < classList.size(); i++){
+                Map<Integer, String> Data = (Map<Integer, String>) classList.get(i);
+
+                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                    if(selected_refid == entry.getValue())
+                        Selected_refIDint = entry.getKey();
+                    
+                }
+            }
+        StudentACImpl sacd = new StudentACImpl();
+        
+        if(RegNo.trim().length() > 0){
+            DefaultListModel<String> dlm = new DefaultListModel<String>();
+            List studList = sacd.getStudentListByRegno(RegNo);
+            for(int i = 0 ; i < studList.size(); i++){
+//                System.out.print( studList.get(i).toString());
+                Map<Integer, String> Data = (Map<Integer, String>) studList.get(i);
+            
+                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                    Integer key = entry.getKey();
+                    String value = entry.getValue();
+                    dlm.addElement(value);
+                    System.out.println("key:"+key+" value:"+value);
+                }
+            }
+            jList1.setModel(dlm);
+        }else{
+            DefaultListModel<String> dlm = new DefaultListModel<String>();
+            List studList = sacd.getStudentListByName(StudName,String.valueOf(Selected_refIDint),StudSec);
+            for(int i = 0 ; i < studList.size(); i++){
+//                System.out.print( studList.get(i).toString());
+                Map<Integer, String> Data = (Map<Integer, String>) studList.get(i);
+            
+                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
+                    Integer key = entry.getKey();
+                    String value = entry.getValue();
+                    dlm.addElement(value);
+                    System.out.println("key:"+key+" value:"+value);
+                }
+            }
+            jList1.setModel(dlm);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

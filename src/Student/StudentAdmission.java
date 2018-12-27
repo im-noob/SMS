@@ -5,6 +5,7 @@
  */
 package Student;
 
+import DataType.Employ.Employ;
 import Database.DBConnection;
 import java.awt.Dimension;
 import java.awt.PopupMenu;
@@ -598,14 +599,9 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         nonTeachingList = sdi.getNonTeachingList();
         System.out.print("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
+            Employ Data = (Employ) nonTeachingList.get(i);
+            refByID.addItem(Data.getName());
             
-            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                Integer key = entry.getKey();
-                String value = entry.getValue();
-                refByID.addItem(value);
-                System.out.println("key:"+key+" value:"+value);
-            }
         }
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -622,15 +618,13 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
             student.setRegID(regID.getText());
             String selected_refid = refByID.getSelectedItem().toString();
             Integer Selected_refIDint = 0 ;
+            
             for(int i = 0 ; i < nonTeachingList.size(); i++){
-                Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
-
-                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                    if(selected_refid == entry.getValue())
-                        Selected_refIDint = entry.getKey();
-                    
-                }
+                Employ Data = (Employ) nonTeachingList.get(i);
+                if(selected_refid == Data.getName())
+                    Selected_refIDint = Data.getId();                    
             }
+            
             student.setRefBy(String.valueOf(Selected_refIDint));
             String studGender = null;
             if(jRadioButton2.isSelected()){

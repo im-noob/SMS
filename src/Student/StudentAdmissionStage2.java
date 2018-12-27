@@ -5,6 +5,9 @@
  */
 package Student;
 
+import DataType.Classes.Classes;
+import DataType.Classes.ClassesDaoImpl;
+import DataType.Employ.Employ;
 import java.awt.Dimension;
 import java.util.List;
 import java.util.Map;
@@ -400,29 +403,25 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_pinActionPerformed
     int studentID = 0 ;
     String RegNo = "0";
+    Classes cls[] = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         
-        StudentDaoImpl sdi = new StudentDaoImpl();
+       StudentDaoImpl sdi = new StudentDaoImpl();
         nonTeachingList = sdi.getNonTeachingList();
         System.out.print("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
-            
-            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                Integer key = entry.getKey();
-                String value = entry.getValue();
-                refByID.addItem(value);
-                System.out.println("key:"+key+" value:"+value);
-            }
+            Employ Data = (Employ) nonTeachingList.get(i);
+            refByID.addItem(Data.getName());  
         }
         
         
-        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
-        List classList = sadi.getNonTeachingList();
-        System.out.print("getting list"+classList.size());
-        for(int i = 0 ; i < classList.size(); i++){
-            System.out.print( classList.get(i).toString());
-            studclass.addItem(classList.get(i).toString());
+        ClassesDaoImpl cdi = new ClassesDaoImpl();
+        cls = cdi.selectClasses();
+        for(int i = 0 ; i < cls.length; i++){
+            if(cls[i] == null)
+                System.out.println("null ");
+            else
+                studclass.addItem(cls[i].getName());
         }
         
         System.out.print("Form open studien admsjion steg 2 Form opened");
@@ -435,21 +434,18 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         String selected_refid = null;
         Integer Selected_refIDint = Integer.valueOf(student.getRefBy()) ;
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
-
-            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                if(Selected_refIDint == entry.getKey())
-                    selected_refid = entry.getValue();
-
-            }
+            Employ Data = (Employ) nonTeachingList.get(i);
+            if(Selected_refIDint == Data.getId())
+                selected_refid = Data.getName();
         }
         refByID.setSelectedItem(selected_refid);
         
-        
-        if(student.getGender() == "1"){
-            jRadioButton2.isSelected();
-        }else if(student.getGender() == "2"){
-            jRadioButton1.isSelected();
+        System.out.println("gender:"+student.getGender());
+        System.out.print(student.getGender().equals("1"));
+        if(student.getGender().equals("1")){
+            jRadioButton2.setSelected(true);
+        }else if(student.getGender().equals("2") ){
+            jRadioButton1.setSelected(true);
         }
         jDateChooser1.setDate(student.getDob());            
         
@@ -485,13 +481,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         String selected_refid = refByID.getSelectedItem().toString();
         Integer Selected_refIDint = 0 ;
         for(int i = 0 ; i < nonTeachingList.size(); i++){
-            Map<Integer, String> Data = (Map<Integer, String>) nonTeachingList.get(i);
-
-            for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                if(selected_refid == entry.getValue())
-                    Selected_refIDint = entry.getKey();
-
-            }
+                Employ Data = (Employ) nonTeachingList.get(i);
+                if(selected_refid == Data.getName())
+                    Selected_refIDint = Data.getId();                    
         }
         
         student.setRefBy(Selected_refIDint.toString());
@@ -546,11 +538,22 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         student.setPh2(studph2);
         
         String studroll = roll.getText();
-        int studstudclass = studclass.getSelectedIndex();
+        String studstudclass = studclass.getSelectedItem().toString();
+        int classID = 0 ;
+        for(int i =0 ; i < cls.length ; i ++){
+            if(cls[i] != null){
+                if(cls[i].getName().equals(studstudclass)){
+                    classID = cls[i].getId();
+                }
+            }
+        }
+        
+        
+        
         String studsec = sec.getSelectedItem().toString();
 
-//        sadi.updateStudent(student, studentID );
-        sadi.insertNewAdmission(studentID, RegNo, studroll,studstudclass,studsec);
+        sadi.updateStudent(student, studentID );
+        sadi.insertNewAdmission(studentID, RegNo, studroll,classID,studsec);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed

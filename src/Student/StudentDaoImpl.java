@@ -5,6 +5,7 @@
  */
 package Student;
 
+import DataType.Employ.Employ;
 import Database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -171,7 +172,7 @@ public class StudentDaoImpl implements StudentDao {
 
     List getNonTeachingList() {
         int i = -1;
-        List<Map<Integer, String>> maps = new ArrayList<Map<Integer, String>>();
+        List<Employ> maps = new ArrayList<Employ>();
 
         
         Connection con =new DBConnection().connectDB();
@@ -183,8 +184,10 @@ public class StudentDaoImpl implements StudentDao {
                 ResultSet rs=stmt.executeQuery(sql);
                 
                 while(rs.next()){
-                   Map<Integer, String> Data = new HashMap<>();
-                   Data.put( rs.getInt("EmpID"), rs.getString("name"));
+                   Employ Data = new Employ();
+                   Data.setName(rs.getString("name"));
+                   Data.setId(rs.getInt("EmpID"));
+//                   Data.put( rs.getInt("EmpID"), rs.getString("name"));
                    maps.add(Data);
                 }
                 

@@ -56,6 +56,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                     student.setReligion(rs.getString("Religion"));
                     student.setPh1(rs.getString("ph1"));
                     student.setPh2(rs.getString("ph2"));
+                    student.setGender(String.valueOf(rs.getInt("Gender")));
 //                    cls.setId(rs.getInt("ClassID"));
 //                    cls.setName(rs.getString("Name"));
 //                    cls.setTutionFee(rs.getInt("Fee"));
@@ -189,7 +190,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
         return i; 
     }
 
-    List getNonTeachingList() {
+    List getNonTeachingList() {//getting class list
         int i = -1;
         List<Integer> arrIdList = new ArrayList<Integer>();
                List<String> arrNameList = new ArrayList<String>();
