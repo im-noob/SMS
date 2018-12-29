@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package transport;
+package DataType.FeeType;
 
 /**
  *
  * @author kumar
  */
-public interface TransportDao {
-     int insertTrans(Transport trans);
-     Transport[] selectTrans();
-    int updateTrans(Transport trans);
+public class FeeBook {
+  
 }

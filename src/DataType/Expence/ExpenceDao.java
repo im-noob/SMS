@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package transport;
+package DataType.Expence;
 
 /**
  *
  * @author kumar
  */
-public interface TransportDao {
-     int insertTrans(Transport trans);
-     Transport[] selectTrans();
-    int updateTrans(Transport trans);
+public interface ExpenceDao {
+     int insertExpence(Expence expence);
+     Expence[] selectExpence(Expence expence);
+    int updateExpence(Expence expence);
 }

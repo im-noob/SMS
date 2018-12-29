@@ -10,5 +10,8 @@ package DataType.Session;
  * @author kumar
  */
 public interface SessionDao {
-     int insertStudent(Session session);
+    
+     int insertSession(Session session);
+     Session[] selectSession();
+    int updateSession(Session session);
 }

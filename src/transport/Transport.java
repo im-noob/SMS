@@ -10,18 +10,13 @@ package transport;
  * @author kumar
  */
 public class Transport {
-    private String name;
+       
 	private int id;
 	private String route;
 	private int price;
+        private String busno;
 	
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	
 	public int getId() {
 		return id;
@@ -41,4 +36,18 @@ public class Transport {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+    /**
+     * @return the busno
+     */
+    public String getBusno() {
+        return busno;
+    }
+
+    /**
+     * @param busno the busno to set
+     */
+    public void setBusno(String busno) {
+        this.busno = busno;
+    }
 }

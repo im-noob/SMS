@@ -5,8 +5,11 @@
  */
 package DataType.Employ;
 
-import Database.DBConnection;
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +28,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         initComponents();
         setBounds(0,0,size.width-10, size.height-10);
       setVisible(true);
+      clearField();
     }
 
     /**
@@ -36,41 +40,39 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        gender = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        castTxt = new javax.swing.JTextField();
         father = new javax.swing.JTextField();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        male = new javax.swing.JRadioButton();
         name = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ph1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dob = new com.toedter.calendar.JDateChooser();
         jLabel37 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        fmale = new javax.swing.JRadioButton();
         ph2 = new javax.swing.JTextField();
         mother = new javax.swing.JTextField();
         religion = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        address = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        empSubmit = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         ph3 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        type = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -104,18 +106,20 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(62, 104, 48, 17);
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jTextField9);
-        jTextField9.setBounds(130, 310, 251, 23);
+        castTxt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(castTxt);
+        castTxt.setBounds(130, 310, 251, 23);
 
         father.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(father);
         father.setBounds(128, 101, 251, 23);
 
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jRadioButton2.setText("Male");
-        jPanel1.add(jRadioButton2);
-        jRadioButton2.setBounds(510, 70, 51, 25);
+        gender.add(male);
+        male.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        male.setSelected(true);
+        male.setText("Male");
+        jPanel1.add(male);
+        male.setBounds(510, 70, 51, 25);
 
         name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(name);
@@ -131,9 +135,9 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(66, 63, 44, 17);
 
-        ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(ph1);
-        ph1.setBounds(130, 400, 251, 23);
+        email.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(email);
+        email.setBounds(130, 400, 251, 23);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("DOB :");
@@ -150,9 +154,10 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel18);
         jLabel18.setBounds(427, 70, 60, 17);
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(504, 111, 200, 30);
+        dob.setAutoscrolls(true);
+        dob.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(dob);
+        dob.setBounds(504, 111, 200, 30);
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setText("Religion :");
@@ -164,10 +169,11 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(62, 145, 52, 17);
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jRadioButton1.setText("Female");
-        jPanel1.add(jRadioButton1);
-        jRadioButton1.setBounds(580, 70, 67, 25);
+        gender.add(fmale);
+        fmale.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fmale.setText("Female");
+        jPanel1.add(fmale);
+        fmale.setBounds(580, 70, 67, 25);
 
         ph2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(ph2);
@@ -191,17 +197,18 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel13);
         jLabel13.setBounds(60, 180, 57, 17);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane2.setViewportView(jTextArea1);
+        address.setColumns(20);
+        address.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        address.setLineWrap(true);
+        address.setRows(5);
+        address.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(address);
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(120, 180, 442, 119);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,15 +218,16 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(320, 440, 190, 30);
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 255));
-        jButton2.setText("Submit");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        empSubmit.setBackground(new java.awt.Color(51, 51, 255));
+        empSubmit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        empSubmit.setText("Submit");
+        empSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                empSubmitMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(70, 440, 210, 30);
+        jPanel1.add(empSubmit);
+        empSubmit.setBounds(70, 440, 210, 30);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Mobile No. 1 :");
@@ -230,48 +238,15 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jPanel1.add(ph3);
         ph3.setBounds(130, 360, 251, 23);
 
+        type.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Non-Teaching", "Principle", "Other" }));
+        jPanel1.add(type);
+        type.setBounds(250, 20, 196, 23);
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Select Type :");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Non-Teaching", "Principle", "Other" }));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Enter Salary :");
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField1.setText("jTextField1");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 196, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(790, 30, 450, 130);
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(160, 20, 80, 17);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -280,27 +255,93 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //my code
+    private void clearField(){
+        this.address.setText("");
+        this.castTxt.setText("");
+        this.email.setText("");
+        this.father.setText("");
+        this.mother.setText("");
+        this.name.setText("");
+        this.ph2.setText("");
+        this.ph3.setText("");
+        this.religion.setText("");
+         DateFormat df = new SimpleDateFormat("d MMM, yyyy");
+      this.dob.setDate(new Date());
+       
+    }
     private void motherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motherActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_motherActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        new DBConnection().connectDB();
-    }//GEN-LAST:event_jButton2MouseClicked
+    private void empSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empSubmitMouseClicked
+         if("Submit" == this.empSubmit.getText()){
+             System.out.printf("Submit click");
+            Employ obj = new Employ();
+            obj.setName(this.name.getText());
+            obj.setAddress(this.address.getText());
+            obj.setEmail(this.email.getText());
+            obj.setPh1(this.ph2.getText());
+            obj.setPh2(this.ph3.getText());
+            obj.setCast(this.castTxt.getText());
+            obj.setReligion(this.religion.getText());
+            obj.setType(this.type.getItemAt(this.type.getSelectedIndex()));
+            obj.setReligion(this.religion.getText());
+            obj.setFather(this.father.getText());
+            obj.setMother(this.mother.getText());
+            obj.setDob(this.dob.getDate());
+            obj.setGender(this.male.isSelected()? 1:this.fmale.isSelected()? 2:0);
+            int i = new EmployDaoImpl().insertEmploy(obj);
+            if(i!=0){
+                System.out.print("Data inserted Employ ID :"+i);
+                JOptionPane.showMessageDialog(this,"Data Save...Employ ID :"+i);
+                clearField();
+
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            }
+        }
+        else if("Update" == this.empSubmit.getText()){
+            System.out.printf("\n--->Under update");
+          /**  Classes clas = new Classes();
+            clas.setName(className.getText());
+            clas.setTutionFee(Integer.parseInt(tutionFee.getText()));
+            clas.setComputer(Integer.parseInt(ComputerFee.getText()));
+            clas.setId(Integer.parseInt(cID.getText()));
+            int i = new ClassesDaoImpl().updateClasses(clas);
+
+            if(i!=0){
+                System.out.print("Data inserted");
+                JOptionPane.showMessageDialog(this,"Data Save...");
+                save.setText("Save");
+                clearField();
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            }*/
+        }
+    }//GEN-LAST:event_empSubmitMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        clearField();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea address;
+    private javax.swing.JTextField castTxt;
+    private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JTextField email;
+    private javax.swing.JButton empSubmit;
     private javax.swing.JTextField father;
+    private javax.swing.JRadioButton fmale;
+    private javax.swing.ButtonGroup gender;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -314,21 +355,15 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JRadioButton male;
     private javax.swing.JTextField mother;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField ph1;
     private javax.swing.JTextField ph2;
     private javax.swing.JTextField ph3;
     private javax.swing.JTextField religion;
+    private javax.swing.JComboBox<String> type;
     // End of variables declaration//GEN-END:variables
 }

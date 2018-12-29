@@ -5,6 +5,8 @@
  */
 package DataType.Employ;
 
+import java.util.Date;
+
 /**
  *
  * @author kumar
@@ -18,12 +20,30 @@ public class Employ {
 	private String ph2;
 	private String email;
 	private String type;
+        private String cast;
+        private String religion;
+        private String father;
+        private String mother;
+        private Date dob;
+        private int gender;
         
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+        public String getReligion() {
+		return religion;
+	}
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
+        public String getCast() {
+		return cast;
+	}
+	public void setCast(String cast) {
+		this.cast = cast;
 	}
 	public String getAddress() {
 		return address;
@@ -61,5 +81,61 @@ public class Employ {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+    /**
+     * @return the father
+     */
+    public String getFather() {
+        return father;
+    }
+
+    /**
+     * @param father the father to set
+     */
+    public void setFather(String father) {
+        this.father = father;
+    }
+
+    /**
+     * @return the mother
+     */
+    public String getMother() {
+        return mother;
+    }
+
+    /**
+     * @param mother the mother to set
+     */
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    /**
+     * @return the dob
+     */
+    public Date getDob() {
+        return dob;
+    }
+
+    /**
+     * @param dob the dob to set
+     */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    /**
+     * @return the gender
+     */
+    public int getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
     
 }

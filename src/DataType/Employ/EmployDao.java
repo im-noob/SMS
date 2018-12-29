@@ -10,5 +10,7 @@ package DataType.Employ;
  * @author kumar
  */
 public interface EmployDao {
-    
+    int insertEmploy(Employ employ);
+     Employ[] selectEmploy();
+    int updateEmploy(Employ employ);
 }
