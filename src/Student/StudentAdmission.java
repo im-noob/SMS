@@ -615,8 +615,8 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
             StudentDaoImpl sdi = new StudentDaoImpl();;
 
             Student student = new Student();
-            
-            student.setRegID(regID.getText());
+            student.setRegID("");
+//            student.setRegID(regID.getText());
             String selected_refid = refByID.getSelectedItem().toString();
             Integer Selected_refIDint = 0 ;
             

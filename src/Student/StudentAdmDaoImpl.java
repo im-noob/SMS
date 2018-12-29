@@ -33,13 +33,17 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                         + " `At`, `PO`, `PS`, `Dist`, `State`, `Pin`, `ph1`, "
                         + "`ph2`, `Nationality`, `Gender`, `DOB`, `Religion`,"
                         + " `Caste`, `refByID`, `RegID`, `create_at` FROM "
-                        + "`studenttable` WHERE RegID = '"+Regno+"'";
+                        + "`studenttable` WHERE studentID = '"+Regno+"'";
                 Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
+                int i = 0 ;
                 while(rs.next()){                    
-                    
-                    student.setStudentID(Integer.valueOf(rs.getString("studentID")));
-                    student.setRegID(rs.getString("RegID"));
+                    i++;
+                    System.out.println("retriving student infomration by regno :"+i);
+//                    student.setStudentID(Integer.valueOf(rs.getString("studentID")));
+//                    student.setRegID(rs.getString("RegID"));
+                    student.setRegID(rs.getString("studentID"));
+
                     student.setRefBy(rs.getString("refByID"));
                     student.setName(rs.getString("Name"));
                     student.setFather(rs.getString("Father"));
@@ -64,6 +68,8 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                     
 
                 }
+                if(i == 0)
+                    student = null;
                
                 
             } catch (SQLException ex) {
@@ -155,23 +161,24 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     
     
     @Override
-    public int insertNewAdmission(int StudID,String regno,String studroll,int studstudclass,String studsec) {
+    public int insertNewAdmission(String regno,int studstudclass,String studsec) {
         int i=0;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "INSERT INTO `admissiontable`( `StudentID`,"
-                        + " `RegNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
+                String studroll = "";
+                
+//                INSERT INTO `admissiontable`(`AdmissionSlNo`) VALUES ((SELECT classtable.code from classtable WHERE ClassID = 12)+111)
+                String sql = "INSERT INTO `admissiontable`(  `RegNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
                         + "`Status`, `Session`) "
-                        + "VALUES (?,?,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) )";
+                        + "VALUES (?,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) )";
                 PreparedStatement stm=con.prepareStatement(sql);
-                stm.setInt(1,StudID);
-                stm.setString(2,regno);
-                stm.setInt(3,studstudclass);
-                stm.setString(4,studsec);
-                stm.setString(5,studroll);
-                stm.setString(6,"0");
-                stm.setString(7,"1");
+                stm.setInt(1,Integer.valueOf(regno));
+                stm.setInt(2,studstudclass);
+                stm.setString(3,studsec);
+                stm.setString(4,studroll);
+                stm.setString(5,"0");
+                stm.setString(6,"1");
 
                 i = stm.executeUpdate();
                
