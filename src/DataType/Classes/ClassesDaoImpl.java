@@ -26,11 +26,13 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "INSERT INTO `classtable`(`Name`, `Fee`, `computer`) VALUES (?,?,?)";
+                String sql = "INSERT INTO `classtable`(`Name`, `examFee`, `computer`,annual,code) VALUES (?,?,?,?,?)";
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setString(1,classes.getName());
-                stm.setInt(2,classes.getTutionFee());
+                stm.setInt(2,classes.getExameFee());
                 stm.setInt(3,classes.getComputer());
+                stm.setInt(4,classes.getAnnualFee());
+                stm.setString(5,classes.getCode());
                 i = stm.executeUpdate();
                
                 
@@ -56,7 +58,7 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "SELECT `ClassID`, `Name`, `Fee`, `computer` FROM `classtable`";
+                String sql = "SELECT `ClassID`, `Name`, `examFee`, `computer`,annual,code FROM `classtable`";
                Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
                
@@ -67,8 +69,10 @@ public class ClassesDaoImpl implements ClassesDao{
                     
                     cls[i].setId(rs.getInt("ClassID"));
                     cls[i].setName(rs.getString("Name"));
-                    cls[i].setTutionFee(rs.getInt("Fee"));
+                    cls[i].setExameFee(rs.getInt("examFee"));
                     cls[i].setComputer(rs.getInt("computer"));
+                    cls[i].setAnnualFee(rs.getInt("annual"));
+                    cls[i].setCode(rs.getString("code"));
                     
                 }
                
@@ -95,12 +99,14 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "UPDATE `classtable` SET `Name`=?,`Fee`=?,`computer`=? WHERE  `ClassID`=?";
+                String sql = "UPDATE `classtable` SET `Name`=?,`examFee`=?,`computer`=?,annual=? WHERE  `ClassID`=?";
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setString(1,classes.getName());
-                stm.setInt(2,classes.getTutionFee());
+                stm.setInt(2,classes.getExameFee());
                 stm.setInt(3,classes.getComputer());
-                stm.setInt(4,classes.getId());
+                stm.setInt(4,classes.getAnnualFee());
+                stm.setInt(5,classes.getId());
+                
                 i = stm.executeUpdate();
                
                 
