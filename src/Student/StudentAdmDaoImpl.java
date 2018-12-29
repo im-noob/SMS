@@ -161,24 +161,47 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     
     
     @Override
-    public int insertNewAdmission(String regno,int studstudclass,String studsec) {
+    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID) {
         int i=0;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String studroll = "";
+                String sqlFirst = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                Statement stmt=con.createStatement(); 
+               
+               System.out.println("getting count for all student for next reg no:"+sqlFirst);
+                ResultSet rs=stmt.executeQuery(sqlFirst);
+                int NoOfStudent = 0 ;
+                while(rs.next()){
+                   NoOfStudent = rs.getInt("count");
+                }
                 
-//                INSERT INTO `admissiontable`(`AdmissionSlNo`) VALUES ((SELECT classtable.code from classtable WHERE ClassID = 12)+111)
-                String sql = "INSERT INTO `admissiontable`(  `RegNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
+                
+                String sqlSec = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) and Sec ='"+studsec+"'";
+               
+                System.out.println("getting count for all student for roll"+sqlSec);
+                ResultSet rssec=stmt.executeQuery(sqlSec);
+                int nexRoll = 0 ;
+                while(rssec.next()){
+                   nexRoll = rssec.getInt("count");
+                }
+                nexRoll++;
+                System.out.println("noof nexRoll:"+nexRoll);
+                
+                
+                String sql = "INSERT INTO `admissiontable`(  `RegNo`,`AdmissionSlNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
                         + "`Status`, `Session`) "
-                        + "VALUES (?,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) )";
+                        + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) )";
+                System.out.print("this is sql :"+sql);
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setInt(1,Integer.valueOf(regno));
-                stm.setInt(2,studstudclass);
-                stm.setString(3,studsec);
-                stm.setString(4,studroll);
-                stm.setString(5,"0");
-                stm.setString(6,"1");
+                stm.setInt(2, studstudclass);
+                stm.setInt(3, NoOfStudent);
+                stm.setInt(4,studstudclass);
+                stm.setString(5,studsec);
+                stm.setString(6,String.valueOf(nexRoll));
+                stm.setInt(7,TransID);
+                stm.setString(8,"1");
 
                 i = stm.executeUpdate();
                
