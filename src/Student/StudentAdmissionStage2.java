@@ -539,6 +539,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         
         String studroll = roll.getText();
         String studstudclass = studclass.getSelectedItem().toString();
+        
         int classID = 0 ;
         for(int i =0 ; i < cls.length ; i ++){
             if(cls[i] != null){

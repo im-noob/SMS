@@ -9,8 +9,8 @@ import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import java.awt.Dimension;
 import java.util.List;
-import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,8 +136,13 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(330, 60, 150, 25);
+        jButton1.setBounds(330, 60, 150, 30);
 
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
@@ -279,68 +284,66 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         System.out.print("Student Acound loded");
     }//GEN-LAST:event_formInternalFrameActivated
     List classList = null;
+    Classes cls[] = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         ClassesDaoImpl cdi = new ClassesDaoImpl();
-        Classes cls[] = cdi.selectClasses();
+        cls = cdi.selectClasses();
         for(int i = 0 ; i < cls.length; i++){
             if(cls[i] == null)
                 System.out.println("null ");
             else
-                cls[i].getName();
+                jComboBox1.addItem(cls[i].getName());
         }
-        
     }//GEN-LAST:event_formInternalFrameOpened
-
+    List studList = null; //student list search 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String RegNo = ID.getText();
         String StudName = ID1.getText();
         String StudSec = STUDCLASS.getSelectedItem().toString();
         
-        String selected_refid = jComboBox1.getSelectedItem().toString();
-            Integer Selected_refIDint = 0 ;
-            for(int i = 0 ; i < classList.size(); i++){
-                Map<Integer, String> Data = (Map<Integer, String>) classList.get(i);
-
-                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                    if(selected_refid == entry.getValue())
-                        Selected_refIDint = entry.getKey();
-                    
+        String studstudclass = jComboBox1.getSelectedItem().toString();
+        
+        int classID = 0 ;
+        for(int i =0 ; i < cls.length ; i ++){
+            if(cls[i] != null){
+                if(cls[i].getName().equals(studstudclass)){
+                    System.out.println("foundi ");
+                    classID = cls[i].getId();
                 }
             }
+        }
+        
+        
         StudentACImpl sacd = new StudentACImpl();
         
         if(RegNo.trim().length() > 0){
             DefaultListModel<String> dlm = new DefaultListModel<String>();
-            List studList = sacd.getStudentListByRegno(RegNo);
+            studList = sacd.getStudentListByRegno(RegNo);
             for(int i = 0 ; i < studList.size(); i++){
 //                System.out.print( studList.get(i).toString());
-                Map<Integer, String> Data = (Map<Integer, String>) studList.get(i);
-            
-                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                    Integer key = entry.getKey();
-                    String value = entry.getValue();
-                    dlm.addElement(value);
-                    System.out.println("key:"+key+" value:"+value);
-                }
+                Student Data = (Student) studList.get(i);
+                dlm.addElement(Data.getName());
             }
             jList1.setModel(dlm);
         }else{
             DefaultListModel<String> dlm = new DefaultListModel<String>();
-            List studList = sacd.getStudentListByName(StudName,String.valueOf(Selected_refIDint),StudSec);
+            System.out.println("studname:"+StudName+" claddid:"+(classID)+" studsec :"+StudSec);
+            studList = sacd.getStudentListByName(StudName,String.valueOf(classID),StudSec);
             for(int i = 0 ; i < studList.size(); i++){
 //                System.out.print( studList.get(i).toString());
-                Map<Integer, String> Data = (Map<Integer, String>) studList.get(i);
-            
-                for ( Map.Entry<Integer, String> entry : Data.entrySet()) {
-                    Integer key = entry.getKey();
-                    String value = entry.getValue();
-                    dlm.addElement(value);
-                    System.out.println("key:"+key+" value:"+value);
-                }
+                Student Data = (Student) studList.get(i);
+                dlm.addElement(Data.getName());
             }
             jList1.setModel(dlm);
         }
+        JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        int index = jList1.locationToIndex(evt.getPoint());
+        Student selectedStud = (Student) studList.get(index);
+        System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
+    }//GEN-LAST:event_jList1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
