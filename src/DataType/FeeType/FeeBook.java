@@ -10,5 +10,5 @@ package DataType.FeeType;
  * @author kumar
  */
 public class FeeBook {
-  
+ // public 
 }

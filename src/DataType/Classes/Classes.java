@@ -12,8 +12,10 @@ package DataType.Classes;
 public class Classes {
     private int id;
     private String name;
-    private int tutionFee;
+    private int exameFee;
+    private int annualFee;
     private int computer;
+    private String code;
     
         public String getName() {
 		return name;
@@ -31,12 +33,12 @@ public class Classes {
 		this.id = id;
 	}
         
-        public int getTutionFee() {
-		return tutionFee;
+        public int getExameFee() {
+		return exameFee;
 	}
 
-	public void setTutionFee(int tutionFee) {
-		this.tutionFee = tutionFee;
+	public void setExameFee(int exameFee) {
+		this.exameFee = exameFee;
 	}
 
 	public int getComputer() {
@@ -46,5 +48,33 @@ public class Classes {
 	public void setComputer(int computer) {
 		this.computer = computer;
 	}
+
+    /**
+     * @return the annualFee
+     */
+    public int getAnnualFee() {
+        return annualFee;
+    }
+
+    /**
+     * @param annualFee the annualFee to set
+     */
+    public void setAnnualFee(int annualFee) {
+        this.annualFee = annualFee;
+    }
+
+    /**
+     * @return the code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
     
 }

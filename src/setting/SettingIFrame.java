@@ -56,7 +56,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tutionFee = new javax.swing.JTextField();
+        examFee = new javax.swing.JTextField();
         save = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         classList = new javax.swing.JList<>();
@@ -66,6 +66,11 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         className = new javax.swing.JTextField();
         cID = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        annualFee = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        code = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         feeSave = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -120,15 +125,15 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(358, 68, 39, 23);
 
-        tutionFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tutionFee.setText("jTextField1");
-        tutionFee.addActionListener(new java.awt.event.ActionListener() {
+        examFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        examFee.setText("jTextField1");
+        examFee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tutionFeeActionPerformed(evt);
+                examFeeActionPerformed(evt);
             }
         });
-        jPanel1.add(tutionFee);
-        tutionFee.setBounds(420, 100, 180, 23);
+        jPanel1.add(examFee);
+        examFee.setBounds(420, 100, 180, 23);
 
         save.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         save.setText("Save");
@@ -138,7 +143,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(save);
-        save.setBounds(474, 183, 121, 25);
+        save.setBounds(490, 250, 121, 30);
 
         classList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         classList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -163,9 +168,9 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jScrollPane2.setBounds(10, 44, 260, 401);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Tution Fee :");
+        jLabel2.setText("Exam Fee :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(324, 100, 73, 17);
+        jLabel2.setBounds(324, 100, 69, 17);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Computer Fee :");
@@ -190,7 +195,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(className);
-        className.setBounds(415, 68, 180, 23);
+        className.setBounds(420, 70, 180, 23);
 
         cID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cID.setText("0");
@@ -201,6 +206,42 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jLabel8.setText("ID :");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(330, 10, 23, 20);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Annual Fee :");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(320, 160, 80, 17);
+
+        annualFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        annualFee.setText("jTextField1");
+        annualFee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annualFeeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(annualFee);
+        annualFee.setBounds(420, 160, 180, 23);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Code :");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(350, 190, 50, 17);
+
+        code.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        code.setText("jTextField1");
+        code.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(code);
+        code.setBounds(420, 190, 180, 23);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel13.setText("(You can’t update this code) ");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(620, 200, 180, 14);
 
         jTabbedPane1.addTab("Class", jPanel1);
 
@@ -534,12 +575,14 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         // TODO add your handling code here:
         if("Save" == save.getText()){
+            
             // System.out.printf("\nerror during save %d",Integer.parseInt(tutionFee.getText()));
             Classes clas = new Classes();
             clas.setName(className.getText());
-            clas.setTutionFee(Integer.parseInt(tutionFee.getText()));
+            clas.setExameFee(Integer.parseInt(examFee.getText()));
             clas.setComputer(Integer.parseInt(ComputerFee.getText()));
-            System.out.print(Integer.parseInt(tutionFee.getText()));
+            clas.setAnnualFee(Integer.parseInt(this.annualFee.getText()));
+            clas.setCode(this.code.getText());
             int i = new ClassesDaoImpl().insertClasses(clas);
             if(i!=0){
                 System.out.print("Data inserted");
@@ -553,11 +596,14 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         }
         else if("Update" == save.getText()){
+            
             System.out.printf("\n--->Under update");
             Classes clas = new Classes();
             clas.setName(className.getText());
-            clas.setTutionFee(Integer.parseInt(tutionFee.getText()));
+            clas.setExameFee(Integer.parseInt(examFee.getText()));
             clas.setComputer(Integer.parseInt(ComputerFee.getText()));
+            clas.setAnnualFee(Integer.parseInt(this.annualFee.getText()));
+            clas.setCode(this.code.getText());
             clas.setId(Integer.parseInt(cID.getText()));
             int i = new ClassesDaoImpl().updateClasses(clas);
 
@@ -565,6 +611,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
                 System.out.print("Data inserted");
                 JOptionPane.showMessageDialog(this,"Data Save...");
                 save.setText("Save");
+                this.code.enable();
                 clearField();
             }
             else{
@@ -575,9 +622,9 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         ListRefresh();
     }//GEN-LAST:event_saveMouseClicked
 
-    private void tutionFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutionFeeActionPerformed
+    private void examFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examFeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tutionFeeActionPerformed
+    }//GEN-LAST:event_examFeeActionPerformed
 
     private void transListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_transListValueChanged
         String vl = this.transList.getSelectedValue();
@@ -634,6 +681,14 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void feeFeeTypeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_feeFeeTypeListValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_feeFeeTypeListValueChanged
+
+    private void annualFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annualFeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_annualFeeActionPerformed
+
+    private void codeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codeActionPerformed
 //Update Code
    private void selectSelectedID(String string){
          try{
@@ -641,9 +696,13 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
                         if(string == classListVector[i].getName()){
                              this.ComputerFee.setText(String.valueOf(classListVector[i].getComputer()));
                             this.className.setText(classListVector[i].getName());
-                            this.tutionFee.setText(String.valueOf(classListVector[i].getTutionFee()));
+                            this.examFee.setText(String.valueOf(classListVector[i].getExameFee()));
                             this.cID.setText(String.valueOf(classListVector[i].getId()));
+                            this.annualFee.setText(String.valueOf(classListVector[i].getAnnualFee()));
+                            this.code.setText(classListVector[i].getCode());
+                             
                             save.setText("Update");
+                            this.code.disable();
                             return;
                         }
                     }
@@ -798,9 +857,11 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void clearField(){
         this.ComputerFee.setText("0");
         this.className.setText("");
-        this.tutionFee.setText("0");
+        this.examFee.setText("0");
         this.cID.setText("0");
-        
+        this.annualFee.setText("0");
+        this.code.setText("0");
+         
     }
     
     //session field
@@ -814,9 +875,12 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ComputerFee;
+    private javax.swing.JTextField annualFee;
     private javax.swing.JLabel cID;
     private javax.swing.JList<String> classList;
     private javax.swing.JTextField className;
+    private javax.swing.JTextField code;
+    private javax.swing.JTextField examFee;
     private javax.swing.JList<String> feeClassList;
     private javax.swing.JList<String> feeFeeTypeList;
     private javax.swing.JButton feeSave;
@@ -824,6 +888,8 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -832,6 +898,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList2;
@@ -863,6 +930,5 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton sessionSave;
     private javax.swing.JTextField sessionTxt;
     private javax.swing.JList<String> transList;
-    private javax.swing.JTextField tutionFee;
     // End of variables declaration//GEN-END:variables
 }
