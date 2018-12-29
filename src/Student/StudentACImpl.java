@@ -26,7 +26,7 @@ public class StudentACImpl implements StudentACDao {
     @Override
     public List getStudentListByName(String name, String classID, String sec) {
         int i = -1;
-        List<Map<Integer, String>> maps = new ArrayList<Map<Integer, String>>();
+        List<Student> maps = new ArrayList<Student>();
 
         
         Connection con =new DBConnection().connectDB();
@@ -38,13 +38,15 @@ public class StudentACImpl implements StudentACDao {
                         + "WHERE admissiontable.ClassID = '"+classID+"' and "
                         + "admissiontable.Sec = '"+sec+"' and "
                         + "Name LIKE '%"+name+"%'";
+                System.out.println(sql);
                 Statement stmt=con.createStatement(); 
         
                 ResultSet rs=stmt.executeQuery(sql);
                 
                 while(rs.next()){
-                   Map<Integer, String> Data = new HashMap<>();
-                   Data.put( rs.getInt("studentID"), rs.getString("Name"));
+                   Student Data = new Student();
+                   Data.setRegID(String.valueOf(rs.getInt("studentID")));
+                   Data.setName(rs.getString("Name"));
                    maps.add(Data);
                 }
                 
@@ -67,7 +69,7 @@ public class StudentACImpl implements StudentACDao {
     @Override
     public List getStudentListByRegno(String regno) {
         int i = -1;
-        List<Map<Integer, String>> maps = new ArrayList<Map<Integer, String>>();
+        List<Student> maps = new ArrayList<Student>();
 
         
         Connection con =new DBConnection().connectDB();
@@ -79,8 +81,9 @@ public class StudentACImpl implements StudentACDao {
                 ResultSet rs=stmt.executeQuery(sql);
                 
                 while(rs.next()){
-                   Map<Integer, String> Data = new HashMap<>();
-                   Data.put( rs.getInt("studentID"), rs.getString("Name"));
+                   Student Data = new Student();
+                   Data.setRegID(String.valueOf(rs.getInt("studentID")));
+                   Data.setName(rs.getString("Name"));
                    maps.add(Data);
                 }
                 

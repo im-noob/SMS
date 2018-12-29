@@ -282,6 +282,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel13);
         jLabel13.setBounds(70, 270, 41, 17);
 
+        regID.setEditable(false);
         regID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(regID);
         regID.setBounds(281, 19, 251, 23);
