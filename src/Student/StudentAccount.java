@@ -67,6 +67,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        ID2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setClosable(true);
@@ -97,32 +102,32 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Reg. ID :");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(32, 23, 55, 17);
+        jLabel1.setBounds(20, 20, 55, 17);
 
         ID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(ID);
-        ID.setBounds(105, 20, 142, 23);
+        ID.setBounds(87, 20, 160, 23);
 
         ID1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(ID1);
-        ID1.setBounds(327, 20, 142, 23);
+        ID1.setBounds(310, 60, 150, 23);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Name :");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(265, 23, 44, 17);
+        jLabel2.setBounds(260, 60, 44, 17);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Class :");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(487, 23, 39, 17);
+        jLabel3.setBounds(260, 20, 39, 17);
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(544, 23, 154, 20);
+        jComboBox1.setBounds(310, 20, 154, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Sec. :");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 65, 35, 17);
+        jLabel4.setBounds(40, 60, 35, 17);
 
         STUDCLASS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
         getContentPane().add(STUDCLASS);
@@ -136,7 +141,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(330, 60, 150, 30);
+        jButton1.setBounds(950, 70, 90, 20);
 
         jList1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -277,6 +282,32 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(265, 97, 784, 507);
 
+        ID2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(ID2);
+        ID2.setBounds(760, 70, 170, 23);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Father Name :");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(660, 70, 90, 17);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("place:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(710, 30, 36, 17);
+        getContentPane().add(jComboBox2);
+        jComboBox2.setBounds(754, 30, 290, 20);
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("GO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(480, 20, 70, 60);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -297,6 +328,16 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
     List studList = null; //student list search 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        int index = jList1.locationToIndex(evt.getPoint());
+        Student selectedStud = (Student) studList.get(index);
+        System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String RegNo = ID.getText();
         String StudName = ID1.getText();
         String StudSec = STUDCLASS.getSelectedItem().toString();
@@ -336,24 +377,22 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
             jList1.setModel(dlm);
         }
-        JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE);  
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        int index = jList1.locationToIndex(evt.getPoint());
-        Student selectedStud = (Student) studList.get(index);
-        System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
-    }//GEN-LAST:event_jList1MouseClicked
+        JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE); 
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
     private javax.swing.JTextField ID1;
+    private javax.swing.JTextField ID2;
     private javax.swing.JComboBox<String> STUDCLASS;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -361,6 +400,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -34,11 +34,11 @@ public class StudentACImpl implements StudentACDao {
             try {
                 String sql = "SELECT * FROM `studenttable` "
                         + "JOIN admissiontable on "
-                        + "studenttable.studentID = admissiontable.StudentID "
+                        + "studenttable.studentID = admissiontable.RegNo "
                         + "WHERE admissiontable.ClassID = '"+classID+"' and "
                         + "admissiontable.Sec = '"+sec+"' and "
                         + "Name LIKE '%"+name+"%'";
-                System.out.println(sql);
+                System.out.println("ql studentlist by name :"+sql);
                 Statement stmt=con.createStatement(); 
         
                 ResultSet rs=stmt.executeQuery(sql);
@@ -75,7 +75,8 @@ public class StudentACImpl implements StudentACDao {
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "SELECT studentID,Name FROM `studenttable` WHERE RegID = '"+regno+"'";
+                String sql = "SELECT studentID,Name FROM `studenttable` WHERE studentID = '"+regno+"'";
+                System.out.println("ql studentlist by reg no :"+sql);
                 Statement stmt=con.createStatement(); 
         
                 ResultSet rs=stmt.executeQuery(sql);
