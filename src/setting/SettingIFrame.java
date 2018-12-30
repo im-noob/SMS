@@ -683,8 +683,8 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void feeClassListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_feeClassListValueChanged
        /** String value = feeClassList.getSelectedValue();
         this.feebookClass.setText(value);*/
-         String vl = this.classList.getSelectedValue();
-
+         String vl = this.feeClassList.getSelectedValue();
+        System.out.printf("##### Print valur ",vl);
         selectSelectedID(vl);
        this.feebookClass.setText(this.selectClass.getName());
 
