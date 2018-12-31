@@ -215,7 +215,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Total Dues :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 203, 74, 17);
+        jLabel8.setBounds(20, 210, 74, 17);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setText("0");
@@ -316,6 +316,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
     List classList = null;
     Classes cls[] = null;
+    List AddList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         ClassesDaoImpl cdi = new ClassesDaoImpl();
         cls = cdi.selectClasses();
@@ -325,16 +326,41 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             else
                 jComboBox1.addItem(cls[i].getName());
         }
+        
+//        
+        StudentACImpl saci = new StudentACImpl();
+        AddList = saci.getUniqueAddressList();
+        for(int i = 0 ; i < AddList.size(); i++){
+            jComboBox2.addItem((String)AddList.get(i));
+        }
+        
+        
     }//GEN-LAST:event_formInternalFrameOpened
     List studList = null; //student list search 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         
+        String fname = ID2.getText();
+        String address = jComboBox2.getSelectedItem().toString();
+        
+        DefaultListModel<String> dlmPer = new DefaultListModel<String>();
+        StudentACImpl sacd = new StudentACImpl();
+
+        studList = sacd.getStudentListByFatherName(fname,address);
+        for(int i = 0 ; i < studList.size(); i++){
+//                System.out.print( studList.get(i).toString());
+            Student Data = (Student) studList.get(i);
+            dlmPer.addElement(Data.getName());
+        }
+        jList1.setModel(dlmPer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
+        StudentACImpl sacd = new StudentACImpl();
+        sacd.getAllFee(selectedStud.getRegID());
+        
+        
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

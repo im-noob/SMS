@@ -103,5 +103,76 @@ public class StudentACImpl implements StudentACDao {
        
         return maps;
     }
+
+    List getUniqueAddressList() {
+        int i = -1;
+        List<String> maps = new ArrayList<String>();
+
+        
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "SELECT DISTINCT CONCAT( At,', ',PO,', ',ps,', ',Dist,', ',State) as Address FROM `studenttable` ORDER BY `studentID` ASC";
+                System.out.println("ql studentlist by reg no :"+sql);
+                Statement stmt=con.createStatement(); 
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next()){
+                   maps.add(rs.getString("Address"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print("Select Me error");
+                System.out.print(ex);
+            }
+            
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+       
+        return maps;    }
+
+    List getStudentListByFatherName(String fname, String address) {
+        int i = -1;
+        List<Student> maps = new ArrayList<Student>();
+
+        
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "select studentID,Name FROM studenttable WHERE CONCAT( At,', ',PO,', ',ps,', ',Dist,', ',State) = '"+address+"' and Father LIKE '%"+fname+"%'";
+                Statement stmt=con.createStatement(); 
+        
+                ResultSet rs=stmt.executeQuery(sql);
+                
+                while(rs.next()){
+                   Student Data = new Student();
+                   Data.setRegID(String.valueOf(rs.getInt("studentID")));
+                   Data.setName(rs.getString("Name"));
+                   maps.add(Data);
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print("Select Me error");
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+       
+        return maps;  
+    }
+
+    void getAllFee(String regID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
