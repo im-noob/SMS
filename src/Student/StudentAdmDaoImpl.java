@@ -161,7 +161,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     
     
     @Override
-    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID) {
+    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm) {
         int i=0;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
@@ -190,8 +190,8 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 
                 
                 String sql = "INSERT INTO `admissiontable`(  `RegNo`,`AdmissionSlNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
-                        + "`Status`, `Session`) "
-                        + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) )";
+                        + "`Status`, `Session`, `transportFee`, `tutionFee`) "
+                        + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`),?,? )";
                 System.out.print("this is sql :"+sql);
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setInt(1,Integer.valueOf(regno));
@@ -202,6 +202,8 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 stm.setString(6,String.valueOf(nexRoll));
                 stm.setInt(7,TransID);
                 stm.setString(8,"1");
+                stm.setInt(9, adm.getTransportFee());
+                stm.setInt(10, adm.getTutionFee());
 
                 i = stm.executeUpdate();
                

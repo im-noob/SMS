@@ -206,7 +206,64 @@ public class StudentDaoImpl implements StudentDao {
        
         return maps;
     }
+    
+    List getStudentbyClass(String classDe) {
+        int i = -1;
+        List<Student> maps = new ArrayList<Student>();
 
+        
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "SELECT * FROM `studenttable` "
+                        + "JOIN admissiontable "
+                        + "on admissiontable.RegNo = studenttable.studentID "
+                        + "WHERE admissiontable.ClassID = '"+classDe+"'";
+                Statement stmt=con.createStatement(); 
+        
+                ResultSet rs=stmt.executeQuery(sql);
+                
+                while(rs.next()){
+                    Student student = new Student();
+                    student.setRegID(rs.getString("studentID"));
+
+                    student.setRefBy(rs.getString("refByID"));
+                    student.setName(rs.getString("Name"));
+                    student.setFather(rs.getString("Father"));
+                    student.setDob(rs.getDate("DOB"));
+                    student.setMother(rs.getString("Mother"));
+                    student.setAt(rs.getString("At"));
+                    student.setPo(rs.getString("PO"));
+                    student.setPs(rs.getString("PS"));
+                    student.setDist(rs.getString("Dist"));
+                    student.setPin(rs.getString("Pin"));
+                    student.setState(rs.getString("State"));
+                    student.setNationality(rs.getString("Nationality"));
+                    student.setCaste(rs.getString("Caste"));
+                    student.setReligion(rs.getString("Religion"));
+                    student.setPh1(rs.getString("ph1"));
+                    student.setPh2(rs.getString("ph2"));
+                    student.setGender(String.valueOf(rs.getInt("Gender")));
+//                  
+                    maps.add(student);
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print("Select Me error");
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+       
+        return maps;
+    }
+    
    
 
    

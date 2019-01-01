@@ -12,5 +12,5 @@ package Student;
 public interface StudentAdmDao {
     Student getStudentData(String Regno);
     int updateStudent(Student Student,int regno);
-    int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID);
+    int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm);
 }

@@ -86,7 +86,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel37 = new javax.swing.JLabel();
         religion = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        roll = new javax.swing.JTextField();
+        TransFee = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         ph1 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
@@ -96,7 +96,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        roll1 = new javax.swing.JTextField();
+        TutioonFee = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         studclass1 = new javax.swing.JComboBox<>();
@@ -336,10 +336,10 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(380, 420, 87, 17);
 
-        roll.setEditable(false);
-        roll.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(roll);
-        roll.setBounds(100, 590, 250, 23);
+        TransFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TransFee.setText("0");
+        getContentPane().add(TransFee);
+        TransFee.setBounds(100, 590, 250, 23);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Class :");
@@ -356,9 +356,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel20.setBounds(10, 420, 83, 17);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel21.setText("Roll No.  :");
+        jLabel21.setText("Transport Fee  :");
         getContentPane().add(jLabel21);
-        jLabel21.setBounds(20, 590, 59, 17);
+        jLabel21.setBounds(-1, 590, 100, 17);
 
         studclass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(studclass);
@@ -394,15 +394,15 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(70, 635, 100, 30);
 
-        roll1.setEditable(false);
-        roll1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(roll1);
-        roll1.setBounds(490, 590, 251, 23);
+        TutioonFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TutioonFee.setText("0");
+        getContentPane().add(TutioonFee);
+        TutioonFee.setBounds(490, 590, 251, 23);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("Admission No.  :");
+        jLabel23.setText("Tution Fee :");
         getContentPane().add(jLabel23);
-        jLabel23.setBounds(390, 590, 100, 17);
+        jLabel23.setBounds(410, 590, 80, 17);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Bus Route :");
@@ -410,6 +410,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel24.setBounds(10, 560, 83, 17);
 
         studclass1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        studclass1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
         getContentPane().add(studclass1);
         studclass1.setBounds(100, 560, 250, 23);
 
@@ -577,7 +578,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         String studph2 = ph2.getText();
         student.setPh2(studph2);
         
-//        String studroll = roll.getText();
         
         String studstudclass = studclass.getSelectedItem().toString();
         
@@ -599,10 +599,18 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 }
             }
         }
+        if(nameOfRoute.equals("None")){
+           TransID = 0 ;
+           System.out.println("none transport");
+        }
+        Admission adm = new Admission();
+        adm.setTransportFee(Integer.valueOf(TransFee.getText()));
+        adm.setTutionFee(Integer.valueOf(TutioonFee.getText()));
+        
         String studsec = sec.getSelectedItem().toString();
 
         sadi.updateStudent(student, studentID );
-        sadi.insertNewAdmission( RegNo, classID,studsec,TransID);//regno is just a student id in table
+        sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm);//regno is just a student id in table
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
@@ -630,10 +638,14 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         mother.setText("");
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
+        TransFee.setText("");
+        TutioonFee.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TransFee;
+    private javax.swing.JTextField TutioonFee;
     private javax.swing.JTextField at;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField dist;
@@ -683,8 +695,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> refByID;
     private javax.swing.JTextField regID;
     private javax.swing.JTextField religion;
-    private javax.swing.JTextField roll;
-    private javax.swing.JTextField roll1;
     private javax.swing.JComboBox<String> sec;
     private javax.swing.JTextField state;
     private javax.swing.JComboBox<String> studclass;
