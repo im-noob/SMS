@@ -151,7 +151,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 97, 223, 270);
+        jScrollPane1.setBounds(10, 97, 240, 300);
 
         jPanel1.setLayout(null);
 
@@ -352,13 +352,13 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         }
         jList1.setModel(dlmPer);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    List FeeList = null;
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
         StudentACImpl sacd = new StudentACImpl();
-        sacd.getAllFee(selectedStud.getRegID());
+        FeeList = sacd.getAllFee(selectedStud.getRegID());
         
         
     }//GEN-LAST:event_jList1MouseClicked

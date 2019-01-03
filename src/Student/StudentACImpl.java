@@ -171,8 +171,40 @@ public class StudentACImpl implements StudentACDao {
         return maps;  
     }
 
-    void getAllFee(String regID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    List getAllFee(String regID) {
+        int i = -1;
+        List<FeeTypeClass >maps = new ArrayList<FeeTypeClass>();
+
+        
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "";
+                Statement stmt=con.createStatement(); 
+        
+                ResultSet rs=stmt.executeQuery(sql);
+                
+                while(rs.next()){
+                   FeeTypeClass Data = new FeeTypeClass();
+                   Data.setFeeName(String.valueOf(rs.getInt("studentID")));
+                   Data.setFeeAmt(Integer.valueOf(rs.getString("Name")));
+                   maps.add(Data);
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print("Select Me error");
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+       
+        return maps;  
     }
     
 }
