@@ -171,25 +171,32 @@ public class StudentACImpl implements StudentACDao {
         return maps;  
     }
 
-    List getAllFee(String regID) {
+    FeeTypeClass getAllFee(String regID) {
         int i = -1;
-        List<FeeTypeClass >maps = new ArrayList<FeeTypeClass>();
 
-        
+        FeeTypeClass Data = new FeeTypeClass();
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "";
-                Statement stmt=con.createStatement(); 
-        
-                ResultSet rs=stmt.executeQuery(sql);
                 
-                while(rs.next()){
-                   FeeTypeClass Data = new FeeTypeClass();
-                   Data.setFeeName(String.valueOf(rs.getInt("studentID")));
-                   Data.setFeeAmt(Integer.valueOf(rs.getString("Name")));
-                   maps.add(Data);
-                }
+                String sqlSupplyOld = "SELECT * FROM `cart_table` WHERE RegID = 1 and session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                
+                String sqlSales = "SELECT COALESCE(SUM(Dues),0) AS SalesFee FROM cart_table WHERE RegID = 2 AND session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                String sqlTrans = "SELECT transportFee *  TIMESTAMPDIFF(MONTH, created_at, CURRENT_TIMESTAMP()) as TransFee FROM `admissiontable` WHERE RegNo = 2 and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                String sqlOtherFee = "";
+                
+//                for sales
+                Statement stmtSales=con.createStatement(); 
+                ResultSet rsSales = stmtSales.executeQuery(sqlSales);
+                rsSales.next();
+                Data.setsupplyFee(rsSales.getInt("SalesFee"));
+                
+//                for tranport 
+                Statement stmtTrans=con.createStatement(); 
+                ResultSet rsTrans = stmtTrans.executeQuery(sqlTrans);
+                rsTrans.next();
+                Data.setTransFee(rsTrans.getInt("TransFee"));
+                
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -204,7 +211,7 @@ public class StudentACImpl implements StudentACDao {
             }
          }
        
-        return maps;  
+        return Data;  
     }
     
 }

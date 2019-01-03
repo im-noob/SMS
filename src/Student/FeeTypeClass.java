@@ -10,35 +10,76 @@ package Student;
  * @author aarav
  */
 public class FeeTypeClass {
-    private String FeeName;
-    private int FeeAmt;
-
+    private int OldFee;
+    private int TransFee;
+    private int otherFee;
+    private int supplyFee;
+ 
     /**
-     * @return the FeeName
+     * @return the OldFee
      */
-    public String getFeeName() {
-        return FeeName;
+    public int getOldFee() {
+        return OldFee;
     }
 
     /**
-     * @param FeeName the FeeName to set
+     * @param OldFee the OldFee to set
      */
-    public void setFeeName(String FeeName) {
-        this.FeeName = FeeName;
+    public void setOldFee(int OldFee) {
+        this.OldFee = OldFee;
     }
     
+    
+    
     /**
-     * @return the FeeAmt
+     * @return the TransFee
      */
-    public int getFeeAmt() {
-        return FeeAmt;
+    public int getTransFee() {
+        return TransFee;
     }
 
     /**
-     * @param FeeAmt the FeeAmt to set
+     * @param TransFee the TransFee to set
      */
-    public void setFeeAmt(int FeeAmt) {
-        this.FeeAmt = FeeAmt;
+    public void setTransFee(int TransFee) {
+        this.TransFee = TransFee;
+    }
+    
+    
+    
+    
+    /**
+     * @return the otherFee
+     */
+    public int getotherFee() {
+        return otherFee;
     }
 
+    /**
+     * @param otherFee the otherFee to set
+     */
+    public void setotherFee(int otherFee) {
+        this.otherFee = otherFee;
+    }
+    
+    
+    
+    
+    
+    
+    /**
+     * @return the supplyFee
+     */
+    public int getsupplyFee() {
+        return supplyFee;
+    }
+
+    /**
+     * @param supplyFee the supplyFee to set
+     */
+    public void setsupplyFee(int supplyFee) {
+        this.supplyFee = supplyFee;
+    }
+    
+   
 }
