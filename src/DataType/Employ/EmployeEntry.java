@@ -73,6 +73,12 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         ph3 = new javax.swing.JTextField();
         type = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        ph4 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        aadhar = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        salary = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -162,7 +168,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setText("Religion :");
         jPanel1.add(jLabel37);
-        jLabel37.setBounds(423, 310, 70, 17);
+        jLabel37.setBounds(440, 310, 70, 17);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Mother :");
@@ -205,7 +211,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(address);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(120, 180, 442, 119);
+        jScrollPane2.setBounds(130, 180, 442, 119);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -216,7 +222,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 440, 190, 30);
+        jButton1.setBounds(330, 480, 190, 30);
 
         empSubmit.setBackground(new java.awt.Color(51, 51, 255));
         empSubmit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -227,7 +233,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(empSubmit);
-        empSubmit.setBounds(70, 440, 210, 30);
+        empSubmit.setBounds(80, 480, 210, 30);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Mobile No. 1 :");
@@ -247,6 +253,33 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
         jLabel5.setText("Select Type :");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(160, 20, 80, 17);
+
+        ph4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(ph4);
+        ph4.setBounds(880, 360, 251, 23);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Mobile No. 3 : ");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(780, 360, 87, 17);
+
+        aadhar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(aadhar);
+        aadhar.setBounds(510, 400, 251, 23);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Aadhar No. :");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(420, 407, 83, 20);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setText("Salary :");
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(50, 440, 60, 20);
+
+        salary.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(salary);
+        salary.setBounds(130, 440, 251, 23);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -286,11 +319,14 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
             obj.setCast(this.castTxt.getText());
             obj.setReligion(this.religion.getText());
             obj.setType(this.type.getItemAt(this.type.getSelectedIndex()));
-            obj.setReligion(this.religion.getText());
+            //obj.setReligion(this.religion.getText());
             obj.setFather(this.father.getText());
             obj.setMother(this.mother.getText());
             obj.setDob(this.dob.getDate());
             obj.setGender(this.male.isSelected()? 1:this.fmale.isSelected()? 2:0);
+            obj.setAadhar(this.aadhar.getText());
+            obj.setPh3(this.ph3.getText());
+            obj.setSalary(Integer.parseInt(this.salary.getText()));
             int i = new EmployDaoImpl().insertEmploy(obj);
             if(i!=0){
                 System.out.print("Data inserted Employ ID :"+i);
@@ -332,6 +368,7 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField aadhar;
     private javax.swing.JTextArea address;
     private javax.swing.JTextField castTxt;
     private com.toedter.calendar.JDateChooser dob;
@@ -348,6 +385,9 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -363,7 +403,9 @@ public class EmployeEntry extends javax.swing.JInternalFrame {
     private javax.swing.JTextField name;
     private javax.swing.JTextField ph2;
     private javax.swing.JTextField ph3;
+    private javax.swing.JTextField ph4;
     private javax.swing.JTextField religion;
+    private javax.swing.JTextField salary;
     private javax.swing.JComboBox<String> type;
     // End of variables declaration//GEN-END:variables
 }

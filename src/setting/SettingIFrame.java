@@ -9,6 +9,8 @@ import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import DataType.FeeType.FeeBook;
 import DataType.FeeType.FeeBookDaoImpl;
+import DataType.FeeType.FeeCalc;
+import DataType.FeeType.FeeCalcDaoImpl;
 import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
 import java.awt.Dimension;
@@ -29,6 +31,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     Session[] sessionListVector = null;
     Transport[] transListVector = null;
     Classes selectClass = null;
+    FeeCalcDaoImpl feeCalcDaoImpl = null;
     /**
      * Creates new form SettingIFrame
      */
@@ -45,6 +48,10 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
        clearField();
      sessionListRefresh();
      transportListRefresh();
+     feeCalcDaoImpl = new FeeCalcDaoImpl();
+     FeeCalc feecalc = new FeeCalc();
+     feecalc.setClassId(3);
+     feeCalcDaoImpl.selectFeeCalc(feecalc);
     }
 
     /**
@@ -111,6 +118,14 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         feeBookSave = new javax.swing.JButton();
         feeBookSave1 = new javax.swing.JButton();
         feeBookSave2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -393,6 +408,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jPanel5.add(jLabel15);
         jLabel15.setBounds(30, 10, 150, 17);
 
+        jPanel6.setEnabled(false);
         jPanel6.setLayout(null);
 
         feeFeeTypeList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -501,6 +517,50 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jPanel6.setBounds(210, 30, 720, 480);
 
         jTabbedPane1.addTab("Fee Book", jPanel5);
+
+        jPanel3.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel3.setLayout(null);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Select Class :");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(30, 10, 90, 20);
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jComboBox1);
+        jComboBox1.setBounds(120, 10, 180, 20);
+
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jComboBox2);
+        jComboBox2.setBounds(420, 10, 280, 20);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Session  :");
+        jPanel3.add(jLabel14);
+        jLabel14.setBounds(350, 10, 80, 20);
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Father", "AT", "PO"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jPanel3.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 40, 710, 480);
+
+        jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton1.setText("ON");
+        jPanel3.add(jToggleButton1);
+        jToggleButton1.setBounds(760, 50, 120, 30);
+
+        jTabbedPane1.addTab("Student List", jPanel3);
 
         jScrollPane1.setViewportView(jTabbedPane1);
 
@@ -771,7 +831,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
                     selectClass = new Classes();
                     for(int i = 0;classListVector.length>i;i++){
                         if(string == classListVector[i].getName()){
-                             this.ComputerFee.setText(String.valueOf(classListVector[i].getComputer()));
+                            this.ComputerFee.setText(String.valueOf(classListVector[i].getComputer()));
                             this.className.setText(classListVector[i].getName());
                             this.examFee.setText(String.valueOf(classListVector[i].getExameFee()));
                             this.cID.setText(String.valueOf(classListVector[i].getId()));
@@ -965,17 +1025,21 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> feeClassList;
     private javax.swing.JList<String> feeFeeTypeList;
     private javax.swing.JLabel feebookClass;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -984,17 +1048,21 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField rBno;
     private javax.swing.JTextField rFee;
     private javax.swing.JLabel rID;

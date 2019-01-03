@@ -27,7 +27,7 @@ public class EmployDaoImpl implements EmployDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "INSERT INTO `employtable`(`Name`, `address`,  `ph1`, `ph2`, `email`, `type`,  `cast`, `religion`, `father`, `mother`, `DOB`, `Gender`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO `employtable`(`Name`, `address`,  `ph1`, `ph2`, `email`, `type`,  `cast`, `religion`, `father`, `mother`, `DOB`, `Gender`, `ph3`, `aadhar`, `salary`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement stm=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                 stm.setString(1,employ.getName());
                 stm.setString(2, employ.getAddress());
@@ -41,6 +41,9 @@ public class EmployDaoImpl implements EmployDao{
                 stm.setString(10,employ.getMother());
                 stm.setDate(11,new java.sql.Date(employ.getDob().getTime()));
                 stm.setInt(12,employ.getGender());
+                stm.setString(13,employ.getPh3());
+                stm.setString(14,employ.getAadhar());
+                stm.setInt(15,employ.getSalary());
                 stm.executeUpdate();
                ResultSet rs = stm.getGeneratedKeys();
                rs.next();

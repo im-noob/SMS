@@ -18,6 +18,7 @@ public class Employ {
 	private String address;
 	private String ph1;
 	private String ph2;
+        private String ph3;
 	private String email;
 	private String type;
         private String cast;
@@ -26,6 +27,8 @@ public class Employ {
         private String mother;
         private Date dob;
         private int gender;
+        private int salary;
+        private String aadhar;
         
 	public String getName() {
 		return name;
@@ -138,4 +141,45 @@ public class Employ {
         this.gender = gender;
     }
     
+      /**
+     * @return the salary
+     */
+    public int getSalary() {
+        return salary;
+    }
+
+    /**
+     * @param salary the salary to set
+     */
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * @return the ph3
+     */
+    public String getPh3() {
+        return ph3;
+    }
+
+    /**
+     * @param ph3 the ph3 to set
+     */
+    public void setPh3(String ph3) {
+        this.ph3 = ph3;
+    }
+
+    /**
+     * @return the aadhar
+     */
+    public String getAadhar() {
+        return aadhar;
+    }
+
+    /**
+     * @param aadhar the aadhar to set
+     */
+    public void setAadhar(String aadhar) {
+        this.aadhar = aadhar;
+    }
 }
