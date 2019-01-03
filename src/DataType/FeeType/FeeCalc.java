@@ -11,7 +11,8 @@ package DataType.FeeType;
  */
 public class FeeCalc {
     private int month;
-    private String fee;
+    private String feeTypeName;
+    private int feeTypeId;
     private int session;
     private String className;
     private int classId;
@@ -34,15 +35,15 @@ public class FeeCalc {
     /**
      * @return the fee
      */
-    public String getFee() {
-        return fee;
+    public String getFeeTypeName() {
+        return feeTypeName;
     }
 
     /**
      * @param fee the fee to set
      */
-    public void setFee(String fee) {
-        this.fee = fee;
+    public void setFeeTypeName(String feeTypeName) {
+        this.feeTypeName = feeTypeName;
     }
 
     /**
@@ -99,5 +100,19 @@ public class FeeCalc {
      */
     public void setFeebookid(int feebookid) {
         this.feebookid = feebookid;
+    }
+
+    /**
+     * @return the feeTypeId
+     */
+    public int getFeeTypeId() {
+        return feeTypeId;
+    }
+
+    /**
+     * @param feeTypeId the feeTypeId to set
+     */
+    public void setFeeTypeId(int feeTypeId) {
+        this.feeTypeId = feeTypeId;
     }
 }

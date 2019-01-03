@@ -27,10 +27,13 @@ public class FeeCalcDaoImpl implements FeeCalcDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-               String sql = "SELECT `feeBookID`, `MonthCode`, `feeType`, `SessionID`, `ClassID`, `created_at` FROM `feereceiptmanagertable` WHERE `ClassID` = "+feecalc.getClassId();
+                
+                String sql = "SELECT `feeBookID`, `MonthCode`, `feeType`, `SessionID`, `ClassID`, `created_at` FROM `feereceiptmanagertable` WHERE `ClassID` = "+feecalc.getClassId();
+               
                 Statement stmt=con.createStatement(); 
-                        
+                
                 String sqlrow = "SELECT COUNT(*) as num FROM `feereceiptmanagertable` WHERE `ClassID` = "+feecalc.getClassId();
+               
                 ResultSet rs = stmt.executeQuery(sqlrow);
                 rs.next();
                 int rowcount =rs.getInt("num"); 
@@ -38,17 +41,18 @@ public class FeeCalcDaoImpl implements FeeCalcDao{
                 obj =new FeeCalc[rowcount];
                 System.out.printf("Total Row count : %d",rowcount);
                 rs=stmt.executeQuery(sql);
-               
+                String[] feeTypeArray ={"Old Fee","Annual Fee","Tuition  Fee","Computer Fee","Examination Fee","Late Fine","Transport Fee","Other Fee"};
                 
                 while(rs.next()){
                    i+=1;
                     obj[i] =new FeeCalc();
                     
-                   obj[i].setClassId(rs.getInt("ClassID"));
+                    obj[i].setClassId(rs.getInt("ClassID"));
                     obj[i].setMonth(rs.getInt("MonthCode"));
-                    obj[i].setFee(rs.getString("feeType"));
+                    obj[i].setFeeTypeName(feeTypeArray[Integer.parseInt(rs.getString("feeType"))-1]);
                     obj[i].setSession(rs.getInt("SessionID"));
-                    obj[i].setFeebookid(rs.getInt("feeBookID"));                    
+                    obj[i].setFeebookid(rs.getInt("feeBookID"));
+                    
                 }
                
                 
