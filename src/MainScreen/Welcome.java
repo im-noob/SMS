@@ -6,6 +6,8 @@
 package MainScreen;
 
 import DataType.Employ.EmployeEntry;
+import DebugFile.DebugClass;
+import DebugFile.DebugClassDaoImpl;
 import Student.StudentAccount;
 import Student.StudentAdmission;
 import Student.StudentAdmissionStage2;
@@ -47,6 +49,7 @@ public class Welcome extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
+        dbExport = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -95,6 +98,14 @@ public class Welcome extends javax.swing.JFrame {
             }
         });
         fileMenu.add(exitMenuItem);
+
+        dbExport.setText("Export");
+        dbExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dbExportActionPerformed(evt);
+            }
+        });
+        fileMenu.add(dbExport);
 
         menuBar.add(fileMenu);
 
@@ -232,7 +243,7 @@ public class Welcome extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-         StudentAdmissionStage2 sifram =new StudentAdmissionStage2(this.getSize());
+        StudentAdmissionStage2 sifram =new StudentAdmissionStage2(this.getSize());
         desktopPane.add(sifram);
         sifram.show(true);
          System.out.printf("Click");
@@ -247,20 +258,29 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
          
-         EmployeEntry sifram =new EmployeEntry(this.getSize());
+        EmployeEntry sifram =new EmployeEntry(this.getSize());
         desktopPane.add(sifram);
         sifram.show(true);
-         System.out.printf("Click");
+        System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-         SettingIFrame sifram =new SettingIFrame(this.getSize());
+        SettingIFrame sifram =new SettingIFrame(this.getSize());
         desktopPane.add(sifram);
         sifram.show(true);
-         System.out.printf("Click");
+        System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void dbExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbExportActionPerformed
+     
+      DebugClassDaoImpl obj= new DebugClassDaoImpl();
+      DebugClass debug= new DebugClass();
+      debug.setNotes("hello");
+      System.out.println(debug.getDate());
+      
+     // obj.fileWriterG("hello");
+    }//GEN-LAST:event_dbExportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +322,7 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
+    private javax.swing.JMenuItem dbExport;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;

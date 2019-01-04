@@ -49,7 +49,8 @@ public class FeeCalcDaoImpl implements FeeCalcDao{
                     
                     obj[i].setClassId(rs.getInt("ClassID"));
                     obj[i].setMonth(rs.getInt("MonthCode"));
-                    obj[i].setFeeTypeName(feeTypeArray[Integer.parseInt(rs.getString("feeType"))-1]);
+                   // obj[i].setFeeTypeName(feeTypeArray[Integer.parseInt(rs.getString("feeType"))-1]);
+                    obj[i].setFeeTypeName(rs.getString("feeType"));
                     obj[i].setSession(rs.getInt("SessionID"));
                     obj[i].setFeebookid(rs.getInt("feeBookID"));
                     
