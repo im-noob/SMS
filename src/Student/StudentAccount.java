@@ -241,6 +241,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Paid");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(20, 340, 100, 30);
 
@@ -468,6 +473,18 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField1FocusLost
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int discAMT = Integer.valueOf(jTextField1.getText());
+        int PaidAMT = Integer.valueOf(jTextField2.getText());
+        StudentACImpl sad = new StudentACImpl();
+        int success = sad.paidTheFee(discAMT,PaidAMT);
+        System.out.println(success);
+        if(success != 0 ){
+            JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;

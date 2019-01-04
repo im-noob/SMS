@@ -207,6 +207,7 @@ public class StudentACImpl implements StudentACDao {
                 int classIDIS = rsClassID.getInt("ClassID");
                 int tutionFee = rsClassID.getInt("tutionFee");
                 FeeCalc fc = new FeeCalc();
+                System.out.println("seidngin classs:"+classIDIS);
                 fc.setClassId(classIDIS);
                 FeeCalcDaoImpl fcdi = new FeeCalcDaoImpl();
                 FeeCalc fcList [] = fcdi.selectFeeCalc(fc);
@@ -226,10 +227,10 @@ public class StudentACImpl implements StudentACDao {
 
                 }
                 
-                
+                System.out.println("idExamC:"+idExamC+" idcomfeeC:"+idCompFeeC+" idAnualc:"+idAnulC+" idtuic:"+idTutFeeC);
                 System.out.println("Exam feec out:"+idExamC+" Computer fec outn:"+idCompFeeC+" anl fee count:"+idAnulC);
                 
-                sqlAllOhterFee = "SELECT examFee*"+idExamC+" AS EF ,computer * "+idCompFeeC+" AS CF, annual*"+idAnulC+" as AF FROM classtable WHERE ClassID = "+classIDIS+" and session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                sqlAllOhterFee = "SELECT examFee AS EF ,computer AS CF, annual as AF FROM classtable WHERE ClassID = "+classIDIS+" and session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
                 
                 System.out.println("other sql:"+sqlAllOhterFee);
                 Statement stmtAllOhterFee=con.createStatement(); 
@@ -238,11 +239,16 @@ public class StudentACImpl implements StudentACDao {
                 int examFee = rsAllOhterFee.getInt("EF");
                 int compFee = rsAllOhterFee.getInt("CF");
                 int annualFee = rsAllOhterFee.getInt("AF");
-
+                
+                
+                
+                System.out.println("examFeeC:"+examFee+" compFeeC:"+compFee+" cnnualfeeC:"+annualFee+" tutinfeeC:"+tutionFee);
                 Data.settutionFee(idTutFeeC*tutionFee);                
                 Data.setexamFee(idExamC*examFee);                
                 Data.setcompFee(idCompFeeC*compFee);                
-                Data.setannualFee(idAnulC*annualFee);                
+                Data.setannualFee(idAnulC*annualFee);      
+                
+                System.out.println("tranFe:"+Data.getTransFee()+" support:"+Data.getsupplyFee()+" supply:"+Data.getsupplyFee()+" TutionFee:"+Data.gettutionFee()+" Examfe:"+Data.getexamFee()+" compFee:"+Data.getcompFee()+" anualfee:"+Data.getannualFee());
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,5 +265,20 @@ public class StudentACImpl implements StudentACDao {
        
         return Data;  
     }
-    
+
+    int paidTheFee(int discAMT, int PaidAMT) {
+        String sqlInsertPaid = "INSERT INTO `feetransactiontable`(`RegNo`, `sessionID`, `FeeType`, `feePaid`, `discount`) VALUES ('Regno','sessin','feetype','fpaid','dues');";
+        int i = 0;
+        try{
+            Connection con =new DBConnection().connectDB();
+            Statement stmtInsertPaid = con.createStatement(); 
+            i = stmtInsertPaid.executeUpdate(sqlInsertPaid);
+            
+        }catch(Exception e){
+            System.out.println("Excpetion paidthefEe:"+e.getMessage());
+        }
+        return(i);
+    }
+
+   
 }
