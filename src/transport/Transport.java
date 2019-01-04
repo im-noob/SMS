@@ -37,17 +37,17 @@ public class Transport {
 		this.price = price;
 	}
 
-    /**
-     * @return the busno
-     */
-    public String getBusno() {
-        return busno;
-    }
+        /**
+         * @return the busno
+         */
+        public String getBusno() {
+            return busno;
+        }
 
-    /**
-     * @param busno the busno to set
-     */
-    public void setBusno(String busno) {
-        this.busno = busno;
-    }
+        /**
+         * @param busno the busno to set
+         */
+        public void setBusno(String busno) {
+            this.busno = busno;
+        }
 }

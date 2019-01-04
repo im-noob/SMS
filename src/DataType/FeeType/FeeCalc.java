@@ -33,14 +33,14 @@ public class FeeCalc {
     }
 
     /**
-     * @return the fee
+     * @return the feeTypeName
      */
     public String getFeeTypeName() {
         return feeTypeName;
     }
 
     /**
-     * @param fee the fee to set
+     * @param feeTypeName the fee to set
      */
     public void setFeeTypeName(String feeTypeName) {
         this.feeTypeName = feeTypeName;

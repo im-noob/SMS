@@ -13,6 +13,7 @@ import DataType.FeeType.FeeCalc;
 import DataType.FeeType.FeeCalcDaoImpl;
 import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
+import DebugFile.DebugClassDaoImpl;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -895,7 +896,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         //this.classList
         ClassesDaoImpl cls =new ClassesDaoImpl();
         classListVector =cls.selectClasses();
-         System.out.printf("Select => %s",classListVector[3].getName());
+       //  System.out.printf("Select => %s",classListVector[3].getName());
         if(classListVector==null) {
             System.out.printf("Null");
         }
@@ -904,11 +905,11 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
            classList.setModel(l1);
            this.feeClassList.setModel(l1);
             
-           System.out.printf("\nPrint size ==>%d",classListVector.length);
+          // System.out.printf("\nPrint size ==>%d",classListVector.length);
             l1.addElement(classListVector[3].getName());
            try{
                     for(int i = 0;classListVector.length>i;i++){
-                         System.out.printf("\n==>%d",i);
+                       //  System.out.printf("\n==>%d",i);
                          l1.addElement(classListVector[i].getName());
                         
                          str[i] = classListVector[i].getName();
@@ -917,7 +918,9 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         catch(Exception ex){
               Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
               
-            System.out.print(ex);
+            
+           DebugClassDaoImpl.fileWriterG(ClassesDaoImpl.class.getName(),ex.fillInStackTrace());
+           
         }
        // this.classList.setListData(str);
      
