@@ -21,6 +21,8 @@ public class DBConnection {
     private ResultSet resultSet;
     private Statement smt;
 
+    
+
     public Connection connectDB(){
         String dbURL = "jdbc:mysql://localhost:3306/hemalayan?zeroDateTimeBehavior=convertToNull";//"jdbc:oracle:thin:@localhost:1521:xe";
         String username = "root";

@@ -5,7 +5,6 @@
  */
 package product;
 
-<<<<<<< HEAD
 import Database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-=======
->>>>>>> a161e0a11ec6663c0afb5fb7169fda1a011f334a
-/**
- *
- * @author kumar
- */
-<<<<<<< HEAD
 public class ProductDaoImpl implements ProductDao{
      
     @Override
@@ -105,8 +97,4 @@ public class ProductDaoImpl implements ProductDao{
          }
         return cl;
     }
-=======
-public class ProductDaoImpl {
-    
->>>>>>> a161e0a11ec6663c0afb5fb7169fda1a011f334a
 }

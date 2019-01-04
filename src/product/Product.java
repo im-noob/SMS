@@ -15,13 +15,11 @@ public class Product {
     
         private String name;
 	private int id;
-<<<<<<< HEAD
-=======
+
 	private Date date;
 	private int price;
 	private int quantity;
 	private int left;
->>>>>>> a161e0a11ec6663c0afb5fb7169fda1a011f334a
 	
 	
 	public String getName() {
@@ -37,8 +35,6 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
-<<<<<<< HEAD
-=======
 	public Date getDate() {
 		return date;
 	}
@@ -63,6 +59,5 @@ public class Product {
 	public void setLeft(int left) {
 		this.left = left;
 	}
-    
->>>>>>> a161e0a11ec6663c0afb5fb7169fda1a011f334a
+   
 }
