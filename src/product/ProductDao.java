@@ -10,5 +10,8 @@ package product;
  * @author kumar
  */
 public interface ProductDao {
-    
+
+    public Product[] getProduct();
+    public int InsetProduct(Product prd);
+    public int updateProduct(Product prd);
 }
