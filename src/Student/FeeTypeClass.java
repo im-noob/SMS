@@ -12,8 +12,14 @@ package Student;
 public class FeeTypeClass {
     private int OldFee;
     private int TransFee;
-    private int otherFee;
     private int supplyFee;
+
+    private int otherFee;
+    private int tutionFee;
+    private int annualFee;
+    private int examFee;
+    private int compFee;
+
  
     /**
      * @return the OldFee
@@ -31,6 +37,8 @@ public class FeeTypeClass {
     
     
     
+    
+    
     /**
      * @return the TransFee
      */
@@ -44,6 +52,8 @@ public class FeeTypeClass {
     public void setTransFee(int TransFee) {
         this.TransFee = TransFee;
     }
+    
+    
     
     
     
@@ -67,6 +77,40 @@ public class FeeTypeClass {
     
     
     
+    
+    
+    /**
+     * @return the annualFee
+     */
+    public int getannualFee() {
+        return annualFee;
+    }
+
+    /**
+     * @param annualFee the annualFee to set
+     */
+    public void setannualFee(int annualFee) {
+        this.annualFee = annualFee;
+    }
+    
+    
+    
+    
+    
+    /**
+     * @return the tutionFee
+     */
+    public int gettutionFee() {
+        return tutionFee;
+    }
+
+    /**
+     * @param tutionFee the tutionFee to set
+     */
+    public void settutionFee(int tutionFee) {
+        this.tutionFee = tutionFee;
+    }
+    
     /**
      * @return the supplyFee
      */
@@ -79,6 +123,37 @@ public class FeeTypeClass {
      */
     public void setsupplyFee(int supplyFee) {
         this.supplyFee = supplyFee;
+    }
+    
+    
+    /**
+     * @return the examFee
+     */
+    public int getexamFee() {
+        return examFee;
+    }
+
+    /**
+     * @param examFee the examFee to set
+     */
+    public void setexamFee(int examFee) {
+        this.examFee = examFee;
+    }
+    
+    
+    
+    /**
+     * @return the compFee
+     */
+    public int getcompFee() {
+        return compFee;
+    }
+
+    /**
+     * @param compFee the compFee to set
+     */
+    public void setcompFee(int compFee) {
+        this.compFee = supplyFee;
     }
     
    

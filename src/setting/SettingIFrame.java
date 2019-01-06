@@ -104,8 +104,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         rName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         rBno = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        rFee = new javax.swing.JTextField();
         rSave = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         classSession1 = new javax.swing.JComboBox<>();
@@ -376,12 +374,12 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("ID :");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(251, 55, 33, 17);
+        jLabel6.setBounds(30, 30, 33, 17);
 
         rID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rID.setText("----------");
         jPanel2.add(rID);
-        rID.setBounds(302, 55, 86, 17);
+        rID.setBounds(80, 30, 86, 17);
 
         transList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         transList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -419,16 +417,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jPanel2.add(rBno);
         rBno.setBounds(420, 160, 250, 23);
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Fee :");
-        jPanel2.add(jLabel11);
-        jLabel11.setBounds(370, 200, 40, 20);
-
-        rFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rFee.setText("jTextField1");
-        jPanel2.add(rFee);
-        rFee.setBounds(420, 200, 250, 23);
-
         rSave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rSave.setText("Save");
         rSave.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -437,7 +425,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(rSave);
-        rSave.setBounds(430, 250, 180, 30);
+        rSave.setBounds(450, 200, 180, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Select Session :");
@@ -707,54 +695,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_feeClassListValueChanged
 
-    private void rSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSaveMouseClicked
-        // TODO add your handling code here:
-        if("Save" == this.rSave.getText()){
-            // System.out.printf("\nerror during save %d",Integer.parseInt(tutionFee.getText()));
-            Transport trans = new Transport();
-            trans.setRoute(this.rName.getText());
-            trans.setPrice(Integer.parseInt(this.rFee.getText()));
-            trans.setBusno(this.rBno.getText());
-
-            int i = new TransportDaoImpl().insertTrans(trans);
-            if(i!=0){
-                System.out.print("Data inserted");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-                clearField();
-
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-            }
-        }
-        else if("Update" == this.rSave.getText()){
-            Transport trans = new Transport();
-            trans.setRoute(this.rName.getText());
-            trans.setPrice(Integer.parseInt(this.rFee.getText()));
-            trans.setBusno(this.rBno.getText());
-            trans.setId(Integer.parseInt(this.rID.getText()));
-            int i = new TransportDaoImpl().updateTrans(trans);
-
-            if(i!=0){
-                System.out.print("Data inserted");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-                this.rSave.setText("Save");
-                clearField();
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-            }
-        }
-        transportListRefresh();
-    }//GEN-LAST:event_rSaveMouseClicked
-
-    private void transListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_transListValueChanged
-        String vl = this.transList.getSelectedValue();
-        this.selectTransportSelectedID(vl);
-    }//GEN-LAST:event_transListValueChanged
-
     private void sessionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_sessionListValueChanged
         String vl = this.sessionList.getSelectedValue();
         this.selectSessionSelectedID(vl);
@@ -903,6 +843,54 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
           ComboBoxFiter.numberValidation(evt);
 
     }//GEN-LAST:event_codeKeyTyped
+
+    private void rSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSaveMouseClicked
+        // TODO add your handling code here:
+        if("Save" == this.rSave.getText()){
+            // System.out.printf("\nerror during save %d",Integer.parseInt(tutionFee.getText()));
+            Transport trans = new Transport();
+            trans.setRoute(this.rName.getText());
+          //  trans.setPrice(Integer.parseInt(this.rFee.getText()));
+            trans.setBusno(this.rBno.getText());
+
+            int i = new TransportDaoImpl().insertTrans(trans);
+            if(i!=0){
+                System.out.print("Data inserted");
+                JOptionPane.showMessageDialog(this,"Data Save...");
+                clearField();
+
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            }
+        }
+        else if("Update" == this.rSave.getText()){
+            Transport trans = new Transport();
+            trans.setRoute(this.rName.getText());
+         //   trans.setPrice(Integer.parseInt(this.rFee.getText()));
+            trans.setBusno(this.rBno.getText());
+            trans.setId(Integer.parseInt(this.rID.getText()));
+            int i = new TransportDaoImpl().updateTrans(trans);
+
+            if(i!=0){
+                System.out.print("Data inserted");
+                JOptionPane.showMessageDialog(this,"Data Save...");
+                this.rSave.setText("Save");
+                clearField();
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            }
+        }
+        transportListRefresh();
+    }//GEN-LAST:event_rSaveMouseClicked
+
+    private void transListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_transListValueChanged
+        String vl = this.transList.getSelectedValue();
+        this.selectTransportSelectedID(vl);
+    }//GEN-LAST:event_transListValueChanged
     
     // add row in table
     private void feeBookEntry(String[] value){
@@ -966,7 +954,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
                     for(int i = 0;this.transListVector.length>i;i++){
                         if(string == transListVector[i].getRoute()){
                             this.rName.setText(transListVector[i].getRoute());
-                            this.rFee.setText(String.valueOf(transListVector[i].getPrice()));
+                        //    this.rFee.setText(String.valueOf(transListVector[i].getPrice()));
                             this.rID.setText(String.valueOf(transListVector[i].getId()));
                             this.rBno.setText(transListVector[i].getBusno());
                             this.rSave.setText("Update");
@@ -1125,7 +1113,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -1166,7 +1153,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField rBno;
-    private javax.swing.JTextField rFee;
     private javax.swing.JLabel rID;
     private javax.swing.JTextField rName;
     private javax.swing.JButton rSave;

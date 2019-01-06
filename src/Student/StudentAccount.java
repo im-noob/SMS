@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -203,13 +204,13 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Paid Amount :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 250, 110, 17);
+        jLabel6.setBounds(10, 280, 110, 17);
 
         jLabel7.setBackground(new java.awt.Color(255, 204, 204));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Discount :");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(30, 300, 74, 17);
+        jLabel7.setBounds(30, 240, 74, 17);
 
         jLabel8.setBackground(new java.awt.Color(255, 204, 204));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -219,16 +220,31 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setText("0");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(100, 300, 100, 23);
+        jTextField1.setBounds(100, 240, 100, 23);
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setText("0");
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(100, 250, 100, 23);
+        jTextField2.setBounds(100, 280, 100, 23);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Paid");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(20, 340, 100, 30);
 
@@ -352,15 +368,54 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         }
         jList1.setModel(dlmPer);
     }//GEN-LAST:event_jButton1ActionPerformed
-    List FeeList = null;
+    FeeTypeClass  ftc = null;
+    int TotalFee = 0 ;
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
         StudentACImpl sacd = new StudentACImpl();
+
        // FeeList = sacd.getAllFee(selectedStud.getRegID());
+        ftc = sacd.getAllFee(selectedStud.getRegID());
+        int OldFee = ftc.getOldFee();
+        int TransFee = ftc.getTransFee();
+        int supplyFee = ftc.getsupplyFee();
+        int tutionFee = ftc.gettutionFee();
+        int examFee = ftc.getexamFee();
+        int compFee = ftc.getcompFee();
+        int annFee = ftc.getannualFee();
+        Object[] rowOld = {"Old fee", OldFee};
+        Object[] rowTrans = {"Tranport fee", TransFee};
+        Object[] rowSupply = {"Supply fee", supplyFee};
+        Object[] rowTution = {"Tution fee", tutionFee};
+        Object[] rowExam = {"Exam fee", examFee};
+        Object[] rowComp = {"Computer fee", compFee};
+        Object[] rowAnual = {"Annual fee", annFee};
+
+        DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+        try{
+            int rowCount = tm.getRowCount();
+            //Remove rows one by one from the end of the table
+            for (int i = rowCount - 1; i >= 0; i--) {
+                tm.removeRow(i);
+            }
+
+        }catch(Exception e){
+            System.out.println("reving failed");
+        }
         
-        
+        tm.addRow(rowOld); 
+        tm.addRow(rowTrans);
+        tm.addRow(rowSupply);
+        tm.addRow(rowTution);
+        tm.addRow(rowExam);
+        tm.addRow(rowComp);
+        tm.addRow(rowAnual);
+        TotalFee = OldFee+TransFee+supplyFee+tutionFee+examFee+compFee+annFee;
+//      showing total fee
+        jLabel5.setText(String.valueOf(TotalFee));
+
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -406,6 +461,30 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        try{
+            jTextField2.setText(String.valueOf(Integer.valueOf(TotalFee)-Integer.valueOf(jTextField1.getText())));
+        }catch(Exception e){
+            System.out.println("calcultion value");
+        }
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int discAMT = Integer.valueOf(jTextField1.getText());
+        int PaidAMT = Integer.valueOf(jTextField2.getText());
+        StudentACImpl sad = new StudentACImpl();
+        int success = sad.paidTheFee(discAMT,PaidAMT);
+        System.out.println(success);
+        if(success != 0 ){
+            JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
