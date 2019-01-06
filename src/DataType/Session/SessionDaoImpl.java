@@ -118,6 +118,12 @@ public class SessionDaoImpl implements SessionDao {
          }
         return i;
     }
+
+    @Override
+    public int calculateFeeInSessionChange() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }

@@ -6,6 +6,7 @@
 package MainScreen;
 
 import DataType.Employ.EmployeEntry;
+import DataType.Expence.ExpenceIFrame;
 import DebugFile.DebugClass;
 import DebugFile.DebugClassDaoImpl;
 import Student.StudentAccount;
@@ -20,16 +21,23 @@ import setting.SettingIFrame;
  * @author kumar
  */
 public class Welcome extends javax.swing.JFrame {
-
+    
+     ExpenceIFrame expenceIFrame ;
+     SettingIFrame settingIFrame ;
+     EmployeEntry employeEntry;
+    StudentAccount studentAccount;
+    StudentAdmissionStage2 studentAdmissionStage2;
+     StudentAdmission studentAdmission ;
+         
     /**
      * Creates new form Welcome
      */
     public Welcome() {
-        initComponents();
-         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      initComponents();
+      Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       setBounds(0,0,screenSize.width, screenSize.height);
       setVisible(true);
-      
+     // startFunction();
      
     }
 
@@ -69,6 +77,7 @@ public class Welcome extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         setting = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -199,6 +208,14 @@ public class Welcome extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem8.setText("Expence ");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem8);
+
         menuBar.add(jMenu1);
 
         setting.setText("Setting");
@@ -234,41 +251,47 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-         StudentAdmission sifram =new StudentAdmission(this.getSize());
-        desktopPane.add(sifram);
-        sifram.show(true);
-         System.out.printf("Click");
+        //this.closeFunction();
+        studentAccount =new StudentAccount(this.getSize());
+        this.desktopPane.add(studentAccount);
+        studentAdmission.show(true);
+        studentAdmission.repaint();
+        System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        StudentAdmissionStage2 sifram =new StudentAdmissionStage2(this.getSize());
-        desktopPane.add(sifram);
-        sifram.show(true);
+       // this.closeFunction(); 
+        studentAdmissionStage2 =new StudentAdmissionStage2(this.getSize());
+         this.desktopPane.add(studentAdmissionStage2);
+         studentAdmissionStage2.show(true);
+         studentAdmissionStage2.repaint();
          System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-         StudentAccount sifram =new StudentAccount(this.getSize());
-        desktopPane.add(sifram);
-        sifram.show(true);
+        //this.closeFunction(); 
+        studentAdmission =new StudentAdmission(this.getSize());
+         this.desktopPane.add(studentAdmission);
+         studentAccount.show(true);
+         studentAccount.repaint();
          System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         
-        EmployeEntry sifram =new EmployeEntry(this.getSize());
-        desktopPane.add(sifram);
-        sifram.show(true);
-        System.out.printf("Click");
+       // this.closeFunction(); 
+        employeEntry =new EmployeEntry(this.getSize()); 
+         this.desktopPane.add(employeEntry);
+         employeEntry.show(true);
+         employeEntry.repaint();
+         System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        SettingIFrame sifram =new SettingIFrame(this.getSize());
-        desktopPane.add(sifram);
-        sifram.show(true);
+        //this.closeFunction();
+        settingIFrame =new SettingIFrame(this.getSize());
+        this.desktopPane.add(settingIFrame);
+        settingIFrame.show(true);
+        settingIFrame.repaint();
         System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -281,7 +304,52 @@ public class Welcome extends javax.swing.JFrame {
       
      // obj.fileWriterG("hello");
     }//GEN-LAST:event_dbExportActionPerformed
+  
+    /**
+    private void closeFunction(){
+     try{
+        if(studentAccount.isShowing())
+                studentAccount.dispose();
+        else if(expenceIFrame.isShowing())
+                expenceIFrame.dispose();
+        else if(settingIFrame.isShowing())
+                settingIFrame.dispose();
+        else if(employeEntry.isShowing())
+                employeEntry.dispose();
+        else if(studentAdmissionStage2.isShowing())
+                studentAdmissionStage2.dispose();
+        else if(studentAdmission.isShowing())
+                studentAdmission.dispose();
+      }
+      catch(Exception ex){
+          System.out.printf(ex.getMessage());
+      }
+       expenceIFrame.disable();
+       settingIFrame.disable();
+       employeEntry.disable();
+       studentAccount.disable();
+       studentAdmissionStage2.disable();
+       studentAdmission.disable();
+    }
+    
+    private void startFunction(){
+          desktopPane.add(settingIFrame);
+          desktopPane.add(employeEntry);
+          desktopPane.add(studentAccount);
+          desktopPane.add(studentAdmissionStage2);
+          desktopPane.add(studentAdmission);   
+    } */
+    
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        expenceIFrame =new ExpenceIFrame(this.getSize());
+        desktopPane.add(expenceIFrame);
+        expenceIFrame.show(true);
+        expenceIFrame.repaint();
+         System.out.printf("Click");
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -339,6 +407,7 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu newAdd;
     private javax.swing.JMenu newStudent;
