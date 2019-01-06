@@ -9,8 +9,10 @@ import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import DataType.Employ.Employ;
 import java.awt.Dimension;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import setting.ComboBoxFiter;
 import transport.Transport;
 import transport.TransportDaoImpl;
 
@@ -100,6 +102,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         studclass1 = new javax.swing.JComboBox<>();
+        classSession3 = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setClosable(true);
@@ -127,6 +131,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setNextFocusableComponent(jButton1);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField1);
         jTextField1.setBounds(90, 35, 206, 23);
 
@@ -151,6 +160,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 ph2ActionPerformed(evt);
             }
         });
+        ph2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ph2KeyTyped(evt);
+            }
+        });
         getContentPane().add(ph2);
         ph2.setBounds(480, 420, 251, 23);
 
@@ -170,6 +184,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel15.setBounds(190, 80, 53, 17);
 
         regID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        regID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                regIDKeyTyped(evt);
+            }
+        });
         getContentPane().add(regID);
         regID.setBounds(250, 80, 251, 23);
 
@@ -295,6 +314,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 pinActionPerformed(evt);
             }
         });
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pinKeyTyped(evt);
+            }
+        });
         getContentPane().add(pin);
         pin.setBounds(100, 300, 251, 23);
 
@@ -338,6 +362,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         TransFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TransFee.setText("0");
+        TransFee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TransFeeKeyTyped(evt);
+            }
+        });
         getContentPane().add(TransFee);
         TransFee.setBounds(100, 590, 250, 23);
 
@@ -347,6 +376,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel17.setBounds(30, 520, 83, 17);
 
         ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ph1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ph1KeyTyped(evt);
+            }
+        });
         getContentPane().add(ph1);
         ph1.setBounds(100, 420, 251, 23);
 
@@ -396,6 +430,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         TutioonFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TutioonFee.setText("0");
+        TutioonFee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TutioonFeeKeyTyped(evt);
+            }
+        });
         getContentPane().add(TutioonFee);
         TutioonFee.setBounds(490, 590, 251, 23);
 
@@ -413,6 +452,15 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         studclass1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
         getContentPane().add(studclass1);
         studclass1.setBounds(100, 560, 250, 23);
+
+        classSession3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(classSession3);
+        classSession3.setBounds(540, 40, 240, 23);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel25.setText("Select Session :");
+        getContentPane().add(jLabel25);
+        jLabel25.setBounds(440, 40, 100, 17);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -513,7 +561,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
+        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
 
         Student student = new Student();
 
@@ -538,8 +586,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         student.setName(name.getText());
         student.setFather(father.getText());
 
-        java.util.Date studdob = jDateChooser1.getDate();
-//            java.sql.Date studsqldob = new java.sql.Date(studdob.getTime());
+        Date studdob = jDateChooser1.getDate();
+
         student.setDob(studdob);
 
         String studmother = mother.getText();
@@ -609,8 +657,28 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         
         String studsec = sec.getSelectedItem().toString();
 
-        sadi.updateStudent(student, studentID );
-        sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm);//regno is just a student id in table
+        int i =sadi.updateStudent(student, studentID );
+         if(i!=0){
+                System.out.print("Data Upadte .....");
+               
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                return;
+            }
+       
+         i = sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm);//regno is just a student id in table
+          if(i!=0){
+                System.out.print("Data inserted New Admission .....");
+                JOptionPane.showMessageDialog(this,"Data Save...");
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                return;
+            }
+         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
@@ -642,12 +710,48 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         TutioonFee.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+         ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void regIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_regIDKeyTyped
+         ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_regIDKeyTyped
+
+    private void pinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyTyped
+          ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_pinKeyTyped
+
+    private void ph1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ph1KeyTyped
+         ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_ph1KeyTyped
+
+    private void ph2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ph2KeyTyped
+         ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_ph2KeyTyped
+
+    private void TransFeeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TransFeeKeyTyped
+          ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_TransFeeKeyTyped
+
+    private void TutioonFeeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TutioonFeeKeyTyped
+         ComboBoxFiter.numberValidation(evt);
+
+    }//GEN-LAST:event_TutioonFeeKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TransFee;
     private javax.swing.JTextField TutioonFee;
     private javax.swing.JTextField at;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> classSession3;
     private javax.swing.JTextField dist;
     private javax.swing.JTextField father;
     private javax.swing.JLabel id;
@@ -672,6 +776,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;

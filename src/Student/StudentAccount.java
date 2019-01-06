@@ -358,7 +358,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         Student selectedStud = (Student) studList.get(index);
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
         StudentACImpl sacd = new StudentACImpl();
-        FeeList = sacd.getAllFee(selectedStud.getRegID());
+       // FeeList = sacd.getAllFee(selectedStud.getRegID());
         
         
     }//GEN-LAST:event_jList1MouseClicked

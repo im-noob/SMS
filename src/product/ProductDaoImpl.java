@@ -9,6 +9,6 @@ package product;
  *
  * @author kumar
  */
-public class ProductDaoImpl {
+public class ProductDaoImpl implements ProductDao{
     
 }

@@ -8,11 +8,8 @@ package Student;
 import DataType.Employ.Employ;
 import Database.DBConnection;
 import java.awt.Dimension;
-import java.awt.PopupMenu;
-import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -598,7 +595,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         StudentDaoImpl sdi = new StudentDaoImpl();
         nonTeachingList = sdi.getNonTeachingList();
-        System.out.print("getting list"+nonTeachingList.size());
+       // System.out.print("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
             Employ Data = (Employ) nonTeachingList.get(i);
             refByID.addItem(Data.getName());
@@ -611,12 +608,14 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        try{
+        try{
             StudentDaoImpl sdi = new StudentDaoImpl();;
 
             Student student = new Student();
             student.setRegID("");
-//            student.setRegID(regID.getText());
+            
+//          student.setRegID(regID.getText());
+
             String selected_refid = refByID.getSelectedItem().toString();
             Integer Selected_refIDint = 0 ;
             
@@ -677,12 +676,21 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
             String studph2 = ph2.getText();
             student.setPh2(studph2);
             
-            sdi.insertStudent(student);
+           int i = sdi.insertStudent(student);
+          if(i!=0){
+                System.out.print("Data inserted New Reg. .......");
+                JOptionPane.showMessageDialog(this,"Data Save...");
+            }
+            else{
+                System.out.print("error during save");
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+               
+            }
             
-//        }
-//        catch(Exception e){
-//            System.out.print("erro in takign iniput:"+e.getMessage());
-//        }
+        }
+        catch(Exception e){
+            System.out.print("erro in takign iniput:"+e.getMessage());
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
