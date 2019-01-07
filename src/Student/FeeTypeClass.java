@@ -153,7 +153,7 @@ public class FeeTypeClass {
      * @param compFee the compFee to set
      */
     public void setcompFee(int compFee) {
-        this.compFee = supplyFee;
+        this.compFee = compFee;
     }
     
    

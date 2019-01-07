@@ -106,7 +106,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setAutoscrolls(true);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         PList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -116,13 +116,11 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(PList);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(50, 220, 200, 400);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 200, 400));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Product :");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(340, 220, 60, 30);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 60, 30));
 
         addButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addButton.setText("Submit");
@@ -131,74 +129,61 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(addButton);
-        addButton.setBounds(570, 550, 110, 30);
+        getContentPane().add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 550, 110, 30));
 
         pname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pname.setForeground(new java.awt.Color(204, 51, 0));
         pname.setText("....");
-        getContentPane().add(pname);
-        pname.setBounds(420, 220, 110, 20);
+        getContentPane().add(pname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Stock Id :");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(340, 260, 80, 20);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, 20));
 
         stockId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stockId.setForeground(new java.awt.Color(204, 51, 0));
         stockId.setText("....");
-        getContentPane().add(stockId);
-        stockId.setBounds(420, 260, 100, 20);
+        getContentPane().add(stockId, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 100, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Items :");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(360, 300, 50, 20);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 50, 20));
 
         items.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         items.setForeground(new java.awt.Color(204, 51, 0));
         items.setText("....");
-        getContentPane().add(items);
-        items.setBounds(420, 300, 110, 20);
+        getContentPane().add(items, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 110, 20));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Remains Items :");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(300, 330, 100, 20);
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, 20));
 
         ritems.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ritems.setForeground(new java.awt.Color(204, 51, 0));
         ritems.setText("....");
-        getContentPane().add(ritems);
-        ritems.setBounds(420, 330, 120, 20);
+        getContentPane().add(ritems, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 120, 20));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Rate :");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(370, 410, 43, 17);
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 43, -1));
 
         rate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rate.setForeground(new java.awt.Color(204, 51, 0));
         rate.setText("....");
-        getContentPane().add(rate);
-        rate.setBounds(420, 410, 120, 17);
+        getContentPane().add(rate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 120, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Size :");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(360, 370, 40, 14);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 40, 14));
 
         size.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         size.setForeground(new java.awt.Color(153, 51, 0));
         size.setText("....");
-        getContentPane().add(size);
-        size.setBounds(420, 370, 110, 17);
+        getContentPane().add(size, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 110, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Quantity :");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(320, 480, 70, 17);
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 70, -1));
 
         VQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -206,8 +191,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 VQuantityKeyPressed(evt);
             }
         });
-        getContentPane().add(VQuantity);
-        VQuantity.setBounds(400, 470, 120, 30);
+        getContentPane().add(VQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, 120, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Reset");
@@ -216,8 +200,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(410, 550, 100, 30);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, 100, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -302,8 +285,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         });
         jPanel1.add(SearchAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 33, 100, 30));
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(50, 20, 1190, 180);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 1190, 180));
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -324,8 +306,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(740, 220, 500, 290);
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 220, 500, 290));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Add To Cart");
@@ -334,19 +315,16 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(570, 470, 110, 30);
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 110, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Total Price :");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(550, 410, 80, 17);
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 80, -1));
 
         TPValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TPValue.setForeground(new java.awt.Color(153, 51, 0));
         TPValue.setText("0");
-        getContentPane().add(TPValue);
-        TPValue.setBounds(640, 410, 80, 17);
+        getContentPane().add(TPValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

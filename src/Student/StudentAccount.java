@@ -8,11 +8,15 @@ package Student;
 import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import java.awt.Dimension;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -65,6 +69,8 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -74,6 +80,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setClosable(true);
@@ -143,7 +150,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(950, 70, 90, 20);
+        jButton1.setBounds(950, 70, 90, 30);
 
         jList1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,9 +188,8 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jLabel5.setBackground(new java.awt.Color(255, 204, 204));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Total Dues :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(100, 210, 90, 17);
+        jLabel5.setBounds(100, 240, 90, 20);
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -205,19 +211,19 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Paid Amount :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 280, 110, 17);
+        jLabel6.setBounds(0, 300, 90, 17);
 
         jLabel7.setBackground(new java.awt.Color(255, 204, 204));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Discount :");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(30, 240, 74, 17);
+        jLabel7.setBounds(20, 270, 74, 17);
 
         jLabel8.setBackground(new java.awt.Color(255, 204, 204));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Total Dues :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 210, 74, 17);
+        jLabel8.setBounds(10, 240, 74, 17);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setText("0");
@@ -232,12 +238,12 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(100, 240, 100, 23);
+        jTextField1.setBounds(100, 270, 100, 23);
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setText("0");
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(100, 280, 100, 23);
+        jTextField2.setBounds(100, 300, 100, 23);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Paid");
@@ -249,17 +255,35 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(20, 340, 100, 30);
 
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField3.setText("0");
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(100, 190, 100, 23);
+
+        jLabel11.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Other Fee :");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(10, 190, 74, 17);
+
         jTabbedPane1.addTab("Dues", jPanel1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tran. ID", "Session", "Fee Type", "Fee Paid", "Discount", "Date"
             }
         ));
         jScrollPane4.setViewportView(jTable2);
@@ -325,6 +349,15 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(480, 20, 70, 60);
 
+        jButton4.setText("Print");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(1050, 150, 70, 30);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -371,13 +404,20 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     FeeTypeClass  ftc = null;
     int TotalFee = 0 ;
+    String selectedRegNO = null;
+    List<StudentFeeHistory> sfhList = null;
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        
+        
         int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
+        selectedRegNO = selectedStud.getRegID();
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
         StudentACImpl sacd = new StudentACImpl();
         ftc = sacd.getAllFee(selectedStud.getRegID());
-        
+        sfhList = sacd.getAllHistory(selectedStud.getRegID());
+
+        //filling first table
         int OldFee = ftc.getOldFee();
         int TransFee = ftc.getTransFee();
         int supplyFee = ftc.getsupplyFee();
@@ -415,7 +455,31 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         TotalFee = OldFee+TransFee+supplyFee+tutionFee+examFee+compFee+annFee;
 //      showing total fee
         jLabel5.setText(String.valueOf(TotalFee));
-
+        
+        
+        jTextField3.setText("0");
+        jTextField1.setText("0");
+        jTextField2.setText("0");
+        
+        
+        
+//        filling second history table
+        DefaultTableModel tmHis = (DefaultTableModel) jTable2.getModel();
+        for(int k = 0 ; k < sfhList.size() ; k ++){
+            StudentFeeHistory sfh = sfhList.get(k);
+            Object objSfh[] = {
+                sfh.getfeeTransID(),
+                sfh.getSessionName(),
+                sfh.getFeeType(),
+                sfh.getfeePaid(),
+                sfh.getdiscount(),
+                sfh.getcreated_at(),
+                
+            };
+            tmHis.addRow(objSfh);
+            
+        }
+        
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -474,17 +538,43 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        //setting other ffee
+        ftc.setotherFee(Integer.valueOf(jTextField3.getText()));
         int discAMT = Integer.valueOf(jTextField1.getText());
         int PaidAMT = Integer.valueOf(jTextField2.getText());
+        if(TotalFee < discAMT+PaidAMT){
+            JOptionPane.showMessageDialog(rootPane, "You can't take Advance payment at this time!!");
+            return;
+        }
         StudentACImpl sad = new StudentACImpl();
-        int success = sad.paidTheFee(discAMT,PaidAMT);
-        System.out.println(success);
+        int success = sad.paidTheFee(discAMT,PaidAMT,selectedRegNO,ftc);
+        System.out.println("row inserted:"+success);
         if(success != 0 ){
             JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
         }else{
             JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        TotalFee += Integer.valueOf(jTextField3.getText());
+        jLabel5.setText(String.valueOf(TotalFee));
+    }//GEN-LAST:event_jTextField3FocusLost
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            MessageFormat headerFormat = new MessageFormat("Fee Transaction Report of Registration no:"+selectedRegNO);
+            MessageFormat footerFormat = new MessageFormat("- {0} -");
+            jTable2.print(JTable.PrintMode.FIT_WIDTH, headerFormat, footerFormat);
+        } catch (PrinterException ex) {
+            Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
@@ -494,10 +584,12 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -519,5 +611,6 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

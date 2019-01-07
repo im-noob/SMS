@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,6 +176,8 @@ public class StudentACImpl implements StudentACDao {
         int i = -1;
 
         FeeTypeClass Data = new FeeTypeClass();
+        FeeTypeClass newPureData = new FeeTypeClass();//for sending after subtracacting paided fee
+
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
@@ -247,9 +250,57 @@ public class StudentACImpl implements StudentACDao {
                 Data.setexamFee(idExamC*examFee);                
                 Data.setcompFee(idCompFeeC*compFee);                
                 Data.setannualFee(idAnulC*annualFee);      
+                Data.setOldFee(0);
+                
+                //now subtracting all paided fee after retriving
+                String sqlAllPaid = "SELECT FeeType,"
+                        + "SUM(feePaid+discount) as allfee FROM "
+                        + "`feetransactiontable` "
+                        + "WHERE RegNo = "+regID+" and "
+                        + "sessionID = ("
+                            + "SELECT COALESCE(max(sessionID),0) "
+                            + "FROM `sessiontable`"
+                        + ") "
+                        + "GROUP BY FeeType";
+                Statement stmtAllPaid=con.createStatement(); 
+                ResultSet rsAllPaid = stmtAllPaid.executeQuery(sqlAllPaid);
+                System.out.println("retrive paid data sql:"+sqlAllPaid);
+                while(rsAllPaid.next()){
+                    
+                    String tempFeeType = rsAllPaid.getString("FeeType");
+                    int tempFee = rsAllPaid.getInt("allfee");
+                    System.out.println("feePaidDta: fetype:"+tempFeeType+" tmepfee:"+tempFee);
+                    if(tempFeeType.equals("Computer Fee")){
+                        Data.setcompFee(Data.getcompFee() - tempFee); 
+                        System.out.println("comfe:"+(Data.getcompFee() - tempFee)+" fee:"+Data.getcompFee()+" paid fee:"+tempFee);
+
+                    }else if(tempFeeType.equals("Old Fee")){
+                        Data.setOldFee(Data.getOldFee() - tempFee);
+                    }else if(tempFeeType.equals("Supply Fee")){
+                        Data.setsupplyFee(Data.getsupplyFee() - tempFee);
+                    }else if(tempFeeType.equals("Transport Fee")){
+                        Data.setTransFee(Data.getTransFee() - tempFee);
+                    }else if(tempFeeType.equals("Other Fee")){
+//                        Data.setOldFee(Data.getOldFee()- tempFee);
+                    }else if(tempFeeType.equals("Tuition  Fee")){
+                        Data.settutionFee(Data.gettutionFee() - tempFee);  
+                    }else if(tempFeeType.equals("Annual Fee")){
+                        Data.setannualFee(Data.getannualFee() - tempFee);
+                    }else if(tempFeeType.equals("Examination Fee")){
+                        Data.setexamFee(Data.getexamFee() - tempFee);
+                    }
+                        
+                        
+                                      
+                                        
+                                       
+                              
+                        
+                }
                 
                 System.out.println("tranFe:"+Data.getTransFee()+" support:"+Data.getsupplyFee()+" supply:"+Data.getsupplyFee()+" TutionFee:"+Data.gettutionFee()+" Examfe:"+Data.getexamFee()+" compFee:"+Data.getcompFee()+" anualfee:"+Data.getannualFee());
-                
+//                System.out.println("New data after paid cal: tranFe:"+newPureData.getTransFee()+" support:"+newPureData.getsupplyFee()+" supply:"+newPureData.getsupplyFee()+" TutionFee:"+newPureData.gettutionFee()+" Examfe:"+newPureData.getexamFee()+" compFee:"+newPureData.getcompFee()+" anualfee:"+newPureData.getannualFee());
+
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.print("Select Me error");
@@ -266,19 +317,140 @@ public class StudentACImpl implements StudentACDao {
         return Data;  
     }
 
-    int paidTheFee(int discAMT, int PaidAMT) {
-        String sqlInsertPaid = "INSERT INTO `feetransactiontable`(`RegNo`, `sessionID`, `FeeType`, `feePaid`, `discount`) VALUES ('Regno','sessin','feetype','fpaid','dues');";
+    int paidTheFee(int discAMT, int PaidAMT,String selectedRegNO,FeeTypeClass ftc) {
+        
+        int PaidAMTC = PaidAMT;
+        int discAMTC = discAMT;
+        int []feeDUES = new int[8];
+        
+        int feeDis[] = new int[8];
+        Arrays.fill(feeDis,0);
+        int feePaid[] = new int[8];
+        Arrays.fill(feePaid, 0);
+        String[] feeTypeOrder ={"Old Fee","Supply Fee","Transport Fee"
+                ,"Other Fee","Tuition  Fee","Annual Fee","Examination Fee",
+            "Computer Fee"};
+        // OldFee
+                feeDUES[0] = ftc.getOldFee();
+        // supplyFee 
+                feeDUES[1] = ftc.getsupplyFee();
+        // TransFee 
+                feeDUES[2]= ftc.getTransFee();
+
+        // otherFee 
+                feeDUES[3] = ftc.getotherFee();
+        // tutionFee 
+                feeDUES[4] = ftc.gettutionFee();
+        // annualFee 
+                feeDUES[5] = ftc.getannualFee();
+        // examFee 
+                feeDUES[6] = ftc.getexamFee();
+        // compFee = 
+                feeDUES[7] = ftc.getcompFee();
+
+        
+        for(int i = 0 ; i < 8 ; i++){
+            if(discAMT>0){
+                if(discAMT>feeDUES[i]){
+                    discAMT -= feeDUES[i];
+                    feeDis[i] = feeDUES[i];                     
+                    feeDUES[i] = 0;
+                }else{
+                    feeDUES[i] = feeDUES[i] - discAMT;
+                    feeDis[i] = discAMT;
+                    break;
+                } 
+            }
+        }
+        
+        for(int i = 0 ; i < 8 ; i++){
+            if(PaidAMT>0){
+                if(PaidAMT>feeDUES[i]){
+                    PaidAMT -= feeDUES[i];
+                    feePaid[i] = feeDUES[i];                     
+                    feeDUES[i] = 0;
+                }else{
+                    feeDUES[i] = feeDUES[i] - PaidAMT;
+                    feePaid[i] = PaidAMT;
+                    break;
+                } 
+            }
+        }
+        
+        System.out.println("disc:"+discAMTC+" paid:"+PaidAMTC);
+        int sDis = 0 ;        
+        int sPaid = 0 ;
+
+//        for(int i = 0 ; i<8 ; i++){
+//            sDis += feeDis[i];
+//            sPaid += feePaid[i];
+//            System.out.println("type:"+feeTypeOrder[i]+" disc:"+feeDis[i]+" paid:"+feePaid[i]);
+//        }        
+        System.out.println("totaldis:"+sDis+" ttal paid:"+sPaid);
         int i = 0;
         try{
-            Connection con =new DBConnection().connectDB();
-            Statement stmtInsertPaid = con.createStatement(); 
-            i = stmtInsertPaid.executeUpdate(sqlInsertPaid);
+            for(int j = 0 ; j<8 ; j++){
+                if(feePaid[j]==0 && feeDis[j]==0)
+                    continue;
+                String sqlInsertPaid = "INSERT INTO `feetransactiontable`"
+                        + "(`RegNo`, `sessionID`, `FeeType`, `feePaid`,"
+                        + " `discount`) "
+                        + "VALUES ('"+selectedRegNO+"',"
+                        + "(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`),"
+                        + "'"+feeTypeOrder[j]+"',"
+                        + "'"+feePaid[j]+"','"+feeDis[j]+"');";
+                System.out.println("sql in insert paid:"+sqlInsertPaid);
+                Connection con =new DBConnection().connectDB();
+                Statement stmtInsertPaid = con.createStatement(); 
+                i = stmtInsertPaid.executeUpdate(sqlInsertPaid);
+                i+=i;
+                con.close();
+            }
+            
             
         }catch(Exception e){
             System.out.println("Excpetion paidthefEe:"+e.getMessage());
         }
         return(i);
     }
+
+    List getAllHistory(String regID) {
+        Connection con =new DBConnection().connectDB();
+            
+        String sqlHist = "SELECT feeTransID,sessiontable.Name as sn,FeeType,"
+                + "feePaid,discount,created_at "
+                + "FROM `feetransactiontable` "
+                + "JOIN sessiontable on "
+                + "sessiontable.sessionID = feetransactiontable.sessionID "
+                + " WHERE RegNo = "+regID+" ORDER BY `created_at` DESC";
+        System.out.println("get historysql:"+sqlHist);
+
+        List<StudentFeeHistory> Data = new ArrayList<StudentFeeHistory>();
+        
+        try {
+            
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery(sqlHist);
+            while(rs.next()){
+                StudentFeeHistory sfh = new StudentFeeHistory();
+                sfh.setFeeType(rs.getString("FeeType"));
+                sfh.setSessionName(rs.getString("sn"));
+                sfh.setcreated_at(rs.getString("created_at"));
+                sfh.setdiscount(rs.getString("discount"));
+                sfh.setfeePaid(rs.getString("feePaid"));
+                sfh.setfeeTransId(rs.getString("feeTransID"));
+                Data.add(sfh);
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentACImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return(null);
+        }
+        return(Data);
+    }   
+    
 
    
 }
