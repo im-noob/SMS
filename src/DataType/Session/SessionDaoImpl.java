@@ -56,7 +56,7 @@ public class SessionDaoImpl implements SessionDao {
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "SELECT `sessionID`, `Name` FROM `sessiontable`";
+                String sql = "SELECT `sessionID`, `Name` FROM `sessiontable` ORDER BY sessionID DESC";
                Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
                

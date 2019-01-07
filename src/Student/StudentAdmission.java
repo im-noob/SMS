@@ -680,6 +680,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
           if(i!=0){
                 System.out.print("Data inserted New Reg. .......");
                 JOptionPane.showMessageDialog(this,"Data Save...");
+                jButton1.doClick();
             }
             else{
                 System.out.print("error during save");
