@@ -13,5 +13,6 @@ public interface SessionDao {
     
      int insertSession(Session session);
      Session[] selectSession();
+     int calculateFeeInSessionChange();
     int updateSession(Session session);
 }

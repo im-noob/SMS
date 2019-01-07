@@ -414,10 +414,13 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         selectedRegNO = selectedStud.getRegID();
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
         StudentACImpl sacd = new StudentACImpl();
+
+       // FeeList = sacd.getAllFee(selectedStud.getRegID());
         ftc = sacd.getAllFee(selectedStud.getRegID());
         sfhList = sacd.getAllHistory(selectedStud.getRegID());
 
         //filling first table
+
         int OldFee = ftc.getOldFee();
         int TransFee = ftc.getTransFee();
         int supplyFee = ftc.getsupplyFee();

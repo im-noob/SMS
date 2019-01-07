@@ -51,7 +51,6 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         price = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        title = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         save = new javax.swing.JButton();
         jdate = new com.toedter.calendar.JDateChooser();
@@ -59,6 +58,9 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         remark = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        title = new javax.swing.JComboBox<>();
+        expence = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -68,6 +70,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(102, 255, 102));
         jPanel1.setLayout(null);
 
+        etable.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         etable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -84,6 +87,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        etable.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(etable);
 
         jPanel1.add(jScrollPane2);
@@ -92,27 +96,27 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Title :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(720, 90, 33, 17);
+        jLabel1.setBounds(730, 80, 33, 17);
 
         price.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         price.setText("jTextField1");
+        price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceActionPerformed(evt);
+            }
+        });
         jPanel1.add(price);
-        price.setBounds(760, 130, 280, 23);
+        price.setBounds(780, 123, 210, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Price :");
+        jLabel2.setText("Amount :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(710, 130, 50, 17);
-
-        title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        title.setText("jTextField1");
-        jPanel1.add(title);
-        title.setBounds(760, 90, 280, 23);
+        jLabel2.setBounds(710, 130, 70, 17);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Remark :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(700, 160, 60, 17);
+        jLabel3.setBounds(720, 200, 60, 17);
 
         save.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         save.setText("Save");
@@ -124,6 +128,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jPanel1.add(save);
         save.setBounds(790, 310, 140, 30);
 
+        jdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jdate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jdateFocusGained(evt);
@@ -135,19 +140,25 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jdate);
-        jdate.setBounds(790, 30, 220, 30);
+        jdate.setBounds(780, 30, 220, 30);
 
         remark.setColumns(20);
+        remark.setLineWrap(true);
         remark.setRows(5);
+        remark.setWrapStyleWord(true);
+        remark.setName(""); // NOI18N
+        remark.setNextFocusableComponent(save);
         jScrollPane3.setViewportView(remark);
 
         jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(760, 160, 270, 120);
+        jScrollPane3.setBounds(780, 160, 290, 130);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Date :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(730, 40, 40, 14);
+        jLabel4.setBounds(730, 40, 40, 17);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +167,22 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(940, 310, 110, 30);
+
+        title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Title", "Tour", "Oil", "Supply", "Office", "Staff Payment", "School Management", "Other" }));
+        title.setNextFocusableComponent(price);
+        jPanel1.add(title);
+        title.setBounds(780, 80, 280, 23);
+
+        expence.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        expence.setText("------");
+        jPanel1.add(expence);
+        expence.setBounds(830, 390, 110, 17);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Today Expence :");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(710, 390, 110, 17);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -166,7 +193,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
             Expence expence = new Expence();
-            expence.setTitle(this.title.getText());
+            expence.setTitle(this.title.getItemAt(title.getSelectedIndex()));
             expence.setRemark(this.remark.getText());
             expence.setPrice(Integer.parseInt(this.price.getText()));
             expence.setDate(jdate.getDate());
@@ -199,18 +226,22 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        selectData();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceActionPerformed
     
     //clear field
     private void clearField(){
         this.remark.setText("");
         this.price.setText("0");
-        this.title.setText("");
+        this.title.setSelectedIndex(0);
     }
     
     // Select Value
     private void selectData(){
              Expence expence = new Expence();
-            expence.setTitle(this.title.getText());
+            expence.setTitle(this.title.getItemAt(this.title.getSelectedIndex()));
             expence.setRemark(this.remark.getText());
             expence.setPrice(Integer.parseInt(this.price.getText()));
             expence.setDate(jdate.getDate());
@@ -246,11 +277,13 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable etable;
+    private javax.swing.JLabel expence;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -259,6 +292,6 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField price;
     private javax.swing.JTextArea remark;
     private javax.swing.JButton save;
-    private javax.swing.JTextField title;
+    private javax.swing.JComboBox<String> title;
     // End of variables declaration//GEN-END:variables
 }

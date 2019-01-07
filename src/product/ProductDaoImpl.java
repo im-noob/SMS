@@ -5,6 +5,7 @@
  */
 package product;
 
+
 import Database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -97,4 +98,5 @@ public class ProductDaoImpl implements ProductDao{
          }
         return cl;
     }
+
 }
