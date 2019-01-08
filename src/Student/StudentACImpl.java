@@ -194,16 +194,23 @@ public class StudentACImpl implements StudentACDao {
 //                for sales
                 Statement stmtSales=con.createStatement(); 
                 ResultSet rsSales = stmtSales.executeQuery(sqlSales);
-                rsSales.next();
-                Data.setsupplyFee(rsSales.getInt("SalesFee"));
-                
+                int supplyFee = 0;
+                System.out.println("sqlSales:"+sqlSales);
+                while(rsSales.next()) {
+                    supplyFee = (rsSales.getInt("SalesFee"));
+                }
+                Data.setsupplyFee(supplyFee);
                 
                 
 //                for tranport 
                 Statement stmtTrans=con.createStatement(); 
                 ResultSet rsTrans = stmtTrans.executeQuery(sqlTrans);
-                rsTrans.next();
-                int TransMothlyFee = rsTrans.getInt("TransFee");
+                int TransMothlyFee = 0;
+                while(rsTrans.next()) {
+                    TransMothlyFee = rsTrans.getInt("TransFee");
+                }
+                System.out.println("sqlTrans:"+sqlTrans+" :"+TransMothlyFee);
+                
                 Statement stmtTrnasCalc = con.createStatement();
                 
                 sqlTransCalc = "SELECT TIMESTAMPDIFF"
@@ -217,15 +224,22 @@ public class StudentACImpl implements StudentACDao {
                 while(rsTransCalc.next()){
                     TranRate =  (rsTransCalc.getInt("TransFee"));
                 }
-                System.out.println("all trnas fee:"+TranRate*TransMothlyFee);
+                int TotalTrans = TranRate*TransMothlyFee;
+                System.out.println("all trnas fee:"+TranRate*TransMothlyFee+"trans rate:"+TranRate+" trnamothfee:"+TransMothlyFee);
+                Data.setTransFee(TotalTrans);
                 
                 // for other fee calulation
                 
+                
                 Statement stmtClassID=con.createStatement(); 
                 ResultSet rsClassID = stmtClassID.executeQuery(sqlclassID);
-                rsClassID.next();
-                int classIDIS = rsClassID.getInt("ClassID");
-                int tutionFee = rsClassID.getInt("tutionFee");
+                int classIDIS = 0;
+                int tutionFee = 0;
+                while(rsClassID.next()){
+                    classIDIS = rsClassID.getInt("ClassID");
+                    tutionFee = rsClassID.getInt("tutionFee");
+                }
+                
                 FeeCalc fc = new FeeCalc();
                 System.out.println("seidngin classs:"+classIDIS);
                 fc.setClassId(classIDIS);
@@ -255,12 +269,17 @@ public class StudentACImpl implements StudentACDao {
                 System.out.println("other sql:"+sqlAllOhterFee);
                 Statement stmtAllOhterFee=con.createStatement(); 
                 ResultSet rsAllOhterFee = stmtAllOhterFee.executeQuery(sqlAllOhterFee);
-                rsAllOhterFee.next();
-                int examFee = rsAllOhterFee.getInt("EF");
-                int compFee = rsAllOhterFee.getInt("CF");
-                int annualFee = rsAllOhterFee.getInt("AF");
                 
                 
+                int examFee = 0;
+                int compFee = 0;
+                int annualFee = 0;
+                while(rsAllOhterFee.next()){
+                    examFee = rsAllOhterFee.getInt("EF");
+                    compFee = rsAllOhterFee.getInt("CF");
+                    annualFee = rsAllOhterFee.getInt("AF");
+                }
+
                 
                 System.out.println("examFeeC:"+examFee+" compFeeC:"+compFee+" cnnualfeeC:"+annualFee+" tutinfeeC:"+tutionFee);
                 Data.settutionFee(idTutFeeC*tutionFee);                
