@@ -8,6 +8,7 @@ package Student;
 import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import DataType.Employ.Employ;
+import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
 import java.awt.Dimension;
 import java.util.Date;
@@ -55,8 +56,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         ph2 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        id = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         regID = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -170,16 +169,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(ph2);
         ph2.setBounds(480, 420, 251, 23);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("ID :");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 80, 23, 17);
-
-        id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        id.setText("---------");
-        getContentPane().add(id);
-        id.setBounds(100, 80, 54, 17);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Reg. No.");
@@ -409,7 +398,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Sec. :");
         getContentPane().add(jLabel22);
-        jLabel22.setBounds(400, 520, 83, 17);
+        jLabel22.setBounds(430, 520, 50, 17);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Reset");
@@ -439,12 +428,12 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(TutioonFee);
-        TutioonFee.setBounds(490, 590, 251, 23);
+        TutioonFee.setBounds(480, 590, 251, 23);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Tution Fee :");
         getContentPane().add(jLabel23);
-        jLabel23.setBounds(410, 590, 80, 17);
+        jLabel23.setBounds(400, 590, 80, 17);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Bus Route :");
@@ -458,12 +447,12 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         classSession3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(classSession3);
-        classSession3.setBounds(540, 40, 240, 23);
+        classSession3.setBounds(480, 560, 250, 23);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Select Session :");
+        jLabel25.setText("Session :");
         getContentPane().add(jLabel25);
-        jLabel25.setBounds(440, 40, 100, 17);
+        jLabel25.setBounds(420, 560, 60, 17);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -483,12 +472,13 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     String RegNo = "0";
     Classes cls[] = null;
     Transport []TranstList = null;
+    Session[] sessionList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         
         //for ref by non teaching employee
        StudentDaoImpl sdi = new StudentDaoImpl();
         nonTeachingList = sdi.getNonTeachingList();
-        System.out.print("getting list"+nonTeachingList.size());
+        System.out.println("getting list"+nonTeachingList.size());
         for(int i = 0 ; i < nonTeachingList.size(); i++){
             Employ Data = (Employ) nonTeachingList.get(i);
             refByID.addItem(Data.getName());  
@@ -511,7 +501,16 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             if(TranstList[i] != null)
                 studclass1.addItem(TranstList[i].getRoute());
         }
-        System.out.print("Form open studien admsjion steg 2 Form opened");
+        
+//        listing session 
+//        classSession3
+        SessionDaoImpl sessdi = new SessionDaoImpl();
+        sessionList = sessdi.selectSession();
+        for(int i = 0 ; i< sessionList.length ; i ++){
+            if(sessionList[i] != null)
+                classSession3.addItem(sessionList[i].getName());
+        }
+        System.out.println("Form open studien admsjion steg 2 Form opened");
     }//GEN-LAST:event_formInternalFrameOpened
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        /*** StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
@@ -533,7 +532,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         refByID.setSelectedItem(selected_refid);
         
         System.out.println("gender:"+student.getGender());
-        System.out.print(student.getGender().equals("1"));
+        System.out.println(student.getGender().equals("1"));
         if(student.getGender().equals("1")){
             jRadioButton2.setSelected(true);
         }else if(student.getGender().equals("2") ){
@@ -542,7 +541,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jDateChooser1.setDate(student.getDob());            
         
         studentID = student.getStudentID();
-        id.setText(String.valueOf(studentID));
+//        id.setText(String.valueOf(studentID));
         regID.setText(student.getRegID());
         name.setText(student.getName());
         father.setText(student.getFather());            
@@ -642,6 +641,16 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             }
         }
         
+        int SessionId = 0;
+        String sessionToadimt = classSession3.getSelectedItem().toString();
+        for(int i =0 ; i < sessionList.length ; i ++){
+            if(sessionList[i] != null){
+                if(sessionList[i].getName().equals(sessionToadimt)){
+                    SessionId = sessionList[i].getId();
+                }
+            }
+        }
+        
         int TransID = 0;
         String nameOfRoute = studclass1.getSelectedItem().toString();
         for(int i =0 ; i < TranstList.length ; i ++){
@@ -660,28 +669,31 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         adm.setTutionFee(Integer.valueOf(TutioonFee.getText()));
         
         String studsec = sec.getSelectedItem().toString();
-
-        int i =sadi.updateStudent(student, studentID );
-         if(i!=0){
-                System.out.print("Data Upadte .....");
-               
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-                return;
-            }
+        
+        System.out.println("sending for update for regno:"+studentID+"regno:"+RegNo);
+        int i =sadi.updateStudent(student, Integer.valueOf(RegNo) );
+        if(i!=0){
+            System.out.println("Data Upadte .....");
+        }else{
+            System.out.println("error during update:"+i);
+            JOptionPane.showMessageDialog(this,"Error during update Retry..");
+            return;
+        }
        
-         i = sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm);//regno is just a student id in table
-          if(i!=0){
-                System.out.print("Data inserted New Admission .....");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-                return;
-            }
+        i = sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm,SessionId);//regno is just a student id in table
+        System.out.println("updated flag:"+i);
+         if(i == -485){
+            System.out.println("Already exists row");
+            JOptionPane.showMessageDialog(this,"Data Updated !! This admission is already Taken");
+        }else if(i!=0){
+            System.out.println("Data inserted New Admission .....");
+            JOptionPane.showMessageDialog(this,"Data Save...");
+        }
+        else{
+            System.out.println("error during save:"+i);
+            JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            return;
+        }
          
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -758,7 +770,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> classSession3;
     private javax.swing.JTextField dist;
     private javax.swing.JTextField father;
-    private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -774,7 +785,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

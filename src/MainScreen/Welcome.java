@@ -241,12 +241,14 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        //this.closeFunction();
-        studentAccount =new StudentAccount(this.getSize());
-        this.desktopPane.add(studentAccount);
-        studentAdmission.show(true);
-        studentAdmission.repaint();
-        System.out.printf("Click");
+        
+        //this.closeFunction(); 
+        studentAdmission =new StudentAdmission(this.getSize());
+         this.desktopPane.add(studentAdmission);
+         studentAccount.show(true);
+         studentAccount.repaint();
+         System.out.printf("Click");
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -259,12 +261,13 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        //this.closeFunction(); 
-        studentAdmission =new StudentAdmission(this.getSize());
-         this.desktopPane.add(studentAdmission);
-         studentAccount.show(true);
-         studentAccount.repaint();
-         System.out.printf("Click");
+        
+        //this.closeFunction();
+        studentAccount =new StudentAccount(this.getSize());
+        this.desktopPane.add(studentAccount);
+        studentAdmission.show(true);
+        studentAdmission.repaint();
+        System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

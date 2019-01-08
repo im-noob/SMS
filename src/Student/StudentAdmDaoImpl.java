@@ -141,7 +141,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 System.out.print(sql);
                 i = stm.executeUpdate();
                 
-                return(i);
+//                return(i);
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.print(ex);
@@ -161,12 +161,29 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     
     
     @Override
-    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm) {
+    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm,int SessionId) {
+        
+        
+        
         int i=0;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sqlFirst = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                //Before Inserting checking for the dublicate entry..
+                String sqlCheckExist = "SELECT EXISTS(SELECT * FROM admissiontable WHERE RegNo = "+regno+" and Session = "+SessionId+") as EXISTSRow";
+                System.out.println("sqlCheckExist:"+sqlCheckExist);
+                Statement stmtCheckExist=con.createStatement(); 
+                ResultSet rsCheckExist = stmtCheckExist.executeQuery(sqlCheckExist);
+                rsCheckExist.next();
+                if(rsCheckExist.getInt("EXISTSRow") == 1){
+                    System.out.println("check exists:"+rsCheckExist.getInt("EXISTSRow"));
+                    return(-485);
+                }
+                    
+               
+                
+                
+                String sqlFirst = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = "+SessionId+"";
                 Statement stmt=con.createStatement(); 
                
                System.out.println("getting count for all student for next reg no:"+sqlFirst);
@@ -177,7 +194,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 }
                 
                 
-                String sqlSec = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`) and Sec ='"+studsec+"'";
+                String sqlSec = "SELECT COUNT(*) as count from admissiontable WHERE ClassID = "+studstudclass+" and Session = "+SessionId+" and Sec ='"+studsec+"'";
                
                 System.out.println("getting count for all student for roll"+sqlSec);
                 ResultSet rssec=stmt.executeQuery(sqlSec);
@@ -191,7 +208,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 
                 String sql = "INSERT INTO `admissiontable`(  `RegNo`,`AdmissionSlNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
                         + "`Status`, `Session`, `transportFee`, `tutionFee`) "
-                        + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,(SELECT COALESCE(max(sessionID),0) FROM `sessiontable`),?,? )";
+                        + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,"+SessionId+",?,? )";
                 System.out.print("this is sql :"+sql);
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setInt(1,Integer.valueOf(regno));

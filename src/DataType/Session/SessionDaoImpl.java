@@ -60,6 +60,7 @@ public class SessionDaoImpl implements SessionDao {
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
+
                 
                 Statement stmtr=con.createStatement(); 
                 
@@ -69,8 +70,9 @@ public class SessionDaoImpl implements SessionDao {
                 rsr.next();
                 int rowcount =rsr.getInt("num"); 
                 cls  = new Session[rowcount];
-                
-               String sql = "SELECT `sessionID`, `Name` FROM `sessiontable`";
+           
+                String sql = "SELECT `sessionID`, `Name` FROM `sessiontable` ORDER BY sessionID DESC";
+
                Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
                
