@@ -5,6 +5,8 @@
  */
 package DataType.Session;
 
+import java.sql.Connection;
+
 /**
  *
  * @author kumar
@@ -13,6 +15,7 @@ public interface SessionDao {
     
      int insertSession(Session session);
      Session[] selectSession();
-     int calculateFeeInSessionChange();
+     Session[] calculateFeeInSessionChange(int id);
     int updateSession(Session session);
+      public int calculateFeeNow(Session[] sessions,int id,Connection con);
 }

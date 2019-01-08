@@ -13,6 +13,7 @@ package DataType.Classes;
  */
 public interface ClassesDao {
     int insertClasses(Classes classes);
-     Classes[] selectClasses();
+     Classes[] selectClasses(int i);
     int updateClasses(Classes classes);
+     public Classes selectParticularClasses(Classes classes);
 }

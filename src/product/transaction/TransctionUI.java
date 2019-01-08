@@ -6,12 +6,13 @@
 package product.transaction;
 
 import DataType.Session.Session;
-import product.*;
 import java.awt.Dimension;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import product.*;
+import setting.ComboBoxFiter;
 
 /**
  *
@@ -106,7 +107,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setAutoscrolls(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         PList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         PList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -116,11 +117,13 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(PList);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 200, 400));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(50, 220, 200, 400);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Product :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 60, 30));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(340, 220, 60, 30);
 
         addButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addButton.setText("Submit");
@@ -129,69 +132,86 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 550, 110, 30));
+        getContentPane().add(addButton);
+        addButton.setBounds(570, 550, 110, 30);
 
         pname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pname.setForeground(new java.awt.Color(204, 51, 0));
         pname.setText("....");
-        getContentPane().add(pname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 20));
+        getContentPane().add(pname);
+        pname.setBounds(420, 220, 110, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Stock Id :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, 20));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(340, 260, 80, 20);
 
         stockId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stockId.setForeground(new java.awt.Color(204, 51, 0));
         stockId.setText("....");
-        getContentPane().add(stockId, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 100, 20));
+        getContentPane().add(stockId);
+        stockId.setBounds(420, 260, 100, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Items :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 50, 20));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(360, 300, 50, 20);
 
         items.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         items.setForeground(new java.awt.Color(204, 51, 0));
         items.setText("....");
-        getContentPane().add(items, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 110, 20));
+        getContentPane().add(items);
+        items.setBounds(420, 300, 110, 20);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Remains Items :");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, 20));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(300, 330, 100, 20);
 
         ritems.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ritems.setForeground(new java.awt.Color(204, 51, 0));
         ritems.setText("....");
-        getContentPane().add(ritems, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 120, 20));
+        getContentPane().add(ritems);
+        ritems.setBounds(420, 330, 120, 20);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Rate :");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 43, -1));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(370, 410, 43, 17);
 
         rate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rate.setForeground(new java.awt.Color(204, 51, 0));
         rate.setText("....");
-        getContentPane().add(rate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 120, -1));
+        getContentPane().add(rate);
+        rate.setBounds(420, 410, 120, 17);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Size :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 40, 14));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(360, 370, 40, 14);
 
         size.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         size.setForeground(new java.awt.Color(153, 51, 0));
         size.setText("....");
-        getContentPane().add(size, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 110, -1));
+        getContentPane().add(size);
+        size.setBounds(420, 370, 110, 17);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Quantity :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 70, -1));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(320, 480, 70, 17);
 
         VQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 VQuantityKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                VQuantityKeyTyped(evt);
+            }
         });
-        getContentPane().add(VQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, 120, 30));
+        getContentPane().add(VQuantity);
+        VQuantity.setBounds(400, 470, 120, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Reset");
@@ -200,12 +220,19 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, 100, 30));
+        getContentPane().add(jButton2);
+        jButton2.setBounds(410, 550, 100, 30);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         sSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(sSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 140, 30));
+        sSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sSearchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(sSearch);
+        sSearch.setBounds(70, 70, 140, 30);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Search");
@@ -214,67 +241,87 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 80, 30));
+        jPanel1.add(jButton1);
+        jButton1.setBounds(90, 120, 80, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Enter Registration No.");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(70, 30, 134, 17);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Class :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, 22));
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(450, 110, 39, 22);
 
         stClass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stClass.setForeground(new java.awt.Color(153, 51, 0));
         stClass.setText("....");
-        jPanel1.add(stClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 130, 30));
+        jPanel1.add(stClass);
+        stClass.setBounds(520, 100, 130, 30);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Roll  :");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 40, 30));
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(450, 130, 40, 30);
 
         stRoll.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stRoll.setForeground(new java.awt.Color(153, 51, 0));
         stRoll.setText("....");
-        jPanel1.add(stRoll, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 100, 30));
+        jPanel1.add(stRoll);
+        stRoll.setBounds(520, 130, 100, 30);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Sec   :");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, -1, 30));
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(790, 100, 39, 30);
 
         stSec.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stSec.setForeground(new java.awt.Color(153, 51, 0));
         stSec.setText("....");
-        jPanel1.add(stSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 130, 30));
+        jPanel1.add(stSec);
+        stSec.setBounds(860, 100, 130, 30);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Session :");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 140, 70, 20));
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(780, 140, 70, 20);
 
         stSession.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         stSession.setForeground(new java.awt.Color(153, 51, 0));
         stSession.setText("....");
-        jPanel1.add(stSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 130, 140, 30));
+        jPanel1.add(stSession);
+        stSession.setBounds(850, 130, 140, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 102, 102));
         jLabel8.setText("OR");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(300, 50, 35, 29);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Admission No: ");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, 20));
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(420, 30, 90, 20);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Session : ");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, -1, 20));
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(710, 30, 58, 20);
 
         admissionNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(admissionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 130, 30));
+        admissionNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                admissionNoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(admissionNo);
+        admissionNo.setBounds(520, 30, 130, 30);
 
         sessionList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sessionList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(sessionList, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, 120, 30));
+        jPanel1.add(sessionList);
+        sessionList.setBounds(780, 30, 120, 30);
 
         SearchAS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SearchAS.setText("Search");
@@ -283,9 +330,11 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 SearchASActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 33, 100, 30));
+        jPanel1.add(SearchAS);
+        SearchAS.setBounds(970, 33, 100, 30);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 1190, 180));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(50, 20, 1190, 180);
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -306,7 +355,8 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 220, 500, 290));
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(740, 220, 500, 290);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Add To Cart");
@@ -315,16 +365,19 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 110, 30));
+        getContentPane().add(jButton3);
+        jButton3.setBounds(570, 470, 110, 30);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Total Price :");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 80, -1));
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(550, 410, 80, 17);
 
         TPValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TPValue.setForeground(new java.awt.Color(153, 51, 0));
         TPValue.setText("0");
-        getContentPane().add(TPValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 80, -1));
+        getContentPane().add(TPValue);
+        TPValue.setBounds(640, 410, 80, 17);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -394,14 +447,20 @@ public class TransctionUI extends javax.swing.JInternalFrame {
              System.out.print(value);
              if(value != ""){
                  String[] str = tdi.selectStudent(value);
-                 stClass.setText(str[6]);
-                 stRoll.setText(str[3]);
-                 stSession.setText(str[7]);
-                 stSec.setText(str[4]);
-                 admid = Integer.parseInt(str[0]);
-                 session = str[7];
-                 sid = Integer.parseInt(str[5]);
-                 regNo = Integer.parseInt(value);
+                 if(str[0] != ""){
+                    stClass.setText(str[6]);
+                    stRoll.setText(str[3]);
+                    stSession.setText(str[7]);
+                    stSec.setText(str[4]);
+                    admid = Integer.parseInt(str[0]);
+                    session = str[7];
+                    sid = Integer.parseInt(str[5]);
+                    regNo = Integer.parseInt(value);
+                 }
+                 else{
+                   JOptionPane.showMessageDialog(null, "No Record Found.", "", JOptionPane.INFORMATION_MESSAGE);  
+                }
+             
              }
              else{
                  JOptionPane.showMessageDialog(null, "Input Box is Empty.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -410,7 +469,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void VQuantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_VQuantityKeyPressed
-         
+            
     }//GEN-LAST:event_VQuantityKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -477,20 +536,37 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         if(value != ""){
             int ind = this.sessionList.getSelectedIndex();
             String[] str = tdi.selectStudent1(Integer.parseInt(value),ses[ind].getId());
-            stClass.setText(str[6]);
-            stRoll.setText(str[3]);
-            stSession.setText(str[7]);
-            stSec.setText(str[4]);
-            admid = Integer.parseInt(str[0]);
-            session = str[7];
-            sid = Integer.parseInt(str[5]);
-            regNo = Integer.parseInt(value);
+            if(str[0] != ""){
+                stClass.setText(str[6]);
+                stRoll.setText(str[3]);
+                stSession.setText(str[7]);
+                stSec.setText(str[4]);
+                admid = Integer.parseInt(str[0]);
+                session = str[7];
+                sid = Integer.parseInt(str[5]);
+                regNo = Integer.parseInt(value);
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "No Record Found.", "", JOptionPane.INFORMATION_MESSAGE);  
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "Input Box is Empty.", "", JOptionPane.INFORMATION_MESSAGE);
             pname.setFocusable(true);
         }
     }//GEN-LAST:event_SearchASActionPerformed
+
+    private void admissionNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_admissionNoKeyTyped
+        ComboBoxFiter.numberValidation(evt);
+    }//GEN-LAST:event_admissionNoKeyTyped
+
+    private void sSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sSearchKeyTyped
+        ComboBoxFiter.numberValidation(evt);
+    }//GEN-LAST:event_sSearchKeyTyped
+
+    private void VQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_VQuantityKeyTyped
+       ComboBoxFiter.numberValidation(evt);
+    }//GEN-LAST:event_VQuantityKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> PList;

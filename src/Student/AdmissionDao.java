@@ -10,5 +10,5 @@ package Student;
  * @author kumar
  */
 public interface AdmissionDao {
-    
+    public void oldFee(Student student);
 }

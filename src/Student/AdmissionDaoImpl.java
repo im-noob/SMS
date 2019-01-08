@@ -9,6 +9,12 @@ package Student;
  *
  * @author kumar
  */
-public class AdmissionDaoImpl {
+public class AdmissionDaoImpl implements AdmissionDao {
+
+    @Override
+    public void oldFee(Student student) {
+        
+        
+     }
     
 }

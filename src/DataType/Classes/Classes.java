@@ -16,6 +16,7 @@ public class Classes {
     private int annualFee;
     private int computer;
     private String code;
+    private int session;
     
         public String getName() {
 		return name;
@@ -75,6 +76,20 @@ public class Classes {
      */
     public void setCode(String code) {
         this.code = code;
+    }
+
+    /**
+     * @return the session
+     */
+    public int getSession() {
+        return session;
+    }
+
+    /**
+     * @param session the session to set
+     */
+    public void setSession(int session) {
+        this.session = session;
     }
     
 }

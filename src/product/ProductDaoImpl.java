@@ -5,14 +5,16 @@
  */
 package product;
 
-
 import Database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ *
+ * @author kumar
+ */
 public class ProductDaoImpl implements ProductDao{
      
     @Override
@@ -98,5 +100,4 @@ public class ProductDaoImpl implements ProductDao{
          }
         return cl;
     }
-
 }

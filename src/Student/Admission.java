@@ -15,6 +15,8 @@ public class Admission {
     private int roll;
     private int tutionFee;
     private int transportFee;
+    private int createat;
+    
 
     /**
      * @return the StudentID
@@ -84,6 +86,20 @@ public class Admission {
      */
     public void setRoll(int roll) {
         this.roll = roll;
+    }
+
+    /**
+     * @return the createat
+     */
+    public int getCreateat() {
+        return createat;
+    }
+
+    /**
+     * @param createat the createat to set
+     */
+    public void setCreateat(int createat) {
+        this.createat = createat;
     }
     
 }

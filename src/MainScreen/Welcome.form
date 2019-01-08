@@ -48,58 +48,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="editMenu">
-          <Properties>
-            <Property name="mnemonic" type="int" value="101"/>
-            <Property name="text" type="java.lang.String" value="Edit"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="cutMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="116"/>
-                <Property name="text" type="java.lang.String" value="Cut"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="copyMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="121"/>
-                <Property name="text" type="java.lang.String" value="Copy"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="pasteMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="112"/>
-                <Property name="text" type="java.lang.String" value="Paste"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="100"/>
-                <Property name="text" type="java.lang.String" value="Delete"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="helpMenu">
-          <Properties>
-            <Property name="mnemonic" type="int" value="104"/>
-            <Property name="text" type="java.lang.String" value="Help"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="contentMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
-                <Property name="text" type="java.lang.String" value="Contents"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
-              <Properties>
-                <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="About"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="newAdd">
           <Properties>
             <Property name="text" type="java.lang.String" value="New"/>
@@ -152,11 +100,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="New Inventory "/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="New Stock"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -181,6 +135,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Product Transaction"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Transaction Status"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

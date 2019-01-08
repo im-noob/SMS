@@ -15,6 +15,7 @@ import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
 import DebugFile.DebugClassDaoImpl;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -145,6 +146,23 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setAutoscrolls(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jTabbedPane1.setBackground(new java.awt.Color(102, 255, 51));
 
@@ -364,11 +382,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         sessionTxt.setBounds(400, 90, 290, 23);
 
         sessionList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        sessionList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         sessionList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 sessionListValueChanged(evt);
@@ -425,7 +438,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jLabel9.setBounds(320, 120, 80, 20);
 
         rName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rName.setText("jTextField1");
         rName.setNextFocusableComponent(rBno);
         jPanel2.add(rName);
         rName.setBounds(420, 120, 250, 23);
@@ -436,7 +448,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jLabel10.setBounds(340, 160, 80, 20);
 
         rBno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rBno.setText("jTextField1");
         rBno.setNextFocusableComponent(rSave);
         jPanel2.add(rBno);
         rBno.setBounds(420, 160, 250, 23);
@@ -716,9 +727,8 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_feeFeeTypeListValueChanged
 
     private void feeClassListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_feeClassListValueChanged
-        /** String value = feeClassList.getSelectedValue();
-            this.feebookClass.setText(value);
-            */
+        /***String value = feeClassList.getSelectedValue();
+         * this.feebookClass.setText(value);*/
         
         String vl = this.feeClassList.getSelectedValue();
         // System.out.printf("##### Print valur ",vl);
@@ -737,22 +747,22 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sessionTxtActionPerformed
 
     private void sessionSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionSaveMouseClicked
-        // TODO add your handling code here:
+       
         if("Save" == this.sessionSave.getText()){
-            // System.out.printf("\nerror during save %d",Integer.parseInt(tutionFee.getText()));
+           
             Session clas = new Session();
             clas.setName(this.sessionTxt.getText());
 
             int i = new SessionDaoImpl().insertSession(clas);
             if(i!=0){
-                System.out.print("Data inserted");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-                this.sessionClearField();
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-            }
+                        System.out.print("Data inserted");
+                        JOptionPane.showMessageDialog(this,"Data Save...");
+                        this.sessionClearField();
+                    }
+                else{
+                        System.out.print("error during save");
+                        JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                    }
         }
         else if("Update" == sessionSave.getText()){
             System.out.printf("\n--->Under update");
@@ -762,15 +772,15 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             int i = new SessionDaoImpl().updateSession(clas);
 
             if(i!=0){
-                System.out.print("Data inserted");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-                this.sessionSave.setText("Save");
-                clearField();
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
-            }
+                        System.out.print("Data inserted");
+                        JOptionPane.showMessageDialog(this,"Data Save...");
+                        this.sessionSave.setText("Save");
+                        clearField();
+                    }
+                else{
+                        System.out.print("error during save");
+                        JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                    }
         }
         sessionListRefresh();
     }//GEN-LAST:event_sessionSaveMouseClicked
@@ -805,24 +815,35 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         // TODO add your handling code here:
         if("Save" == save.getText()){
-
-            // System.out.printf("\nerror during save %d",Integer.parseInt(tutionFee.getText()));
-            Classes clas = new Classes();
-            clas.setName(className.getText());
-            clas.setExameFee(Integer.parseInt(examFee.getText()));
-            clas.setComputer(Integer.parseInt(ComputerFee.getText()));
-            clas.setAnnualFee(Integer.parseInt(this.annualFee.getText()));
-            clas.setCode(this.code.getText());
-            int i = new ClassesDaoImpl().insertClasses(clas);
-            if(i!=0){
-                System.out.print("Data inserted");
-                JOptionPane.showMessageDialog(this,"Data Save...");
-                clearField();
-
-            }
-            else{
-                System.out.print("error during save");
-                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+            try {
+               /** Object obj=this.classSession.getSelectedItem();
+                Class<?> cl =obj.getClass();
+                java.lang.reflect.Field fl=cl.getField("key");
+                
+                
+                System.out.printf("\nerror during save ");
+                System.out.println(fl);*/
+                
+                Classes clas = new Classes();
+                clas.setName(className.getText());
+                clas.setExameFee(Integer.parseInt(examFee.getText()));
+                clas.setComputer(Integer.parseInt(ComputerFee.getText()));
+                clas.setAnnualFee(Integer.parseInt(this.annualFee.getText()));
+                clas.setCode(this.code.getText());
+                //clas.setSession();
+                int i = new ClassesDaoImpl().insertClasses(clas);
+                if(i!=0){
+                    System.out.print("Data inserted");
+                    JOptionPane.showMessageDialog(this,"Data Save...");
+                    clearField();
+                    
+                }
+                else{
+                    System.out.print("error during save");
+                    JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                }
+            } catch (SecurityException ex) {
+                Logger.getLogger(SettingIFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else if("Update" == save.getText()){
@@ -872,7 +893,11 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_annualFeeKeyTyped
 
     private void codeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeKeyTyped
-          ComboBoxFiter.numberValidation(evt);
+           ComboBoxFiter.numberValidation(evt);
+            if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            System.out.println("Hello");
+        }
+      
 
     }//GEN-LAST:event_codeKeyTyped
 
@@ -923,6 +948,10 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         String vl = this.transList.getSelectedValue();
         this.selectTransportSelectedID(vl);
     }//GEN-LAST:event_transListValueChanged
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+         this.className.setFocusable(closable);
+    }//GEN-LAST:event_formInternalFrameOpened
     
     // add row in table
     private void feeBookEntry(String[] value){
@@ -1004,7 +1033,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private void ListRefresh(){
         //this.classList
         ClassesDaoImpl cls =new ClassesDaoImpl();
-        classListVector =cls.selectClasses();
+        classListVector =cls.selectClasses(1);
        //  System.out.printf("Select => %s",classListVector[3].getName());
         if(classListVector==null) {
             System.out.printf("Null");
@@ -1089,7 +1118,6 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
                     for(int i = 0;transListVector.length>i;i++){
                          //System.out.printf("\n==>%d",i);
                          l1.addElement(transListVector[i].getRoute());
-                        
                         
                     }
            }
