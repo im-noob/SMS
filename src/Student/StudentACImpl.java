@@ -185,7 +185,9 @@ public class StudentACImpl implements StudentACDao {
                 String sqlSupplyOld = "SELECT * FROM `cart_table` WHERE RegID = "+regID+" and session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
                 
                 String sqlSales = "SELECT COALESCE(SUM(Dues),0) AS SalesFee FROM cart_table WHERE RegID = "+regID+" AND session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
-                String sqlTrans = "SELECT transportFee *  TIMESTAMPDIFF(MONTH, created_at, CURRENT_TIMESTAMP()) as TransFee FROM `admissiontable` WHERE RegNo = "+regID+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+//                String sqlTrans = "SELECT transportFee *  TIMESTAMPDIFF(MONTH, created_at, CURRENT_TIMESTAMP()) as TransFee FROM `admissiontable` WHERE RegNo = "+regID+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                String sqlTrans = " SELECT transportFee as TransFee FROM `admissiontable` WHERE RegNo = "+regID+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
+                String sqlTransCalc = "";
                 String sqlclassID = "SELECT ClassID,tutionFee FROM admissiontable WHERE RegNo = "+regID+" and Session = (SELECT COALESCE(max(sessionID),0) FROM `sessiontable`)";
                 String sqlAllOhterFee = "";
                
@@ -195,12 +197,27 @@ public class StudentACImpl implements StudentACDao {
                 rsSales.next();
                 Data.setsupplyFee(rsSales.getInt("SalesFee"));
                 
+                
+                
 //                for tranport 
                 Statement stmtTrans=con.createStatement(); 
                 ResultSet rsTrans = stmtTrans.executeQuery(sqlTrans);
                 rsTrans.next();
-                Data.setTransFee(rsTrans.getInt("TransFee"));
-               
+                int TransMothlyFee = rsTrans.getInt("TransFee");
+                Statement stmtTrnasCalc = con.createStatement();
+                
+                sqlTransCalc = "SELECT TIMESTAMPDIFF"
+                        + "(MONTH, created_id, CURRENT_TIMESTAMP()) as TransFee"
+                        + " FROM transportfeetable WHERE RegNo = "+regID+" and "
+                        + "Session = (SELECT COALESCE(max(sessionID),0) "
+                        + "FROM `sessiontable`)";
+                System.out.println("sqlTransCalc:"+sqlTransCalc);
+                ResultSet rsTransCalc = stmtTrnasCalc.executeQuery(sqlTransCalc);
+                int TranRate = 0 ;
+                while(rsTransCalc.next()){
+                    TranRate =  (rsTransCalc.getInt("TransFee"));
+                }
+                System.out.println("all trnas fee:"+TranRate*TransMothlyFee);
                 
                 // for other fee calulation
                 
