@@ -26,13 +26,14 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "INSERT INTO `classtable`(`Name`, `examFee`, `computer`,annual,code) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO `classtable`(`Name`, `examFee`, `computer`,annual,code,`session`) VALUES (?,?,?,?,?,?)";
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setString(1,classes.getName());
                 stm.setInt(2,classes.getExameFee());
                 stm.setInt(3,classes.getComputer());
                 stm.setInt(4,classes.getAnnualFee());
                 stm.setString(5,classes.getCode());
+                stm.setInt(6, classes.getSession());
                 i = stm.executeUpdate();
                
                 
@@ -51,15 +52,25 @@ public class ClassesDaoImpl implements ClassesDao{
     }
     
      @Override
-    public Classes[] selectClasses() {
+    public Classes[] selectClasses(int id) {
        int i = -1;
-        Classes[] cls = new Classes[30];
+        Classes[] cls =null ;
        // Vector
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "SELECT `ClassID`, `Name`, `examFee`, `computer`,annual,code FROM `classtable`";
-               Statement stmt=con.createStatement();  
+                
+                Statement stmtr=con.createStatement(); 
+                
+                String sqlrow = "SELECT COUNT(*) as num FROM `classtable` Where `session` ="+id;
+                
+                ResultSet rsr = stmtr.executeQuery(sqlrow);
+                rsr.next();
+                int rowcount =rsr.getInt("num"); 
+                cls = new Classes[rowcount];
+                
+                String sql = "SELECT `ClassID`, `Name`, `examFee`, `computer`,annual,code FROM `classtable` Where `session` ="+id;
+                Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
                
                 
@@ -99,16 +110,18 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "UPDATE `classtable` SET `Name`=?,`examFee`=?,`computer`=?,annual=? WHERE  `ClassID`=?";
+                String sql = "UPDATE `classtable` SET `Name`=?,`examFee`=?,`computer`=?,annual=? WHERE  `ClassID`=? And `session` =?";
+                
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setString(1,classes.getName());
                 stm.setInt(2,classes.getExameFee());
                 stm.setInt(3,classes.getComputer());
                 stm.setInt(4,classes.getAnnualFee());
                 stm.setInt(5,classes.getId());
-                
+                stm.setInt(6,classes.getSession());
+                System.out.printf("\n Update code : %s",stm);
                 i = stm.executeUpdate();
-               
+               i=1;
                 
             } catch (SQLException ex) {
                 System.out.print("\n\nError during update");
@@ -125,6 +138,46 @@ public class ClassesDaoImpl implements ClassesDao{
             }
          }
         return i;
+    }
+    
+    /** particular class */
+     @Override
+    public Classes selectParticularClasses(Classes classes) {
+        int i=0;
+        Classes cls=null;
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                
+                Statement stmtr=con.createStatement();  
+               cls = new Classes();
+                String sqlrow = "SELECT Count(`ClassID`) as num,`ClassID`, `Name`, `examFee`, `computer`,annual,code,session FROM `classtable` Where `session` ="+classes.getSession()+" and `ClassID` ="+classes.getId();
+              
+                 ResultSet rsr = stmtr.executeQuery(sqlrow);
+                rsr.next();
+                int rowcount =rsr.getInt("num"); 
+                cls.setAnnualFee(rsr.getInt("annual"));
+                cls.setCode(rsr.getString("code"));
+                cls.setComputer(rsr.getInt("computer"));
+                cls.setExameFee(rsr.getInt("examFee"));
+                cls.setId(rsr.getInt("ClassID"));
+                cls.setName(rsr.getString("Name"));
+                cls.setSession(rsr.getInt("session"));
+                
+            } catch (SQLException ex) {
+                System.out.print("\n\nError during update");
+                Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);                
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                  System.out.print("\n\nError during update");
+                Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+        return cls;
     }
     
 }

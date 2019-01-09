@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import setting.ComboBoxFiter;
 
 /**
  *
@@ -21,6 +22,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form ExpenceIFrame
      */
+    int totalExpence = 0;
     public ExpenceIFrame() {
         initComponents();
     }
@@ -105,6 +107,11 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
                 priceActionPerformed(evt);
             }
         });
+        price.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                priceKeyTyped(evt);
+            }
+        });
         jPanel1.add(price);
         price.setBounds(780, 123, 210, 30);
 
@@ -132,6 +139,9 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jdate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jdateFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jdateFocusLost(evt);
             }
         });
         jdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,14 +211,14 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
              System.out.printf("Submit click");
           int i = new ExpenceDaoImpl().insertExpence(expence);
             if(i!=0){
-                System.out.print("Data inserted Employ ID :"+i);
-                JOptionPane.showMessageDialog(this,"Data Save...Employ ID :"+i);
+               System.out.print(" Data Save ");
+               JOptionPane.showMessageDialog(this," Data Save ");
                clearField();
                selectData();
 
             }
             else{
-                System.out.print("error during save");
+                System.out.print(" Error during save ");
                 JOptionPane.showMessageDialog(this,"Error during save Retry..");
             }
        
@@ -219,7 +229,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jdateFocusGained
 
     private void jdateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdateMouseExited
-         // TODO add your handling code here:
+         
          selectData();
     }//GEN-LAST:event_jdateMouseExited
 
@@ -230,6 +240,14 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceActionPerformed
+
+    private void priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceKeyTyped
+        ComboBoxFiter.numberValidation(evt);
+    }//GEN-LAST:event_priceKeyTyped
+
+    private void jdateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdateFocusLost
+         selectData();
+    }//GEN-LAST:event_jdateFocusLost
     
     //clear field
     private void clearField(){
@@ -260,9 +278,8 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
                try{System.out.printf(expenceListVector[0].getTitle());
                     for(int i = 0;expenceListVector.length>i;i++){
                          
-                         modeal.addRow(new Object[]{expenceListVector[i].getTitle(),expenceListVector[i].getPrice(),expenceListVector[i].getDate(),expenceListVector[i].getRemark()});
-                        
-                       
+modeal.addRow(new Object[]{expenceListVector[i].getTitle(),expenceListVector[i].getPrice(),expenceListVector[i].getDate(),expenceListVector[i].getRemark()});
+                     this.totalExpence += expenceListVector[i].getPrice();                         
                     }
            }
         catch(Exception ex){
@@ -270,6 +287,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
               
             System.out.print(ex);
         }
+          this.expence.setText(" "+totalExpence);
        // this.classList.setListData(str);
      
         this.repaint();

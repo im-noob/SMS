@@ -15,7 +15,6 @@ public class Product {
     
         private String name;
 	private int id;
-
 	private Date date;
 	private int price;
 	private int quantity;
@@ -59,5 +58,4 @@ public class Product {
 	public void setLeft(int left) {
 		this.left = left;
 	}
-   
 }

@@ -28,6 +28,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
      * Creates new form StudentAdmissionStage2
      */
     List nonTeachingList = null;
+      SessionDaoImpl    sessionDaoImpl = new SessionDaoImpl();
 
     public StudentAdmissionStage2() {
         initComponents();
@@ -38,6 +39,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         initComponents();
         setBounds(0,0,size.width-10, size.height-10);
       setVisible(true);
+    
     }
 
     /**
@@ -484,7 +486,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         
         //for class list
         ClassesDaoImpl cdi = new ClassesDaoImpl();
-        cls = cdi.selectClasses();
+        cls = cdi.selectClasses(1);
         for(int i = 0 ; i < cls.length; i++){
             if(cls[i] == null)
                 System.out.println("null ");
@@ -511,7 +513,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         System.out.println("Form open studien admsjion steg 2 Form opened");
     }//GEN-LAST:event_formInternalFrameOpened
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
+       /*** StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
         RegNo = jTextField1.getText();
         Student student = sadi.getStudentData(RegNo);
         if(student == null)
@@ -554,7 +556,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jTextField9.setText(student.getCaste());            
         religion.setText(student.getReligion());            
         ph1.setText(student.getPh1());
-        ph2.setText(student.getPh2());
+        ph2.setText(student.getPh2());*/
+       sessionDaoImpl.calculateFeeInSessionChange(2);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

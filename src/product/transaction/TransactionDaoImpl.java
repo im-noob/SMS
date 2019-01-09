@@ -34,7 +34,6 @@ public class TransactionDaoImpl implements TransactionDao {
                Statement stmt=con.createStatement();  
                 ResultSet rs=stmt.executeQuery(sql);
                 
-               
                 while(rs.next()){
                     cl[i] = new Stock();
                     System.out.println(rs.getInt(1)+":"+rs.getString("Name"));
@@ -61,6 +60,41 @@ public class TransactionDaoImpl implements TransactionDao {
         return cl;
     }
 
+    public ReportList[] report() {
+        int i=0;
+        ReportList[] cl = new ReportList[200]; 
+       // Vector
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "SELECT productstocktable.*, product.Name FROM `productstocktable` INNER JOIN product ON productstocktable.ProductID = product.productID WHERE productstocktable.Flag = 1 ORDER BY productstocktable.RQuantity;";
+               Statement stmt=con.createStatement();  
+                ResultSet rs=stmt.executeQuery(sql);
+                
+                while(rs.next()){
+                    cl[i] = new ReportList();
+                    System.out.println(rs.getInt(1)+":"+rs.getString("Name"));
+                    cl[i].setQuantity(rs.getInt("RQuantity"));
+                    cl[i].setSize(rs.getString("Size"));
+                    cl[i].setDate(rs.getDate("created_at").toString()); 
+                    cl[i++].setName(rs.getString("Name"));
+                    
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+        return cl;
+    }
+
+    
     public Session[] selectSession() {
         int i=0;
         Session[] cl = new Session[30]; 
@@ -163,7 +197,7 @@ public class TransactionDaoImpl implements TransactionDao {
                PreparedStatement stmt= con.prepareStatement(sql); 
                stmt.setInt(1, str);
                stmt.setInt(2, sid); 
-               ResultSet rs=stmt.executeQuery();
+               ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
                     System.out.println(rs.getInt(1)+":"+rs.getString("Name"));
                     cl[0] = String.valueOf(rs.getInt("AdmissionID"));
@@ -256,10 +290,10 @@ public class TransactionDaoImpl implements TransactionDao {
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "SELECT producttransactiontable.*,product.Name FROM `producttransactiontable` INNER join product ON producttransactiontable.ProductID = product.productID WHERE cart_id = ?";
+                String sql = "SELECT producttransactiontable.*, product.Name FROM `producttransactiontable` INNER join product ON producttransactiontable.ProductID = product.productID WHERE producttransactiontable.cart_id = ?";
                 PreparedStatement stmt= con.prepareStatement(sql); 
                 stmt.setInt(1, cart_id);
-                ResultSet rs=stmt.executeQuery(sql);
+                ResultSet rs=stmt.executeQuery();
                 
                 while(rs.next()){
                     cl[i] = new Transaction();
@@ -375,6 +409,29 @@ public class TransactionDaoImpl implements TransactionDao {
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setInt(1,stk.getStatus());
                 stm.setInt(2,stk.getId());
+                i = stm.executeUpdate();
+            } catch (SQLException ex) {
+               // Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+         }
+        return i;
+    }
+    public int UpdateTransactionStatus(Transaction trn) {
+        int i=0;
+        Connection con =new DBConnection().connectDB();
+        if(con !=null ){
+            try {
+                String sql = "UPDATE `producttransactiontable` SET status=?  where producttrID=?";
+                PreparedStatement stm=con.prepareStatement(sql);
+                stm.setInt(1,trn.getStatus());
+                stm.setInt(2,trn.getTid());
                 i = stm.executeUpdate();
             } catch (SQLException ex) {
                // Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);

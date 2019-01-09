@@ -375,7 +375,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     List AddList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         ClassesDaoImpl cdi = new ClassesDaoImpl();
-        cls = cdi.selectClasses();
+        cls = cdi.selectClasses(1);
         for(int i = 0 ; i < cls.length; i++){
             if(cls[i] == null)
                 System.out.println("null ");
