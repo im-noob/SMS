@@ -110,17 +110,18 @@ public class ClassesDaoImpl implements ClassesDao{
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
-                String sql = "UPDATE `classtable` SET `Name`=?,`examFee`=?,`computer`=?,annual=? WHERE  `ClassID`=? Where `session` =?";
+                String sql = "UPDATE `classtable` SET `Name`=?,`examFee`=?,`computer`=?,annual=? WHERE  `ClassID`=? And `session` =?";
+                
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setString(1,classes.getName());
                 stm.setInt(2,classes.getExameFee());
                 stm.setInt(3,classes.getComputer());
                 stm.setInt(4,classes.getAnnualFee());
                 stm.setInt(5,classes.getId());
-                stm.setInt(5,classes.getSession());
-                
+                stm.setInt(6,classes.getSession());
+                System.out.printf("\n Update code : %s",stm);
                 i = stm.executeUpdate();
-               
+               i=1;
                 
             } catch (SQLException ex) {
                 System.out.print("\n\nError during update");
@@ -165,8 +166,7 @@ public class ClassesDaoImpl implements ClassesDao{
                 
             } catch (SQLException ex) {
                 System.out.print("\n\nError during update");
-                Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                
+                Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);                
                 System.out.print(ex);
             }
             try {

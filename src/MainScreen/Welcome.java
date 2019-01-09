@@ -7,8 +7,6 @@ package MainScreen;
 
 import DataType.Employ.EmployeEntry;
 import DataType.Expence.ExpenceIFrame;
-import DebugFile.DebugClass;
-import DebugFile.DebugClassDaoImpl;
 import Student.StudentAccount;
 import Student.StudentAdmission;
 import Student.StudentAdmissionStage2;
@@ -56,12 +54,6 @@ public class Welcome extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        dbExport = new javax.swing.JMenuItem();
         newAdd = new javax.swing.JMenu();
         newStudent = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -80,41 +72,6 @@ public class Welcome extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        dbExport.setText("Export");
-        dbExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbExportActionPerformed(evt);
-            }
-        });
-        fileMenu.add(dbExport);
-
-        menuBar.add(fileMenu);
 
         newAdd.setText("New");
 
@@ -236,10 +193,6 @@ public class Welcome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         //this.closeFunction(); 
@@ -287,16 +240,6 @@ public class Welcome extends javax.swing.JFrame {
         settingIFrame.repaint();
         System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void dbExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbExportActionPerformed
-     
-      DebugClassDaoImpl obj= new DebugClassDaoImpl();
-      DebugClass debug= new DebugClass();
-      debug.setNotes("hello");
-      System.out.println(debug.getDate());
-      
-     // obj.fileWriterG("hello");
-    }//GEN-LAST:event_dbExportActionPerformed
   
     /**
     private void closeFunction(){
@@ -407,10 +350,7 @@ public class Welcome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem dbExport;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -427,9 +367,6 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu newAdd;
     private javax.swing.JMenu newStudent;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JMenu setting;
     // End of variables declaration//GEN-END:variables
 

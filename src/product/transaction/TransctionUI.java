@@ -565,7 +565,7 @@ public class TransctionUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sSearchKeyTyped
 
     private void VQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_VQuantityKeyTyped
-       ComboBoxFiter.numberValidation(evt);
+        // TODO add your handling code here:
     }//GEN-LAST:event_VQuantityKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
