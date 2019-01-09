@@ -10,6 +10,7 @@ import Database.DBConnection;
 import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
+import setting.ComboBoxFiter;
 
 /**
  *
@@ -20,7 +21,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
     /**
      * Creates new form StudentAdmission
      */
-
+    ComboBoxFiter cbf = new ComboBoxFiter();
     public StudentAdmission() {
         initComponents();
         
@@ -65,7 +66,6 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         ph1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        ph2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         state = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -122,6 +122,7 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         religion = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        ph2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Student", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -235,6 +236,14 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
                 pinActionPerformed(evt);
             }
         });
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pinKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pinKeyTyped(evt);
+            }
+        });
         getContentPane().add(pin);
         pin.setBounds(130, 240, 251, 23);
 
@@ -253,6 +262,14 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         jLabel10.setBounds(70, 310, 43, 17);
 
         ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ph1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ph1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ph1KeyTyped(evt);
+            }
+        });
         getContentPane().add(ph1);
         ph1.setBounds(130, 360, 251, 23);
 
@@ -260,10 +277,6 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         jLabel11.setText("Mobile No. 1 :");
         getContentPane().add(jLabel11);
         jLabel11.setBounds(62, 363, 83, 17);
-
-        ph2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(ph2);
-        ph2.setBounds(510, 360, 251, 23);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Mobile No. 2 : ");
@@ -564,6 +577,14 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(50, 463, 220, 30);
 
+        ph2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ph2KeyTyped(evt);
+            }
+        });
+        getContentPane().add(ph2);
+        ph2.setBounds(510, 360, 250, 20);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -714,6 +735,26 @@ public class StudentAdmission extends javax.swing.JInternalFrame {
         ph2.setText("");
         mother.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyPressed
+        
+    }//GEN-LAST:event_pinKeyPressed
+
+    private void ph1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ph1KeyPressed
+        
+    }//GEN-LAST:event_ph1KeyPressed
+
+    private void pinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyTyped
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_pinKeyTyped
+
+    private void ph1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ph1KeyTyped
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_ph1KeyTyped
+
+    private void ph2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ph2KeyTyped
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_ph2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

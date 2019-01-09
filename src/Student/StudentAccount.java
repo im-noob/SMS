@@ -17,6 +17,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import setting.ComboBoxFiter;
 
 /**
  *
@@ -30,7 +31,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     public StudentAccount() {
         initComponents();
     }
-
+    ComboBoxFiter cbf = new ComboBoxFiter();
     public StudentAccount(Dimension size) {
          initComponents();
         setBounds(0,0,size.width-10, size.height-10);
@@ -242,6 +243,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setText("0");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField2);
         jTextField2.setBounds(100, 300, 100, 23);
 
@@ -578,6 +584,10 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_jTextField2KeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;

@@ -7,6 +7,9 @@ package setting;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,6 +20,7 @@ public class ComboBoxFiter {
       private int key;
     private String value;
 
+    public ComboBoxFiter(){}
     public ComboBoxFiter(int key, String value)
     {
         this.key = key;
