@@ -163,8 +163,6 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     @Override
     public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm,int SessionId) {
         
-        
-        
         int i=0;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
@@ -224,6 +222,20 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
 
                 i = stm.executeUpdate();
                
+                if(TransID != 0){
+                    String sqlrouteTrans = "INSERT INTO `transportfeetable`("
+                        + " `RegNo`, `session`, `routeID`) "
+                        + "VALUES ('"+regno+"','"+SessionId+"','"+TransID+"')";
+                  
+                    System.out.println("routesql:"+sqlrouteTrans);
+                    
+                    Statement stmtTrans=con.createStatement(); 
+                    stmtTrans.executeUpdate(sqlrouteTrans);
+                
+                    
+                    
+                }
+                
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
