@@ -11,6 +11,7 @@ import DataType.Employ.Employ;
 import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -134,17 +135,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setNextFocusableComponent(jButton1);
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
             }
         });
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(90, 35, 206, 23);
+        jTextField1.setBounds(100, 40, 250, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Reg. No. :");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 38, 62, 17);
+        jLabel1.setBounds(20, 40, 62, 17);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
@@ -153,8 +157,13 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(326, 34, 90, 30);
+        jButton1.setBounds(390, 40, 90, 30);
 
         ph2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ph2.addActionListener(new java.awt.event.ActionListener() {
@@ -173,24 +182,26 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Reg. No.");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(190, 80, 53, 17);
+        jLabel15.setBounds(30, 90, 53, 17);
 
+        regID.setEditable(false);
         regID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        regID.setFocusable(false);
         regID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 regIDKeyTyped(evt);
             }
         });
         getContentPane().add(regID);
-        regID.setBounds(250, 80, 251, 23);
+        regID.setBounds(100, 90, 251, 23);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Reff. By :");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(540, 80, 57, 17);
+        jLabel16.setBounds(400, 90, 57, 17);
 
         getContentPane().add(refByID);
-        refByID.setBounds(600, 80, 244, 20);
+        refByID.setBounds(480, 90, 244, 20);
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -245,11 +256,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("DOB :");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(420, 170, 37, 17);
+        jLabel19.setBounds(420, 180, 37, 17);
 
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(470, 170, 200, 30);
+        jDateChooser1.setBounds(480, 180, 200, 30);
 
         po.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(po);
@@ -407,6 +418,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(220, 633, 110, 30);
 
@@ -417,12 +433,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(70, 635, 100, 30);
 
         TutioonFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TutioonFee.setText("0");
         TutioonFee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TutioonFeeKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TutioonFeeKeyTyped(evt);
             }
@@ -442,6 +466,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         studclass1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         studclass1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        studclass1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                studclass1ItemStateChanged(evt);
+            }
+        });
         getContentPane().add(studclass1);
         studclass1.setBounds(100, 560, 250, 23);
 
@@ -474,7 +503,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     Transport []TranstList = null;
     Session[] sessionList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        
+//        bus fee editable
+        TransFee.setEditable(false);
         //for ref by non teaching employee
        StudentDaoImpl sdi = new StudentDaoImpl();
         nonTeachingList = sdi.getNonTeachingList();
@@ -511,6 +541,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 classSession3.addItem(sessionList[i].getName());
         }
         System.out.println("Form open studien admsjion steg 2 Form opened");
+//        foucs on regbox
+        jTextField1.requestFocus();
     }//GEN-LAST:event_formInternalFrameOpened
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        /*** StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
@@ -685,9 +717,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
          if(i == -485){
             System.out.println("Already exists row");
             JOptionPane.showMessageDialog(this,"Data Updated !! This admission is already Taken");
+            jButton2.doClick();
         }else if(i!=0){
             System.out.println("Data inserted New Admission .....");
             JOptionPane.showMessageDialog(this,"Data Save...");
+            jButton2.doClick();
         }
         else{
             System.out.println("error during save:"+i);
@@ -760,6 +794,51 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
          ComboBoxFiter.numberValidation(evt);
 
     }//GEN-LAST:event_TutioonFeeKeyTyped
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_jButton3KeyPressed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void TutioonFeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TutioonFeeKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_TutioonFeeKeyPressed
+
+    private void studclass1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_studclass1ItemStateChanged
+        String nameOfRoute = studclass1.getSelectedItem().toString();
+        if(!nameOfRoute.equals("None")){
+           TransFee.setEditable(true);
+        }else{
+            TransFee.setEditable(false);
+            TransFee.setText("0");
+        }
+    }//GEN-LAST:event_studclass1ItemStateChanged
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_jButton2KeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

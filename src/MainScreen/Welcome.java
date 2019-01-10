@@ -198,8 +198,9 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction(); 
         studentAdmission =new StudentAdmission(this.getSize());
          this.desktopPane.add(studentAdmission);
-         studentAccount.show(true);
-         studentAccount.repaint();
+         studentAdmission.requestDefaultFocus();
+//         studentAccount.show(true);
+//         studentAccount.repaint();
          System.out.printf("Click");
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -208,8 +209,9 @@ public class Welcome extends javax.swing.JFrame {
        // this.closeFunction(); 
         studentAdmissionStage2 =new StudentAdmissionStage2(this.getSize());
          this.desktopPane.add(studentAdmissionStage2);
-         studentAdmissionStage2.show(true);
-         studentAdmissionStage2.repaint();
+//         studentAdmissionStage2.show(true);
+//         studentAdmissionStage2.repaint();
+         studentAdmissionStage2.requestDefaultFocus();
          System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -218,8 +220,10 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction();
         studentAccount =new StudentAccount(this.getSize());
         this.desktopPane.add(studentAccount);
-        studentAdmission.show(true);
-        studentAdmission.repaint();
+        studentAccount.requestFocus();
+//        studentAdmission.show(true);
+//        studentAdmission.repaint();
+
         System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

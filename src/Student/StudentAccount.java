@@ -8,6 +8,7 @@ package Student;
 import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
 import java.util.List;
@@ -115,10 +116,21 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel1.setBounds(20, 20, 55, 17);
 
         ID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IDKeyPressed(evt);
+            }
+        });
         getContentPane().add(ID);
         ID.setBounds(87, 20, 160, 23);
 
         ID1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID1.setNextFocusableComponent(jButton3);
+        ID1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ID1KeyPressed(evt);
+            }
+        });
         getContentPane().add(ID1);
         ID1.setBounds(310, 60, 150, 23);
 
@@ -131,6 +143,8 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel3.setText("Class :");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(260, 20, 39, 17);
+
+        jComboBox1.setNextFocusableComponent(STUDCLASS);
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(310, 20, 154, 20);
 
@@ -145,9 +159,15 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
+        jButton1.setNextFocusableComponent(jTextField3);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
         getContentPane().add(jButton1);
@@ -158,11 +178,19 @@ public class StudentAccount extends javax.swing.JInternalFrame {
                 jList1MouseClicked(evt);
             }
         });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 97, 240, 300);
 
+        jTabbedPane1.setFocusable(false);
+
+        jPanel1.setFocusable(false);
         jPanel1.setLayout(null);
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -330,6 +358,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jTabbedPane1.setBounds(265, 97, 784, 507);
 
         ID2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ID2KeyPressed(evt);
+            }
+        });
         getContentPane().add(ID2);
         ID2.setBounds(760, 70, 170, 23);
 
@@ -342,14 +375,27 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel10.setText("place:");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(710, 30, 36, 17);
+
+        jComboBox2.setNextFocusableComponent(ID2);
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox2);
         jComboBox2.setBounds(754, 30, 290, 20);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("GO");
+        jButton3.setNextFocusableComponent(jComboBox2);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
             }
         });
         getContentPane().add(jButton3);
@@ -376,12 +422,17 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         ClassesDaoImpl cdi = new ClassesDaoImpl();
         cls = cdi.selectClasses(1);
-        for(int i = 0 ; i < cls.length; i++){
+        if(cls != null){
+            for(int i = 0 ; i < cls.length; i++){
             if(cls[i] == null)
                 System.out.println("null ");
-            else
-                jComboBox1.addItem(cls[i].getName());
+                else
+                    jComboBox1.addItem(cls[i].getName());
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No classes Fount");
         }
+        
         
 //        
         StudentACImpl saci = new StudentACImpl();
@@ -389,7 +440,8 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         for(int i = 0 ; i < AddList.size(); i++){
             jComboBox2.addItem((String)AddList.get(i));
         }
-        
+//        
+        ID.requestFocus();
         
     }//GEN-LAST:event_formInternalFrameOpened
     List studList = null; //student list search 
@@ -588,6 +640,53 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         cbf.numberValidation(evt);
     }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void ID1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ID1KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_ID1KeyPressed
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_jButton3KeyPressed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void ID2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ID2KeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_ID2KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void IDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_IDKeyPressed
+
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+//          jList1.doClick();
+        }
+    }//GEN-LAST:event_jList1KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
