@@ -120,6 +120,9 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 IDKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumberFilter(evt);
+            }
         });
         getContentPane().add(ID);
         ID.setBounds(87, 20, 160, 23);
@@ -221,6 +224,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel5.setBounds(100, 240, 90, 20);
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumberFilter(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,8 +270,12 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SubmitOnEnter(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
+                NumberFilter(evt);
             }
         });
         jPanel1.add(jTextField1);
@@ -272,6 +284,9 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setText("0");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField2KeyTyped(evt);
             }
@@ -297,8 +312,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SubmitOnEnter(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                NumberFilter(evt);
             }
         });
         jPanel1.add(jTextField3);
@@ -446,28 +464,35 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
     List studList = null; //student list search 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String fname = ID2.getText();
-        String address = jComboBox2.getSelectedItem().toString();
-        
-        DefaultListModel<String> dlmPer = new DefaultListModel<String>();
-        StudentACImpl sacd = new StudentACImpl();
+        try{
+            String fname = ID2.getText();
+            String address = jComboBox2.getSelectedItem().toString();
 
-        studList = sacd.getStudentListByFatherName(fname,address);
-        for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-            Student Data = (Student) studList.get(i);
-            dlmPer.addElement(Data.getName());
+            DefaultListModel<String> dlmPer = new DefaultListModel<String>();
+            StudentACImpl sacd = new StudentACImpl();
+
+            studList = sacd.getStudentListByFatherName(fname,address);
+            for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                Student Data = (Student) studList.get(i);
+                dlmPer.addElement(Data.getName());
+            }
+            jList1.setModel(dlmPer);
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("error in account search:"+err.getMessage());
         }
-        jList1.setModel(dlmPer);
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     FeeTypeClass  ftc = null;
     int TotalFee = 0 ;
     String selectedRegNO = null;
     List<StudentFeeHistory> sfhList = null;
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+    
+    int index = -1;
+    public void LoadFeeData(){
         
-        
-        int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
         selectedRegNO = selectedStud.getRegID();
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
@@ -540,50 +565,61 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             tmHis.addRow(objSfh);
             
         }
+    }
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        index = jList1.locationToIndex(evt.getPoint());
+        this.LoadFeeData();
+        
         
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String RegNo = ID.getText();
-        String StudName = ID1.getText();
-        String StudSec = STUDCLASS.getSelectedItem().toString();
-        
-        String studstudclass = jComboBox1.getSelectedItem().toString();
-        
-        int classID = 0 ;
-        for(int i =0 ; i < cls.length ; i ++){
-            if(cls[i] != null){
-                if(cls[i].getName().equals(studstudclass)){
-                    System.out.println("foundi ");
-                    classID = cls[i].getId();
+        try{
+            String RegNo = ID.getText();
+            String StudName = ID1.getText();
+            String StudSec = STUDCLASS.getSelectedItem().toString();
+
+            String studstudclass = jComboBox1.getSelectedItem().toString();
+
+            int classID = 0 ;
+            for(int i =0 ; i < cls.length ; i ++){
+                if(cls[i] != null){
+                    if(cls[i].getName().equals(studstudclass)){
+                        System.out.println("foundi ");
+                        classID = cls[i].getId();
+                    }
                 }
             }
-        }
-        
-        
-        StudentACImpl sacd = new StudentACImpl();
-        
-        if(RegNo.trim().length() > 0){
-            DefaultListModel<String> dlm = new DefaultListModel<String>();
-            studList = sacd.getStudentListByRegno(RegNo);
-            for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-                Student Data = (Student) studList.get(i);
-                dlm.addElement(Data.getName());
+
+
+            StudentACImpl sacd = new StudentACImpl();
+
+            if(RegNo.trim().length() > 0){
+                DefaultListModel<String> dlm = new DefaultListModel<String>();
+                studList = sacd.getStudentListByRegno(RegNo);
+                for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                    Student Data = (Student) studList.get(i);
+                    dlm.addElement(Data.getName());
+                }
+                jList1.setModel(dlm);
+            }else{
+                DefaultListModel<String> dlm = new DefaultListModel<String>();
+                System.out.println("studname:"+StudName+" claddid:"+(classID)+" studsec :"+StudSec);
+                studList = sacd.getStudentListByName(StudName,String.valueOf(classID),StudSec);
+                for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                    Student Data = (Student) studList.get(i);
+                    dlm.addElement(Data.getName());
+                }
+                jList1.setModel(dlm);
             }
-            jList1.setModel(dlm);
-        }else{
-            DefaultListModel<String> dlm = new DefaultListModel<String>();
-            System.out.println("studname:"+StudName+" claddid:"+(classID)+" studsec :"+StudSec);
-            studList = sacd.getStudentListByName(StudName,String.valueOf(classID),StudSec);
-            for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-                Student Data = (Student) studList.get(i);
-                dlm.addElement(Data.getName());
-            }
-            jList1.setModel(dlm);
+            JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("eror in account search:"+err.getMessage());
         }
-        JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE); 
+         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
@@ -591,6 +627,9 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        if(jTextField1.getText().trim().length() == 0 ){
+            jTextField1.setText("0");
+        }
         try{
             jTextField2.setText(String.valueOf(Integer.valueOf(TotalFee)-Integer.valueOf(jTextField1.getText())));
         }catch(Exception e){
@@ -599,33 +638,59 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        //setting other ffee
-        ftc.setotherFee(Integer.valueOf(jTextField3.getText()));
-        int discAMT = Integer.valueOf(jTextField1.getText());
-        int PaidAMT = Integer.valueOf(jTextField2.getText());
-        if(TotalFee < discAMT+PaidAMT){
-            JOptionPane.showMessageDialog(rootPane, "You can't take Advance payment at this time!!");
+        if(jTextField3.getText().trim().length() == 0 ){
+            jTextField3.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Other Fee is Mindatory Field");
             return;
         }
-        StudentACImpl sad = new StudentACImpl();
-        int success = sad.paidTheFee(discAMT,PaidAMT,selectedRegNO,ftc);
-        System.out.println("row inserted:"+success);
-        if(success != 0 ){
-            JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+        if(jTextField1.getText().trim().length() == 0 ){
+            jTextField1.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Discount is Mindatory Field");
+            return;
         }
+        if(jTextField2.getText().trim().length() == 0 ){
+            jTextField2.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Paid Amount is Mindatory Field");
+            return;
+        }
+        
+        try{
+            //setting other ffee
+            ftc.setotherFee(Integer.valueOf(jTextField3.getText()));
+            int discAMT = Integer.valueOf(jTextField1.getText());
+            int PaidAMT = Integer.valueOf(jTextField2.getText());
+            if(PaidAMT<=0){
+                JOptionPane.showMessageDialog(rootPane, "You can't fee 0 fee");
+                return;
+            }
+            if(TotalFee < discAMT+PaidAMT){
+                JOptionPane.showMessageDialog(rootPane, "You can't take Advance payment at this time!!");
+                return;
+            }
+            StudentACImpl sad = new StudentACImpl();
+            int success = sad.paidTheFee(discAMT,PaidAMT,selectedRegNO,ftc);
+            System.out.println("row inserted:"+success);
+            if(success != 0 ){
+                JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
+                this.LoadFeeData();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+            }
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("error in accuont paid:"+err.getMessage());
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        
+        if(jTextField3.getText().trim().length() == 0 ){
+            jTextField3.setText("0");
+        }
         TotalFee += Integer.valueOf(jTextField3.getText());
         jLabel5.setText(String.valueOf(TotalFee));
     }//GEN-LAST:event_jTextField3FocusLost
-
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3KeyTyped
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
@@ -687,6 +752,24 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 //          jList1.doClick();
         }
     }//GEN-LAST:event_jList1KeyPressed
+
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_jTextField2KeyPressed
+
+    private void SubmitOnEnter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SubmitOnEnter
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_SubmitOnEnter
+
+    private void NumberFilter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumberFilter
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_NumberFilter
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
