@@ -23,11 +23,30 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public Stock[] selectStock() {
         int i=0;
-        Stock[] cl = new Stock[200]; 
+        
        // Vector
         Connection con =new DBConnection().connectDB();
+        int noOfRow = 0;
+        if(con != null){
+            try {
+                String sql1 = "SELECT COUNT(productstocktable.*) as Count FROM productstocktable " +
+                             "inner join product ON product.productID = productstocktable.ProductID " +
+                             "WHERE productstocktable.Flag = 1;";
+                Statement stmt1=con.createStatement();  
+                ResultSet rs1=stmt1.executeQuery(sql1);
+                
+                while(rs1.next()){
+                    noOfRow = rs1.getInt("Count");
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+        }
+        Stock[] cl = new Stock[noOfRow];
         if(con !=null ){
             try {
+                
                 String sql = "SELECT productstocktable.*,product.* FROM productstocktable " +
                              "inner join product ON product.productID = productstocktable.ProductID " +
                              "WHERE productstocktable.Flag = 1;";
@@ -61,10 +80,25 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     public ReportList[] report() {
-        int i=0;
-        ReportList[] cl = new ReportList[200]; 
+        int i=0; 
        // Vector
         Connection con =new DBConnection().connectDB();
+        int noOfRow = 0;
+        if(con != null){
+            try {
+                String sql1 = "SELECT COUNT(product.Name) as Count FROM `productstocktable` INNER JOIN product ON productstocktable.ProductID = product.productID WHERE productstocktable.Flag = 1 ORDER BY productstocktable.RQuantity;";
+                Statement stmt1=con.createStatement();  
+                ResultSet rs1=stmt1.executeQuery(sql1);
+                
+                while(rs1.next()){
+                    noOfRow = rs1.getInt("Count");
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+        }
+        ReportList[] cl = new ReportList[noOfRow];
         if(con !=null ){
             try {
                 String sql = "SELECT productstocktable.*, product.Name FROM `productstocktable` INNER JOIN product ON productstocktable.ProductID = product.productID WHERE productstocktable.Flag = 1 ORDER BY productstocktable.RQuantity;";
@@ -97,9 +131,24 @@ public class TransactionDaoImpl implements TransactionDao {
     
     public Session[] selectSession() {
         int i=0;
-        Session[] cl = new Session[30]; 
        // Vector
         Connection con =new DBConnection().connectDB();
+        int noOfRow = 0;
+        if(con != null){
+            try {
+                String sql1 = "SELECT COUNT(*) as Count from sessiontable ORDER BY sessionID DESC";
+                Statement stmt1=con.createStatement();  
+                ResultSet rs1=stmt1.executeQuery(sql1);
+                
+                while(rs1.next()){
+                    noOfRow = rs1.getInt("Count");
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+        }
+        Session[] cl = new Session[noOfRow];
         if(con !=null ){
             try {
                 String sql = "Select * from sessiontable ORDER BY sessionID DESC";
@@ -253,9 +302,24 @@ public class TransactionDaoImpl implements TransactionDao {
     
     public Cart[] selectCart() { 
        // Vector
-       Cart[] cl = new Cart[20];
        int i=0;
         Connection con =new DBConnection().connectDB();
+        int noOfRow = 0;
+        if(con != null){
+            try {
+                String sql1 = "SELECT COUNT(cart_id) as Count FROM cart_table WHERE status = 0";
+                Statement stmt1=con.createStatement();  
+                ResultSet rs1=stmt1.executeQuery(sql1);
+                
+                while(rs1.next()){
+                    noOfRow = rs1.getInt("Count");
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+        }
+        Cart[] cl = new Cart[noOfRow];
         if(con !=null ){
             try {
                 String sql = "SELECT cart_id,created_at FROM cart_table WHERE status = 0";
@@ -285,9 +349,26 @@ public class TransactionDaoImpl implements TransactionDao {
     
     public Transaction[] selectTransaction(int cart_id) { 
        // Vector
-       Transaction[] cl = new Transaction[20];
+       
        int i=0;
         Connection con =new DBConnection().connectDB();
+        int noOfRow = 0;
+        if(con != null){
+            try {
+                String sql1 = "SELECT COUNT(producttransactiontable.*) as Count FROM `producttransactiontable` INNER join product ON producttransactiontable.ProductID = product.productID WHERE producttransactiontable.cart_id = ?";
+                PreparedStatement stmt1= con.prepareStatement(sql1); 
+                stmt1.setInt(1, cart_id);
+                ResultSet rs1=stmt1.executeQuery();
+                
+                while(rs1.next()){
+                    noOfRow = rs1.getInt("Count");
+                }
+            } catch (SQLException ex) {
+                //Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
+            }
+        }
+        Transaction[] cl = new Transaction[noOfRow];
         if(con !=null ){
             try {
                 String sql = "SELECT producttransactiontable.*, product.Name FROM `producttransactiontable` INNER join product ON producttransactiontable.ProductID = product.productID WHERE producttransactiontable.cart_id = ?";
