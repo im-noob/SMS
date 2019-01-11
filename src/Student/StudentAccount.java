@@ -362,7 +362,7 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(1050, 150, 70, 30);
+        jButton4.setBounds(1060, 120, 70, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -3,23 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentDaoImpl.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/DataType/FeeType/FeeCalcDaoImpl.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/feemanagement/FeeManagement.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentAdmDao.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentAdmissionStage2.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/nbproject/build-impl.xml</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/DataType/FeeType/FeeCalc.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentACDao.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/FeeTypeClass.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/DataType/Session/Session.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentAdmission.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentACImpl.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentAdmDaoImpl.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/MainScreen/Welcome.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentAccount.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/Student/StudentFeeHistory.java</file>
-            <file>file:/C:/Java/SMS5/FeeManagement/src/DataType/Session/SessionDaoImpl.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/setting/SettingIFrame.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/MainScreen/Welcome.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/DataType/Expence/ExpenceDaoImpl.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/DataType/Expence/ExpenceDao.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/Report/ResponseDaoImpl.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/Student/StudentAdmissionStage2.java</file>
+            <file>file:/C:/Users/kumar/Documents/NetBeansProjects/Sms/src/Report/Collection.java</file>
         </group>
     </open-files>
 </project-private>

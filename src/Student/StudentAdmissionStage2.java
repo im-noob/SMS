@@ -557,7 +557,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         religion.setText(student.getReligion());            
         ph1.setText(student.getPh1());
         ph2.setText(student.getPh2());*/
-       sessionDaoImpl.calculateFeeInSessionChange(2);
+      sessionDaoImpl.calculateFeeInSessionChange(2);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -5,6 +5,7 @@
  */
 package DataType.Expence;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.Dimension;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form ExpenceIFrame
      */
-    int totalExpence = 0;
+    
     public ExpenceIFrame() {
         initComponents();
     }
@@ -35,6 +36,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
       this.jdate.setDate(new Date());
       clearField();
       selectData();
+     
     }
 
     /**
@@ -72,6 +74,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(102, 255, 102));
         jPanel1.setLayout(null);
 
+        etable.setAutoCreateRowSorter(true);
         etable.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         etable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,7 +92,6 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        etable.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(etable);
 
         jPanel1.add(jScrollPane2);
@@ -158,6 +160,11 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
         remark.setWrapStyleWord(true);
         remark.setName(""); // NOI18N
         remark.setNextFocusableComponent(save);
+        remark.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                remarkKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(remark);
 
         jPanel1.add(jScrollPane3);
@@ -202,6 +209,11 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+            if(this.price.getText().length() == 0){
+               JOptionPane.showMessageDialog(this,"Please Enter Price");
+               return;
+            }
+            
             Expence expence = new Expence();
             expence.setTitle(this.title.getItemAt(title.getSelectedIndex()));
             expence.setRemark(this.remark.getText());
@@ -243,11 +255,20 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
 
     private void priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceKeyTyped
         ComboBoxFiter.numberValidation(evt);
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            this.save.doClick();
+        }
     }//GEN-LAST:event_priceKeyTyped
 
     private void jdateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdateFocusLost
          selectData();
     }//GEN-LAST:event_jdateFocusLost
+
+    private void remarkKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_remarkKeyTyped
+         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            this.save.doClick();
+        }
+    }//GEN-LAST:event_remarkKeyTyped
     
     //clear field
     private void clearField(){
@@ -258,6 +279,7 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
     
     // Select Value
     private void selectData(){
+        int totalExpence = 0;
              Expence expence = new Expence();
             expence.setTitle(this.title.getItemAt(this.title.getSelectedIndex()));
             expence.setRemark(this.remark.getText());
@@ -278,8 +300,8 @@ public class ExpenceIFrame extends javax.swing.JInternalFrame {
                try{System.out.printf(expenceListVector[0].getTitle());
                     for(int i = 0;expenceListVector.length>i;i++){
                          
-modeal.addRow(new Object[]{expenceListVector[i].getTitle(),expenceListVector[i].getPrice(),expenceListVector[i].getDate(),expenceListVector[i].getRemark()});
-                     this.totalExpence += expenceListVector[i].getPrice();                         
+        modeal.addRow(new Object[]{expenceListVector[i].getTitle(),expenceListVector[i].getPrice(),expenceListVector[i].getDate(),expenceListVector[i].getRemark()});
+                    totalExpence += expenceListVector[i].getPrice();                         
                     }
            }
         catch(Exception ex){

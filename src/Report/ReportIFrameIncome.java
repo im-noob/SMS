@@ -6,6 +6,10 @@
 package Report;
 
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +32,10 @@ public class ReportIFrameIncome extends javax.swing.JInternalFrame {
       
         setBounds(0,0,size.width-10, size.height-10);
         setVisible(true);
+        
+        DateFormat df = new SimpleDateFormat("d MMM, yyyy");
+        this.date.setDate(new Date());
+      this.jMonthChooser1.setMonth(new Date().getMonth());
     }
 
     /**
@@ -109,17 +117,19 @@ public class ReportIFrameIncome extends javax.swing.JInternalFrame {
         date.setBounds(80, 20, 220, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Total Expence :");
+        jLabel4.setText("-----------");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(440, 30, 120, 17);
+        jLabel4.setBounds(440, 30, 70, 17);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Date :");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(20, 30, 40, 14);
+        jLabel5.setBounds(20, 30, 40, 17);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Total Expence :");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(360, 30, 90, 14);
+        jLabel6.setBounds(340, 30, 110, 17);
 
         jTabbedPane1.addTab("On Date", jPanel2);
 
@@ -233,7 +243,42 @@ public class ReportIFrameIncome extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_dateMouseExited
+    
+     /** Get all expence of today */
+    public void todayExpence(){
+         int totalExpence = 0;
+             Collection collection = new Collection();
+            
+            collection.setDate(date.getDate());
 
+         ResponseDaoImpl cls =new ResponseDaoImpl();
+        Collection[] collectionListVector = null;
+        collectionListVector = cls.todayCollection(collection);
+        
+        if(collectionListVector==null) {
+            System.out.printf("Null");
+        }
+        
+          DefaultTableModel modeal =(DefaultTableModel) this.etable.getModel(); 
+          while(modeal.getRowCount()>0)
+              modeal.removeRow(0);
+               try{System.out.printf(collectionListVector[0].getTitle());
+                    for(int i = 0;collectionListVector.length>i;i++){
+                         
+        modeal.addRow(new Object[]{collectionListVector[i].getTitle(),collectionListVector[i].getPrice(),collectionListVector[i].getDate(),collectionListVector[i].getRemark()});
+                    totalExpence += collectionListVector[i].getPrice();                         
+                    }
+           }
+        catch(Exception ex){
+            //  Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+              
+            System.out.print(ex);
+        }
+          this.jLabel4.setText(" "+totalExpence);
+       // this.classList.setListData(str);
+     
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date;

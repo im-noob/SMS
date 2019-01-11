@@ -5,7 +5,13 @@
  */
 package Report;
 
+import DataType.Expence.Expence;
+import DataType.Expence.ExpenceDaoImpl;
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +34,11 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
       
         setBounds(0,0,size.width-10, size.height-10);
         setVisible(true);
+        
+        DateFormat df = new SimpleDateFormat("d MMM, yyyy");
+        this.date.setDate(new Date());
+        this.jMonthChooser1.setMonth(new Date().getMonth());
+        todayExpence();
     }
 
     /**
@@ -42,13 +53,6 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        etable = new javax.swing.JTable();
-        date = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -61,6 +65,13 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         etable2 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        etable = new javax.swing.JTable();
+        date = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,71 +82,21 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 255, 102));
 
-        jPanel2.setBackground(new java.awt.Color(102, 255, 102));
-        jPanel2.setLayout(null);
-
-        etable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title", "Price", "Date", "Remarks"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(etable);
-
-        jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 70, 1000, 430);
-
-        date.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                dateFocusGained(evt);
-            }
-        });
-        date.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                dateMouseExited(evt);
-            }
-        });
-        jPanel2.add(date);
-        date.setBounds(80, 20, 220, 30);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Total Expence :");
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(440, 30, 120, 17);
-
-        jLabel5.setText("Date :");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(20, 30, 40, 14);
-
-        jLabel6.setText("Total Expence :");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(360, 30, 90, 14);
-
-        jTabbedPane1.addTab("On Date", jPanel2);
-
         jPanel3.setBackground(new java.awt.Color(102, 255, 102));
         jPanel3.setLayout(null);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Date :");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(20, 30, 40, 14);
+        jLabel7.setBounds(20, 30, 40, 17);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Total Expence :");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(360, 30, 90, 14);
+        jLabel8.setBounds(340, 30, 110, 17);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Total Expence :");
+        jLabel9.setText("--------");
         jPanel3.add(jLabel9);
         jLabel9.setBounds(440, 30, 120, 17);
 
@@ -162,7 +123,7 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
 
         jMonthChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel3.add(jMonthChooser1);
-        jMonthChooser1.setBounds(70, 20, 156, 30);
+        jMonthChooser1.setBounds(70, 20, 125, 30);
 
         jTabbedPane1.addTab("Month", jPanel3);
 
@@ -201,6 +162,58 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Session", jPanel4);
 
+        jPanel2.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel2.setLayout(null);
+
+        etable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title", "Price", "Date", "Remarks"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(etable);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 70, 1000, 430);
+
+        date.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                dateFocusGained(evt);
+            }
+        });
+        date.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dateMouseExited(evt);
+            }
+        });
+        jPanel2.add(date);
+        date.setBounds(60, 20, 220, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("----------");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(450, 30, 60, 17);
+
+        jLabel5.setText("Date :");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(20, 30, 40, 14);
+
+        jLabel6.setText("Total Expence :");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(360, 30, 90, 14);
+
+        jTabbedPane1.addTab("On Date", jPanel2);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -234,6 +247,41 @@ public class ReportIFrameExpence extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_dateMouseExited
 
+    /** Get all expence of today */
+    public void todayExpence(){
+         int totalExpence = 0;
+             Expence expence = new Expence();
+            
+            expence.setDate(date.getDate());
+
+         ExpenceDaoImpl cls =new ExpenceDaoImpl();
+        Expence[] expenceListVector = null;
+        expenceListVector = cls.selectExpence(expence);
+        
+        if(expenceListVector==null) {
+            System.out.printf("Null");
+        }
+        
+          DefaultTableModel modeal =(DefaultTableModel) this.etable.getModel(); 
+          while(modeal.getRowCount()>0)
+              modeal.removeRow(0);
+               try{System.out.printf(expenceListVector[0].getTitle());
+                    for(int i = 0;expenceListVector.length>i;i++){
+                         
+        modeal.addRow(new Object[]{expenceListVector[i].getTitle(),expenceListVector[i].getPrice(),expenceListVector[i].getDate(),expenceListVector[i].getRemark()});
+                    totalExpence += expenceListVector[i].getPrice();                         
+                    }
+           }
+        catch(Exception ex){
+            //  Logger.getLogger(ClassesDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+              
+            System.out.print(ex);
+        }
+          this.jLabel4.setText(" "+totalExpence);
+       // this.classList.setListData(str);
+     
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date;
