@@ -72,7 +72,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         mother = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         po = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         at = new javax.swing.JTextField();
@@ -281,10 +280,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel19.setText("DOB :");
         getContentPane().add(jLabel19);
         jLabel19.setBounds(420, 180, 37, 17);
-
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(480, 180, 200, 30);
 
         po.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         po.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1065,7 +1060,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
