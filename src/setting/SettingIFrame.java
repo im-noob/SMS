@@ -104,6 +104,10 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         sessionList = new javax.swing.JList<>();
         sID = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        endDate = new com.toedter.calendar.JDateChooser();
+        startDate = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         rID = new javax.swing.JLabel();
@@ -384,7 +388,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel4.add(sessionSave);
-        sessionSave.setBounds(560, 120, 128, 33);
+        sessionSave.setBounds(510, 230, 120, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Session :");
@@ -400,7 +404,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
             }
         });
         jPanel4.add(sessionTxt);
-        sessionTxt.setBounds(400, 90, 290, 23);
+        sessionTxt.setBounds(360, 90, 260, 23);
 
         sessionList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         sessionList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -415,12 +419,30 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
 
         sID.setText("jLabel7");
         jPanel4.add(sID);
-        sID.setBounds(340, 30, 34, 14);
+        sID.setBounds(100, 20, 34, 14);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText(" Session List ");
         jPanel4.add(jLabel27);
         jLabel27.setBounds(80, 60, 100, 17);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("End :");
+        jPanel4.add(jLabel11);
+        jLabel11.setBounds(320, 180, 40, 23);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Start :");
+        jPanel4.add(jLabel14);
+        jLabel14.setBounds(310, 140, 40, 23);
+
+        endDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel4.add(endDate);
+        endDate.setBounds(360, 180, 260, 30);
+
+        startDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel4.add(startDate);
+        startDate.setBounds(360, 140, 260, 30);
 
         jTabbedPane1.addTab("Session", jPanel4);
 
@@ -486,12 +508,12 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Select Session :");
         jPanel2.add(jLabel23);
-        jLabel23.setBounds(400, 50, 100, 17);
+        jLabel23.setBounds(180, 30, 100, 17);
 
         classSession1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         classSession1.setNextFocusableComponent(rName);
         jPanel2.add(classSession1);
-        classSession1.setBounds(510, 50, 240, 23);
+        classSession1.setBounds(290, 30, 240, 23);
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setText(" Transport List ");
@@ -680,7 +702,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jScrollPane11.setViewportView(jTable4);
 
         jPanel5.add(jScrollPane11);
-        jScrollPane11.setBounds(60, 350, 700, 150);
+        jScrollPane11.setBounds(10, 350, 830, 150);
 
         jTabbedPane1.addTab("Fee Book", jPanel5);
 
@@ -714,16 +736,16 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
         jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jToggleButton1.setText("ON");
         jPanel3.add(jToggleButton1);
-        jToggleButton1.setBounds(760, 50, 120, 30);
+        jToggleButton1.setBounds(730, 40, 120, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setText("Select Session :");
         jPanel3.add(jLabel25);
-        jLabel25.setBounds(350, 10, 100, 17);
+        jLabel25.setBounds(320, 10, 100, 17);
 
         classSession3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel3.add(classSession3);
-        classSession3.setBounds(460, 10, 240, 23);
+        classSession3.setBounds(420, 10, 240, 23);
 
         jTabbedPane1.addTab("Student List", jPanel3);
 
@@ -1268,6 +1290,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> classSession2;
     private javax.swing.JComboBox<String> classSession3;
     private javax.swing.JTextField code;
+    private com.toedter.calendar.JDateChooser endDate;
     private javax.swing.JTextField examFee;
     private javax.swing.JButton feeBookSave;
     private javax.swing.JButton feeBookSave1;
@@ -1279,8 +1302,10 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1336,6 +1361,7 @@ public class SettingIFrame extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> sessionList;
     private javax.swing.JButton sessionSave;
     private javax.swing.JTextField sessionTxt;
+    private com.toedter.calendar.JDateChooser startDate;
     private javax.swing.JList<String> transList;
     // End of variables declaration//GEN-END:variables
    

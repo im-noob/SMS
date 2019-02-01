@@ -5,6 +5,8 @@
  */
 package DataType.Session;
 
+import java.util.Date;
+
 /**
  *
  * @author kumar
@@ -12,6 +14,8 @@ package DataType.Session;
 public class Session {
     private int id;
     private String name;
+    private Date startDate;
+    private Date endDate;
 
     /**
      * @return the id
@@ -39,6 +43,34 @@ public class Session {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
     
