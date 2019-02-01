@@ -228,9 +228,16 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction(); 
         studentAdmission =new StudentAdmission(this.getSize());
          this.desktopPane.add(studentAdmission);
+<<<<<<< HEAD
          studentAccount.show(true);
          studentAccount.repaint();
          System.out.printf("\nClick");
+=======
+         studentAdmission.requestDefaultFocus();
+//         studentAccount.show(true);
+//         studentAccount.repaint();
+         System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -238,9 +245,16 @@ public class Welcome extends javax.swing.JFrame {
        // this.closeFunction(); 
         studentAdmissionStage2 =new StudentAdmissionStage2(this.getSize());
          this.desktopPane.add(studentAdmissionStage2);
+<<<<<<< HEAD
          studentAdmissionStage2.show(true);
          studentAdmissionStage2.repaint();
          System.out.printf("\nClick");
+=======
+//         studentAdmissionStage2.show(true);
+//         studentAdmissionStage2.repaint();
+         studentAdmissionStage2.requestDefaultFocus();
+         System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -248,9 +262,17 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction();
         studentAccount =new StudentAccount(this.getSize());
         this.desktopPane.add(studentAccount);
+<<<<<<< HEAD
         studentAdmission.show(true);
         studentAdmission.repaint();
         System.out.printf("\nClick");
+=======
+        studentAccount.requestFocus();
+//        studentAdmission.show(true);
+//        studentAdmission.repaint();
+
+        System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

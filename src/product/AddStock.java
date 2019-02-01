@@ -178,42 +178,47 @@ public class AddStock extends javax.swing.JInternalFrame {
         String Size = size.getText();
         String Price = price.getText();
         int ind = PList.getSelectedIndex();
-        if(data[ind].getId() == 0) {
-            JOptionPane.showMessageDialog(null, "Product is not Selected", "", JOptionPane.INFORMATION_MESSAGE);
-             pname.setFocusable(true);
-        }else if(SPValue == ""){
-             JOptionPane.showMessageDialog(null, "sell Price is empty", "", JOptionPane.INFORMATION_MESSAGE);
-             sellPrice.setFocusable(true);
-        }else if(Size == ""){
-             JOptionPane.showMessageDialog(null, "Size is empty", "", JOptionPane.INFORMATION_MESSAGE);
-             size.setFocusable(true);
-        }else if(Quantity == ""){
-             JOptionPane.showMessageDialog(null, "Quantity is empty", "", JOptionPane.INFORMATION_MESSAGE);
-             quantity.setFocusable(true);
-        }else if(Rate == ""){
-             JOptionPane.showMessageDialog(null, "Rate is empty", "", JOptionPane.INFORMATION_MESSAGE);
-             rate.setFocusable(true);
-        }else if(Price == ""){
-             JOptionPane.showMessageDialog(null, "Price is empty", "", JOptionPane.INFORMATION_MESSAGE);
-             price.setFocusable(true);
-        }else{
-            stk.setFlag(1);
-            stk.setPid(data[ind].getId());
-            stk.setSellPrice(Double.parseDouble(SPValue));
-            stk.setRate(Double.parseDouble(Rate));
-            stk.setQuantity(Integer.parseInt(Quantity));
-            stk.setRQuantity(Integer.parseInt(Quantity));
-            stk.setPrice(Double.parseDouble(Price));
-            stk.setSize(Size);
-            int i = sdi.InsertStock(stk);
-            if(i != 0){
-                JOptionPane.showMessageDialog(null, "Added Successfully", "", JOptionPane.INFORMATION_MESSAGE);
-                pname.setText("");
-                this.ResetData();
+        if(ind >= 0){
+            if(data[ind].getId() == 0) {
+                JOptionPane.showMessageDialog(null, "Product is not Selected", "", JOptionPane.INFORMATION_MESSAGE);
+                 pname.setFocusable(true);
+            }else if(SPValue.length() == 0){
+                 JOptionPane.showMessageDialog(null, "sell Price is empty", "", JOptionPane.INFORMATION_MESSAGE);
+                 sellPrice.setFocusable(true);
+            }else if(Size.length() == 0){
+                 JOptionPane.showMessageDialog(null, "Size is empty", "", JOptionPane.INFORMATION_MESSAGE);
+                 size.setFocusable(true);
+            }else if(Quantity.length() == 0){
+                 JOptionPane.showMessageDialog(null, "Quantity is empty", "", JOptionPane.INFORMATION_MESSAGE);
+                 quantity.setFocusable(true);
+            }else if(Rate.length() == 0){
+                 JOptionPane.showMessageDialog(null, "Rate is empty", "", JOptionPane.INFORMATION_MESSAGE);
+                 rate.setFocusable(true);
+            }else if(Price.length() == 0){
+                 JOptionPane.showMessageDialog(null, "Price is empty", "", JOptionPane.INFORMATION_MESSAGE);
+                 price.setFocusable(true);
+            }else{
+                stk.setFlag(1);
+                stk.setPid(data[ind].getId());
+                stk.setSellPrice(Double.parseDouble(SPValue));
+                stk.setRate(Double.parseDouble(Rate));
+                stk.setQuantity(Integer.parseInt(Quantity));
+                stk.setRQuantity(Integer.parseInt(Quantity));
+                stk.setPrice(Double.parseDouble(Price));
+                stk.setSize(Size);
+                int i = sdi.InsertStock(stk);
+                if(i != 0){
+                    JOptionPane.showMessageDialog(null, "Added Successfully", "", JOptionPane.INFORMATION_MESSAGE);
+                    pname.setText("");
+                    this.ResetData();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Something went wrong", "", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Something went wrong", "", JOptionPane.INFORMATION_MESSAGE);
-            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Select Product.", "", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_addButtonActionPerformed
 

@@ -11,9 +11,11 @@ import DataType.Employ.Employ;
 import DataType.Session.Session;
 import DataType.Session.SessionDaoImpl;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import setting.ComboBoxFiter;
 import transport.Transport;
 import transport.TransportDaoImpl;
@@ -70,7 +72,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         mother = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         po = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         at = new javax.swing.JTextField();
@@ -134,17 +135,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setNextFocusableComponent(jButton1);
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
             }
         });
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(90, 35, 206, 23);
+        jTextField1.setBounds(100, 40, 250, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Reg. No. :");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 38, 62, 17);
+        jLabel1.setBounds(20, 40, 62, 17);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
@@ -153,8 +157,13 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(326, 34, 90, 30);
+        jButton1.setBounds(390, 40, 90, 30);
 
         ph2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ph2.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +172,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             }
         });
         ph2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ph2KeyTyped(evt);
             }
@@ -173,24 +185,26 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Reg. No.");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(190, 80, 53, 17);
+        jLabel15.setBounds(30, 90, 53, 17);
 
+        regID.setEditable(false);
         regID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        regID.setFocusable(false);
         regID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 regIDKeyTyped(evt);
             }
         });
         getContentPane().add(regID);
-        regID.setBounds(250, 80, 251, 23);
+        regID.setBounds(100, 90, 251, 23);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Reff. By :");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(540, 80, 57, 17);
+        jLabel16.setBounds(400, 90, 57, 17);
 
         getContentPane().add(refByID);
-        refByID.setBounds(600, 80, 244, 20);
+        refByID.setBounds(480, 90, 244, 20);
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -202,6 +216,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton2.setText("Male");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jRadioButton2);
         jRadioButton2.setBounds(480, 130, 51, 25);
 
@@ -211,10 +230,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel18.setBounds(400, 130, 60, 17);
 
         name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(name);
         name.setBounds(100, 120, 251, 23);
 
         father.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        father.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(father);
         father.setBounds(100, 160, 251, 23);
 
@@ -239,19 +268,25 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 motherActionPerformed(evt);
             }
         });
+        mother.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(mother);
         mother.setBounds(100, 200, 251, 23);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("DOB :");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(420, 170, 37, 17);
-
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(470, 170, 200, 30);
+        jLabel19.setBounds(420, 180, 37, 17);
 
         po.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        po.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(po);
         po.setBounds(480, 250, 251, 23);
 
@@ -261,6 +296,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel6.setBounds(410, 250, 39, 17);
 
         at.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        at.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(at);
         at.setBounds(100, 240, 251, 23);
 
@@ -275,6 +315,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel8.setBounds(40, 270, 37, 17);
 
         ps.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(ps);
         ps.setBounds(100, 270, 251, 23);
 
@@ -284,10 +329,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel9.setBounds(410, 290, 36, 17);
 
         dist.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        dist.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(dist);
         dist.setBounds(480, 290, 251, 23);
 
         nationality.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nationality.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(nationality);
         nationality.setBounds(480, 330, 251, 23);
 
@@ -297,6 +352,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel14.setBounds(380, 330, 80, 17);
 
         state.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        state.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(state);
         state.setBounds(100, 330, 251, 23);
 
@@ -307,6 +367,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             }
         });
         pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 pinKeyTyped(evt);
             }
@@ -335,6 +398,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jTextField9ActionPerformed(evt);
             }
         });
+        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(jTextField9);
         jTextField9.setBounds(100, 370, 251, 23);
 
@@ -344,6 +412,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel37.setBounds(390, 370, 70, 17);
 
         religion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        religion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
+        });
         getContentPane().add(religion);
         religion.setBounds(480, 370, 251, 23);
 
@@ -355,6 +428,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         TransFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TransFee.setText("0");
         TransFee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TransFeeKeyTyped(evt);
             }
@@ -369,6 +445,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         ph1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ph1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyMoveToNextSection(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ph1KeyTyped(evt);
             }
@@ -387,6 +466,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel21.setBounds(-1, 590, 100, 17);
 
         studclass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        studclass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyPressed(evt);
+            }
+        });
         getContentPane().add(studclass);
         studclass.setBounds(100, 520, 250, 23);
 
@@ -407,6 +491,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(220, 633, 110, 30);
 
@@ -417,12 +506,20 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(70, 635, 100, 30);
 
         TutioonFee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TutioonFee.setText("0");
         TutioonFee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TutioonFeeKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TutioonFeeKeyTyped(evt);
             }
@@ -442,10 +539,25 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
         studclass1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         studclass1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        studclass1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                studclass1ItemStateChanged(evt);
+            }
+        });
+        studclass1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyPressed(evt);
+            }
+        });
         getContentPane().add(studclass1);
         studclass1.setBounds(100, 560, 250, 23);
 
         classSession3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        classSession3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterKeyPressed(evt);
+            }
+        });
         getContentPane().add(classSession3);
         classSession3.setBounds(480, 560, 250, 23);
 
@@ -474,7 +586,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     Transport []TranstList = null;
     Session[] sessionList = null;
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        
+//        bus fee editable
+        TransFee.setEditable(false);
         //for ref by non teaching employee
        StudentDaoImpl sdi = new StudentDaoImpl();
         nonTeachingList = sdi.getNonTeachingList();
@@ -511,9 +624,11 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
                 classSession3.addItem(sessionList[i].getName());
         }
         System.out.println("Form open studien admsjion steg 2 Form opened");
+//        foucs on regbox
+        jTextField1.requestFocus();
     }//GEN-LAST:event_formInternalFrameOpened
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       /*** StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
+        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();;
         RegNo = jTextField1.getText();
         Student student = sadi.getStudentData(RegNo);
         if(student == null)
@@ -539,7 +654,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             jRadioButton1.setSelected(true);
         }
         jDateChooser1.setDate(student.getDob());            
-        
+        System.out.println("dob:"+student.getDob());
         studentID = student.getStudentID();
 //        id.setText(String.valueOf(studentID));
         regID.setText(student.getRegID());
@@ -556,144 +671,256 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jTextField9.setText(student.getCaste());            
         religion.setText(student.getReligion());            
         ph1.setText(student.getPh1());
+<<<<<<< HEAD
         ph2.setText(student.getPh2());*/
       sessionDaoImpl.calculateFeeInSessionChange(2);
+=======
+        ph2.setText(student.getPh2());
+//       sessionDaoImpl.calculateFeeInSessionChange(2);
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
-
-        Student student = new Student();
-
-        student.setRegID(regID.getText());
-        
-        String selected_refid = refByID.getSelectedItem().toString();
-        Integer Selected_refIDint = 0 ;
-        for(int i = 0 ; i < nonTeachingList.size(); i++){
-                Employ Data = (Employ) nonTeachingList.get(i);
-                if(selected_refid == Data.getName())
-                    Selected_refIDint = Data.getId();                    
-        }
-        
-        student.setRefBy(Selected_refIDint.toString());
-        String studGender = null;
-        if(jRadioButton2.isSelected()){
-            studGender = "1";
-        }else if(jRadioButton1.isSelected()){
-            studGender = "2";
-        }
-        student.setGender(studGender);
-        student.setName(name.getText());
-        student.setFather(father.getText());
-
-        Date studdob = jDateChooser1.getDate();
-
-        student.setDob(studdob);
-
-        String studmother = mother.getText();
-        student.setMother(studmother);
-
-        String studat = at.getText();
-        student.setAt(studat);
-
-        String studpo = po.getText();
-        student.setPo(studpo);
-
-        String studps = ps.getText();
-        student.setPs(studps);
-
-        String studdist = dist.getText();
-        student.setDist(studdist);
-
-        String studpin = pin.getText();
-        student.setPin(studpin);
-
-        String studstate = state.getText();
-        student.setState(studstate);
-
-        String studnationality = nationality.getText();
-        student.setNationality(studnationality);
-
-        String studcast = jTextField9.getText();
-        student.setCaste(studcast);
-
-        String studreligion = religion.getText();
-        student.setReligion(studreligion);
-
-        String studph1 = ph1.getText();
-        student.setPh1(studph1);
-
-        String studph2 = ph2.getText();
-        student.setPh2(studph2);
-        
-        
-        String studstudclass = studclass.getSelectedItem().toString();
-        
-        int classID = 0 ;
-        for(int i =0 ; i < cls.length ; i ++){
-            if(cls[i] != null){
-                if(cls[i].getName().equals(studstudclass)){
-                    classID = cls[i].getId();
-                }
-            }
-        }
-        
-        int SessionId = 0;
-        String sessionToadimt = classSession3.getSelectedItem().toString();
-        for(int i =0 ; i < sessionList.length ; i ++){
-            if(sessionList[i] != null){
-                if(sessionList[i].getName().equals(sessionToadimt)){
-                    SessionId = sessionList[i].getId();
-                }
-            }
-        }
-        
-        int TransID = 0;
-        String nameOfRoute = studclass1.getSelectedItem().toString();
-        for(int i =0 ; i < TranstList.length ; i ++){
-            if(TranstList[i] != null){
-                if(TranstList[i].getRoute().equals(nameOfRoute)){
-                    TransID = TranstList[i].getId();
-                }
-            }
-        }
-        if(nameOfRoute.equals("None")){
-           TransID = 0 ;
-           System.out.println("none transport");
-        }
-        Admission adm = new Admission();
-        adm.setTransportFee(Integer.valueOf(TransFee.getText()));
-        adm.setTutionFee(Integer.valueOf(TutioonFee.getText()));
-        
-        String studsec = sec.getSelectedItem().toString();
-        
-        System.out.println("sending for update for regno:"+studentID+"regno:"+RegNo);
-        int i =sadi.updateStudent(student, Integer.valueOf(RegNo) );
-        if(i!=0){
-            System.out.println("Data Upadte .....");
-        }else{
-            System.out.println("error during update:"+i);
-            JOptionPane.showMessageDialog(this,"Error during update Retry..");
+        if(name.getText().trim().length() == 0 ){
+            name.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Name is Mindatory Field");
             return;
         }
-       
-        i = sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm,SessionId);//regno is just a student id in table
-        System.out.println("updated flag:"+i);
-         if(i == -485){
-            System.out.println("Already exists row");
-            JOptionPane.showMessageDialog(this,"Data Updated !! This admission is already Taken");
-        }else if(i!=0){
-            System.out.println("Data inserted New Admission .....");
-            JOptionPane.showMessageDialog(this,"Data Save...");
-        }
-        else{
-            System.out.println("error during save:"+i);
-            JOptionPane.showMessageDialog(this,"Error during save Retry..");
+        
+        if(father.getText().trim().length() == 0 ){
+            father.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Father name is Mindatory Field");
             return;
         }
+        
+        if(mother.getText().trim().length() == 0 ){
+            mother.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Mother name is Mindatory Field");
+            return;
+        }
+        
+        
+        if(jDateChooser1.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Date");
+        }
+        
+        if(at.getText().trim().length() == 0 ){
+            at.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"At is Mindatory Field");
+            return;
+        }
+        
+        if(po.getText().trim().length() == 0 ){
+            po.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Po is Mindatory Field");
+            return;
+        }
+        
+        if(ps.getText().trim().length() == 0 ){
+            ps.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "PS is Mindatory Field");
+            return;
+        }
+        
+        if(dist.getText().trim().length() == 0 ){
+            dist.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"Distric is Mindatory Field");
+            return;
+        }
+        if(pin.getText().trim().length() == 0 ){
+            pin.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "PINCODE is Mindatory Field");
+            return;
+        }
+        if(state.getText().trim().length() == 0 ){
+            state.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "State is Mindatory Field");
+            return;
+        }
+        if(nationality.getText().trim().length() == 0 ){
+            nationality.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"Nationality is Mindatory Field");
+            return;
+        }
+        if(jTextField9.getText().trim().length() == 0 ){
+            jTextField9.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Cast is Mindatory Field");
+            return;
+        }
+        if(religion.getText().trim().length() == 0 ){
+            religion.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Religion is Mindatory Field");
+            return;
+        }
+        if(ph1.getText().trim().length() == 0 ){
+            ph1.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Primary Phone NO is Mindatory Field");
+            return;
+        }
+        if(ph2.getText().trim().length() == 0 ){
+            ph2.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Secondry Phone NO");
+            return;
+        }
+        
+        
+        if(TransFee.getText().trim().length() == 0 ){
+            TransFee.setText("0");
+        }
+        if(TutioonFee.getText().trim().length() == 0 ){
+            TutioonFee.setText("0");
+        }
+        
+        
+
+//        try{
+            StudentAdmDaoImpl sadi = new StudentAdmDaoImpl();
+
+            Student student = new Student();
+
+            student.setRegID(regID.getText());
+
+            String selected_refid = refByID.getSelectedItem().toString();
+            Integer Selected_refIDint = 0 ;
+            for(int i = 0 ; i < nonTeachingList.size(); i++){
+                    Employ Data = (Employ) nonTeachingList.get(i);
+                    if(selected_refid == Data.getName())
+                        Selected_refIDint = Data.getId();                    
+            }
+
+            student.setRefBy(Selected_refIDint.toString());
+            String studGender = null;
+            if(jRadioButton2.isSelected()){
+                studGender = "1";
+            }else if(jRadioButton1.isSelected()){
+                studGender = "2";
+            }
+            student.setGender(studGender);
+            student.setName(name.getText());
+            student.setFather(father.getText());
+
+            Date studdob = jDateChooser1.getDate();
+
+            student.setDob(studdob);
+
+            String studmother = mother.getText();
+            student.setMother(studmother);
+
+            String studat = at.getText();
+            student.setAt(studat);
+
+            String studpo = po.getText();
+            student.setPo(studpo);
+
+            String studps = ps.getText();
+            student.setPs(studps);
+
+            String studdist = dist.getText();
+            student.setDist(studdist);
+
+            String studpin = pin.getText();
+            student.setPin(studpin);
+
+            String studstate = state.getText();
+            student.setState(studstate);
+
+            String studnationality = nationality.getText();
+            student.setNationality(studnationality);
+
+            String studcast = jTextField9.getText();
+            student.setCaste(studcast);
+
+            String studreligion = religion.getText();
+            student.setReligion(studreligion);
+
+            String studph1 = ph1.getText();
+            student.setPh1(studph1);
+
+            String studph2 = ph2.getText();
+            student.setPh2(studph2);
+
+
+            String studstudclass = studclass.getSelectedItem().toString();
+
+            int classID = 0 ;
+            for(int i =0 ; i < cls.length ; i ++){
+                if(cls[i] != null){
+                    if(cls[i].getName().equals(studstudclass)){
+                        classID = cls[i].getId();
+                    }
+                }
+            }
+
+            int SessionId = 0;
+            String sessionToadimt = classSession3.getSelectedItem().toString();
+            for(int i =0 ; i < sessionList.length ; i ++){
+                if(sessionList[i] != null){
+                    if(sessionList[i].getName().equals(sessionToadimt)){
+                        SessionId = sessionList[i].getId();
+                    }
+                }
+            }
+
+            int TransID = 0;
+            String nameOfRoute = studclass1.getSelectedItem().toString();
+            for(int i =0 ; i < TranstList.length ; i ++){
+                if(TranstList[i] != null){
+                    if(TranstList[i].getRoute().equals(nameOfRoute)){
+                        TransID = TranstList[i].getId();
+                    }
+                }
+            }
+            if(nameOfRoute.equals("None")){
+               TransID = 0 ;
+               System.out.println("none transport");
+            }
+            Admission adm = new Admission();
+            adm.setTransportFee(Integer.valueOf(TransFee.getText()));
+            adm.setTutionFee(Integer.valueOf(TutioonFee.getText()));
+
+            String studsec = sec.getSelectedItem().toString();
+
+            System.out.println("sending for update for regno:"+studentID+"regno:"+RegNo);
+            int i =sadi.updateStudent(student, Integer.valueOf(RegNo) );
+            if(i!=0){
+                System.out.println("Data Upadte .....");
+            }else{
+                System.out.println("error during update:"+i);
+                JOptionPane.showMessageDialog(this,"Error during update Retry..");
+                return;
+            }
+
+            String DataReceived = sadi.insertNewAdmission( RegNo, classID,studsec,TransID,adm,SessionId);//regno is just a student id in table
+            System.out.println("updated flag:"+DataReceived);
+            
+            int insF = Integer.valueOf(DataReceived.split(":")[0]);
+            
+
+            if(insF == -485){
+                System.out.println("Already exists row");
+                JOptionPane.showMessageDialog(this,"Data Updated !! This admission is already Taken");
+                jButton2.doClick();
+            }else if(i!=0){
+                String admNo  = DataReceived.split(":")[1];            
+                String rollNo  = DataReceived.split(":")[2];
+                System.out.println("Admission success!! ");
+                JOptionPane.showMessageDialog(this,"Admission success!! \n Your Roll Admission No.:"+admNo+"\n Your Roll No.:"+rollNo);
+                jButton2.doClick();            
+
+            }
+            else{
+                System.out.println("error during save:"+i);
+                JOptionPane.showMessageDialog(this,"Error during save Retry..");
+                return;
+            }
+//        }catch(Exception err){
+//            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+//            System.out.println("error in regstartoin step 2 search:"+err.getMessage());
+//        }
+        
+        
          
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -706,8 +933,8 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         regID.setText("");
         name.setText("");
         father.setText("");
-        jDateChooser1.getDate();
-        jDateChooser1.setDateFormatString("");
+//        jDateChooser1.getDate();
+        jDateChooser1.setCalendar(null);
         at.setText("");
         po.setText("");
         ps.setText("");
@@ -722,8 +949,9 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         mother.setText("");
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
-        TransFee.setText("");
-        TutioonFee.setText("");
+        TransFee.setText("0");
+        TutioonFee.setText("0");
+        jTextField1.requestFocus();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
@@ -761,6 +989,70 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_TutioonFeeKeyTyped
 
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_jButton3KeyPressed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void TutioonFeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TutioonFeeKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_TutioonFeeKeyPressed
+
+    private void studclass1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_studclass1ItemStateChanged
+        String nameOfRoute = studclass1.getSelectedItem().toString();
+        if(!nameOfRoute.equals("None")){
+           TransFee.setEditable(true);
+        }else{
+            TransFee.setEditable(false);
+            TransFee.setText("0");
+        }
+    }//GEN-LAST:event_studclass1ItemStateChanged
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_jButton2KeyPressed
+
+    private void EnterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_EnterKeyPressed
+
+    private void EnterKeyMoveToNextSection(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterKeyMoveToNextSection
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+//            JOptionPane.showMessageDialog(rootPane, "Next");
+            studclass.requestFocus();
+        }
+    }//GEN-LAST:event_EnterKeyMoveToNextSection
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TransFee;
@@ -773,7 +1065,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -335,14 +335,14 @@ public class TransctionReport extends javax.swing.JInternalFrame {
     private void SearchASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchASActionPerformed
         String value = admissionNo.getText();
         System.out.print(value);
-        if(value != ""){
+        if(value.length() != 0){
             int ind = this.sessionList.getSelectedIndex();
             crt = tdi.selectCart();   
             DefaultListModel<String> model = new DefaultListModel<>();
             this.PList.setModel(model);
             
             String[] str = tdi.selectStudent1(Integer.parseInt(value),ses[ind].getId());
-            if(str[0] != ""){
+            if(str[0].length() != 0){
                 stClass.setText(str[6]);
                 stRoll.setText(str[3]);
                 stSession.setText(str[7]);
@@ -363,6 +363,10 @@ public class TransctionReport extends javax.swing.JInternalFrame {
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "No Cart Found.", "", JOptionPane.INFORMATION_MESSAGE);
+                    stClass.setText("");
+                    stRoll.setText("");
+                    stSession.setText("");
+                    stSec.setText("");
                 }
             }
             else{

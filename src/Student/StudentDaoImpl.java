@@ -98,6 +98,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public int insertStudent(Student student) {
         int i=0;
+        int LastID = -1;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
@@ -131,8 +132,10 @@ public class StudentDaoImpl implements StudentDao {
 
                 stm.setString(18,student.getRegID());
                 i = stm.executeUpdate();
-                
-                return(i);
+                ResultSet rsGetInsId = stm.executeQuery("select last_insert_id() as last_id from studenttable");
+                rsGetInsId.next();
+                LastID = rsGetInsId.getInt("last_id");
+                return(LastID);
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.print(ex);

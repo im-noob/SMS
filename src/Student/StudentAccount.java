@@ -8,6 +8,7 @@ package Student;
 import DataType.Classes.Classes;
 import DataType.Classes.ClassesDaoImpl;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
 import java.util.List;
@@ -115,10 +116,24 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel1.setBounds(20, 20, 55, 17);
 
         ID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IDKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumberFilter(evt);
+            }
+        });
         getContentPane().add(ID);
         ID.setBounds(87, 20, 160, 23);
 
         ID1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID1.setNextFocusableComponent(jButton3);
+        ID1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ID1KeyPressed(evt);
+            }
+        });
         getContentPane().add(ID1);
         ID1.setBounds(310, 60, 150, 23);
 
@@ -131,6 +146,8 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel3.setText("Class :");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(260, 20, 39, 17);
+
+        jComboBox1.setNextFocusableComponent(STUDCLASS);
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(310, 20, 154, 20);
 
@@ -145,9 +162,15 @@ public class StudentAccount extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("GO");
+        jButton1.setNextFocusableComponent(jTextField3);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
         getContentPane().add(jButton1);
@@ -158,11 +181,19 @@ public class StudentAccount extends javax.swing.JInternalFrame {
                 jList1MouseClicked(evt);
             }
         });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 97, 240, 300);
 
+        jTabbedPane1.setFocusable(false);
+
+        jPanel1.setFocusable(false);
         jPanel1.setLayout(null);
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -193,6 +224,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel5.setBounds(100, 240, 90, 20);
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumberFilter(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,8 +270,12 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SubmitOnEnter(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
+                NumberFilter(evt);
             }
         });
         jPanel1.add(jTextField1);
@@ -244,6 +284,9 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField2.setText("0");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField2KeyTyped(evt);
             }
@@ -269,8 +312,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             }
         });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SubmitOnEnter(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                NumberFilter(evt);
             }
         });
         jPanel1.add(jTextField3);
@@ -330,6 +376,11 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jTabbedPane1.setBounds(265, 97, 784, 507);
 
         ID2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ID2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ID2KeyPressed(evt);
+            }
+        });
         getContentPane().add(ID2);
         ID2.setBounds(760, 70, 170, 23);
 
@@ -342,14 +393,27 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         jLabel10.setText("place:");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(710, 30, 36, 17);
+
+        jComboBox2.setNextFocusableComponent(ID2);
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox2);
         jComboBox2.setBounds(754, 30, 290, 20);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("GO");
+        jButton3.setNextFocusableComponent(jComboBox2);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
             }
         });
         getContentPane().add(jButton3);
@@ -376,12 +440,17 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         ClassesDaoImpl cdi = new ClassesDaoImpl();
         cls = cdi.selectClasses(1);
-        for(int i = 0 ; i < cls.length; i++){
+        if(cls != null){
+            for(int i = 0 ; i < cls.length; i++){
             if(cls[i] == null)
                 System.out.println("null ");
-            else
-                jComboBox1.addItem(cls[i].getName());
+                else
+                    jComboBox1.addItem(cls[i].getName());
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No classes Fount");
         }
+        
         
 //        
         StudentACImpl saci = new StudentACImpl();
@@ -389,33 +458,41 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         for(int i = 0 ; i < AddList.size(); i++){
             jComboBox2.addItem((String)AddList.get(i));
         }
-        
+//        
+        ID.requestFocus();
         
     }//GEN-LAST:event_formInternalFrameOpened
     List studList = null; //student list search 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String fname = ID2.getText();
-        String address = jComboBox2.getSelectedItem().toString();
-        
-        DefaultListModel<String> dlmPer = new DefaultListModel<String>();
-        StudentACImpl sacd = new StudentACImpl();
+        try{
+            String fname = ID2.getText();
+            String address = jComboBox2.getSelectedItem().toString();
 
-        studList = sacd.getStudentListByFatherName(fname,address);
-        for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-            Student Data = (Student) studList.get(i);
-            dlmPer.addElement(Data.getName());
+            DefaultListModel<String> dlmPer = new DefaultListModel<String>();
+            StudentACImpl sacd = new StudentACImpl();
+
+            studList = sacd.getStudentListByFatherName(fname,address);
+            for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                Student Data = (Student) studList.get(i);
+                dlmPer.addElement(Data.getName());
+            }
+            jList1.setModel(dlmPer);
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("error in account search:"+err.getMessage());
         }
-        jList1.setModel(dlmPer);
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     FeeTypeClass  ftc = null;
     int TotalFee = 0 ;
     String selectedRegNO = null;
     List<StudentFeeHistory> sfhList = null;
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+    
+    int index = -1;
+    public void LoadFeeData(){
         
-        
-        int index = jList1.locationToIndex(evt.getPoint());
         Student selectedStud = (Student) studList.get(index);
         selectedRegNO = selectedStud.getRegID();
         System.out.println("index: "+index+" id :"+selectedStud.getRegID()+" name:"+selectedStud.getName());
@@ -488,50 +565,61 @@ public class StudentAccount extends javax.swing.JInternalFrame {
             tmHis.addRow(objSfh);
             
         }
+    }
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        index = jList1.locationToIndex(evt.getPoint());
+        this.LoadFeeData();
+        
         
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String RegNo = ID.getText();
-        String StudName = ID1.getText();
-        String StudSec = STUDCLASS.getSelectedItem().toString();
-        
-        String studstudclass = jComboBox1.getSelectedItem().toString();
-        
-        int classID = 0 ;
-        for(int i =0 ; i < cls.length ; i ++){
-            if(cls[i] != null){
-                if(cls[i].getName().equals(studstudclass)){
-                    System.out.println("foundi ");
-                    classID = cls[i].getId();
+        try{
+            String RegNo = ID.getText();
+            String StudName = ID1.getText();
+            String StudSec = STUDCLASS.getSelectedItem().toString();
+
+            String studstudclass = jComboBox1.getSelectedItem().toString();
+
+            int classID = 0 ;
+            for(int i =0 ; i < cls.length ; i ++){
+                if(cls[i] != null){
+                    if(cls[i].getName().equals(studstudclass)){
+                        System.out.println("foundi ");
+                        classID = cls[i].getId();
+                    }
                 }
             }
-        }
-        
-        
-        StudentACImpl sacd = new StudentACImpl();
-        
-        if(RegNo.trim().length() > 0){
-            DefaultListModel<String> dlm = new DefaultListModel<String>();
-            studList = sacd.getStudentListByRegno(RegNo);
-            for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-                Student Data = (Student) studList.get(i);
-                dlm.addElement(Data.getName());
+
+
+            StudentACImpl sacd = new StudentACImpl();
+
+            if(RegNo.trim().length() > 0){
+                DefaultListModel<String> dlm = new DefaultListModel<String>();
+                studList = sacd.getStudentListByRegno(RegNo);
+                for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                    Student Data = (Student) studList.get(i);
+                    dlm.addElement(Data.getName());
+                }
+                jList1.setModel(dlm);
+            }else{
+                DefaultListModel<String> dlm = new DefaultListModel<String>();
+                System.out.println("studname:"+StudName+" claddid:"+(classID)+" studsec :"+StudSec);
+                studList = sacd.getStudentListByName(StudName,String.valueOf(classID),StudSec);
+                for(int i = 0 ; i < studList.size(); i++){
+    //                System.out.print( studList.get(i).toString());
+                    Student Data = (Student) studList.get(i);
+                    dlm.addElement(Data.getName());
+                }
+                jList1.setModel(dlm);
             }
-            jList1.setModel(dlm);
-        }else{
-            DefaultListModel<String> dlm = new DefaultListModel<String>();
-            System.out.println("studname:"+StudName+" claddid:"+(classID)+" studsec :"+StudSec);
-            studList = sacd.getStudentListByName(StudName,String.valueOf(classID),StudSec);
-            for(int i = 0 ; i < studList.size(); i++){
-//                System.out.print( studList.get(i).toString());
-                Student Data = (Student) studList.get(i);
-                dlm.addElement(Data.getName());
-            }
-            jList1.setModel(dlm);
+            JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("eror in account search:"+err.getMessage());
         }
-        JOptionPane.showMessageDialog(null, studList.size() + " Record Found ", "InfoBox: Search Result", JOptionPane.INFORMATION_MESSAGE); 
+         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
@@ -539,6 +627,9 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        if(jTextField1.getText().trim().length() == 0 ){
+            jTextField1.setText("0");
+        }
         try{
             jTextField2.setText(String.valueOf(Integer.valueOf(TotalFee)-Integer.valueOf(jTextField1.getText())));
         }catch(Exception e){
@@ -547,33 +638,59 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        //setting other ffee
-        ftc.setotherFee(Integer.valueOf(jTextField3.getText()));
-        int discAMT = Integer.valueOf(jTextField1.getText());
-        int PaidAMT = Integer.valueOf(jTextField2.getText());
-        if(TotalFee < discAMT+PaidAMT){
-            JOptionPane.showMessageDialog(rootPane, "You can't take Advance payment at this time!!");
+        if(jTextField3.getText().trim().length() == 0 ){
+            jTextField3.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Other Fee is Mindatory Field");
             return;
         }
-        StudentACImpl sad = new StudentACImpl();
-        int success = sad.paidTheFee(discAMT,PaidAMT,selectedRegNO,ftc);
-        System.out.println("row inserted:"+success);
-        if(success != 0 ){
-            JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+        if(jTextField1.getText().trim().length() == 0 ){
+            jTextField1.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Discount is Mindatory Field");
+            return;
         }
+        if(jTextField2.getText().trim().length() == 0 ){
+            jTextField2.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Paid Amount is Mindatory Field");
+            return;
+        }
+        
+        try{
+            //setting other ffee
+            ftc.setotherFee(Integer.valueOf(jTextField3.getText()));
+            int discAMT = Integer.valueOf(jTextField1.getText());
+            int PaidAMT = Integer.valueOf(jTextField2.getText());
+            if(PaidAMT<=0){
+                JOptionPane.showMessageDialog(rootPane, "You can't fee 0 fee");
+                return;
+            }
+            if(TotalFee < discAMT+PaidAMT){
+                JOptionPane.showMessageDialog(rootPane, "You can't take Advance payment at this time!!");
+                return;
+            }
+            StudentACImpl sad = new StudentACImpl();
+            int success = sad.paidTheFee(discAMT,PaidAMT,selectedRegNO,ftc);
+            System.out.println("row inserted:"+success);
+            if(success != 0 ){
+                JOptionPane.showMessageDialog(rootPane, "Sucessfully Paid");
+                this.LoadFeeData();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Somthing goes wrong");
+            }
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(rootPane, "Invalid Entry");
+            System.out.println("error in accuont paid:"+err.getMessage());
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        
+        if(jTextField3.getText().trim().length() == 0 ){
+            jTextField3.setText("0");
+        }
         TotalFee += Integer.valueOf(jTextField3.getText());
         jLabel5.setText(String.valueOf(TotalFee));
     }//GEN-LAST:event_jTextField3FocusLost
-
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3KeyTyped
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
@@ -588,6 +705,71 @@ public class StudentAccount extends javax.swing.JInternalFrame {
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         cbf.numberValidation(evt);
     }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void ID1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ID1KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_ID1KeyPressed
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_jButton3KeyPressed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void ID2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ID2KeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_ID2KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void IDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton3.doClick();
+        }
+    }//GEN-LAST:event_IDKeyPressed
+
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+//          jList1.doClick();
+        }
+    }//GEN-LAST:event_jList1KeyPressed
+
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_jTextField2KeyPressed
+
+    private void SubmitOnEnter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SubmitOnEnter
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            jButton2.doClick();
+        }
+    }//GEN-LAST:event_SubmitOnEnter
+
+    private void NumberFilter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumberFilter
+        cbf.numberValidation(evt);
+    }//GEN-LAST:event_NumberFilter
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
