@@ -72,7 +72,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         mother = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         po = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         at = new javax.swing.JTextField();
@@ -281,10 +280,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jLabel19.setText("DOB :");
         getContentPane().add(jLabel19);
         jLabel19.setBounds(420, 180, 37, 17);
-
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(480, 180, 200, 30);
 
         po.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         po.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -676,8 +671,18 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         jTextField9.setText(student.getCaste());            
         religion.setText(student.getReligion());            
         ph1.setText(student.getPh1());
+<<<<<<< HEAD
         ph2.setText(student.getPh2());
 //       sessionDaoImpl.calculateFeeInSessionChange(2);
+=======
+<<<<<<< HEAD
+        ph2.setText(student.getPh2());*/
+      sessionDaoImpl.calculateFeeInSessionChange(2);
+=======
+        ph2.setText(student.getPh2());
+//       sessionDaoImpl.calculateFeeInSessionChange(2);
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
+>>>>>>> d77a8d2340090031f553454b5cc3f0e9b126e613
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -704,6 +709,7 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
         
         if(jDateChooser1.getDate() == null){
             JOptionPane.showMessageDialog(rootPane, "Invalid Date");
+<<<<<<< HEAD
         }
         
         if(at.getText().trim().length() == 0 ){
@@ -749,6 +755,53 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Cast is Mindatory Field");
             return;
         }
+=======
+        }
+        
+        if(at.getText().trim().length() == 0 ){
+            at.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"At is Mindatory Field");
+            return;
+        }
+        
+        if(po.getText().trim().length() == 0 ){
+            po.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Po is Mindatory Field");
+            return;
+        }
+        
+        if(ps.getText().trim().length() == 0 ){
+            ps.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "PS is Mindatory Field");
+            return;
+        }
+        
+        if(dist.getText().trim().length() == 0 ){
+            dist.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"Distric is Mindatory Field");
+            return;
+        }
+        if(pin.getText().trim().length() == 0 ){
+            pin.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "PINCODE is Mindatory Field");
+            return;
+        }
+        if(state.getText().trim().length() == 0 ){
+            state.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "State is Mindatory Field");
+            return;
+        }
+        if(nationality.getText().trim().length() == 0 ){
+            nationality.requestFocus();
+            JOptionPane.showMessageDialog(rootPane,"Nationality is Mindatory Field");
+            return;
+        }
+        if(jTextField9.getText().trim().length() == 0 ){
+            jTextField9.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "Cast is Mindatory Field");
+            return;
+        }
+>>>>>>> d77a8d2340090031f553454b5cc3f0e9b126e613
         if(religion.getText().trim().length() == 0 ){
             religion.requestFocus();
             JOptionPane.showMessageDialog(rootPane, "Religion is Mindatory Field");
@@ -1065,7 +1118,6 @@ public class StudentAdmissionStage2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

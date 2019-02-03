@@ -445,9 +445,9 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         crt_id = tdi.selectCartId();
         crt_id += 1;
              System.out.print(value);
-             if(value != ""){
+             if(value.length() != 0){
                  String[] str = tdi.selectStudent(value);
-                 if(str[0] != ""){
+                 if(str[3].length() != 0){
                     stClass.setText(str[6]);
                     stRoll.setText(str[3]);
                     stSession.setText(str[7]);
@@ -460,7 +460,6 @@ public class TransctionUI extends javax.swing.JInternalFrame {
                  else{
                    JOptionPane.showMessageDialog(null, "No Record Found.", "", JOptionPane.INFORMATION_MESSAGE);  
                 }
-             
              }
              else{
                  JOptionPane.showMessageDialog(null, "Input Box is Empty.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -479,53 +478,59 @@ public class TransctionUI extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
         String vq = VQuantity.getText();
-        int qnt = 0;
-        try{
-            qnt = Integer.parseInt(vq);
-        }
-        catch(Exception e){
-            
-        }
-        int ind = PList.getSelectedIndex();
-        double Price = qnt * data[ind].getRate();
-        trns[sl].setAdmissionID(admid);
-        trns[sl].setRegNo(regNo);
-        trns[sl].setSid(sid);
-        trns[sl].setProductID(data[ind].getPid());
-        trns[sl].setQuntity(qnt);
-        trns[sl].setPrice(Price);
-        trns[sl].setCart_id(crt_id);
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{++sl,data[ind].getPName(),String.valueOf(qnt),String.valueOf(Price)});
-        
-        try{
-            double total = Double.parseDouble(TPValue.getText());
-            TPValue.setText(String.valueOf(total+Price));
-        }
-        catch(Exception ex){
-        
-        }
-        finally{
-            //TPValue.setText(String.valueOf(Price));
-        }
-        int rq = data[ind].getRQuantity();
-        if(qnt > rq){
-            JOptionPane.showMessageDialog(null, (qnt - rq)+"Items Pending", "", JOptionPane.INFORMATION_MESSAGE);
-            trns[sl-1].setStatus(0);
-            crt.setStatus(0);
-            data[ind].setRQuantity(0);
-            ritems.setText("0");
-            data[ind].setStatus(0);
-            tdi.UpdateStockStatus(data[ind]);
+        if(vq.length() != 0){
+            int qnt = 0;
+
+            try{
+                qnt = Integer.parseInt(vq);
+            }
+            catch(Exception e){
+
+            }
+            int ind = PList.getSelectedIndex();
+            double Price = qnt * data[ind].getRate();
+            trns[sl].setAdmissionID(admid);
+            trns[sl].setRegNo(regNo);
+            trns[sl].setSid(sid);
+            trns[sl].setProductID(data[ind].getPid());
+            trns[sl].setQuntity(qnt);
+            trns[sl].setPrice(Price);
+            trns[sl].setCart_id(crt_id);
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{++sl,data[ind].getPName(),String.valueOf(qnt),String.valueOf(Price)});
+
+            try{
+                double total = Double.parseDouble(TPValue.getText());
+                TPValue.setText(String.valueOf(total+Price));
+            }
+            catch(Exception ex){
+
+            }
+            finally{
+                //TPValue.setText(String.valueOf(Price));
+            }
+            int rq = data[ind].getRQuantity();
+            if(qnt > rq){
+                JOptionPane.showMessageDialog(null, (qnt - rq)+"Items Pending", "", JOptionPane.INFORMATION_MESSAGE);
+                trns[sl-1].setStatus(0);
+                crt.setStatus(0);
+                data[ind].setRQuantity(0);
+                ritems.setText("0");
+                data[ind].setStatus(0);
+                tdi.UpdateStockStatus(data[ind]);
+            }
+            else{
+                trns[sl-1].setStatus(1);
+                data[ind].setRQuantity(rq-qnt);
+                ritems.setText(String.valueOf(rq-qnt));
+               // data[ind].setQuantity(rq-qnt);
+            }
+            data[ind].setCheck(true);
+            VQuantity.setText("");
         }
         else{
-            trns[sl-1].setStatus(1);
-            data[ind].setRQuantity(rq-qnt);
-            ritems.setText(String.valueOf(rq-qnt));
-           // data[ind].setQuantity(rq-qnt);
+            JOptionPane.showMessageDialog(null, "Enter Quantity.", "", JOptionPane.INFORMATION_MESSAGE);
         }
-        data[ind].setCheck(true);
-        VQuantity.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void SearchASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchASActionPerformed
@@ -533,10 +538,10 @@ public class TransctionUI extends javax.swing.JInternalFrame {
         crt_id = tdi.selectCartId();
         crt_id += 1;
         System.out.print(value);
-        if(value != ""){
+        if(value.length() != 0){
             int ind = this.sessionList.getSelectedIndex();
             String[] str = tdi.selectStudent1(Integer.parseInt(value),ses[ind].getId());
-            if(str[0] != ""){
+            if(str[3].length() != 0){
                 stClass.setText(str[6]);
                 stRoll.setText(str[3]);
                 stSession.setText(str[7]);

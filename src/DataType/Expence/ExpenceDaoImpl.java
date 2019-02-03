@@ -49,7 +49,8 @@ public class ExpenceDaoImpl implements ExpenceDao{
             }
          }
         return i; }
-
+            
+      /** today expence*/
     @Override
     public Expence[] selectExpence(Expence expence) {
         int i = -1;

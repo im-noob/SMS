@@ -11,6 +11,9 @@ package DataType.Expence;
  */
 public interface ExpenceDao {
      int insertExpence(Expence expence);
+       /** today expence*/
      Expence[] selectExpence(Expence expence);
+     
+   
     int updateExpence(Expence expence);
 }

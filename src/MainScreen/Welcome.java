@@ -7,6 +7,8 @@ package MainScreen;
 
 import DataType.Employ.EmployeEntry;
 import DataType.Expence.ExpenceIFrame;
+import Report.ReportIFrameExpence;
+import Report.ReportIFrameIncome;
 import Student.StudentAccount;
 import Student.StudentAdmission;
 import Student.StudentAdmissionStage2;
@@ -70,6 +72,9 @@ public class Welcome extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         setting = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        expense = new javax.swing.JMenuItem();
+        collection = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,6 +182,31 @@ public class Welcome extends javax.swing.JFrame {
 
         menuBar.add(setting);
 
+        jMenu4.setText("Report");
+
+        expense.setText("Expense");
+        expense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expenseActionPerformed(evt);
+            }
+        });
+        jMenu4.add(expense);
+
+        collection.setText("Collection");
+        collection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                collectionActionPerformed(evt);
+            }
+        });
+        collection.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                collectionKeyTyped(evt);
+            }
+        });
+        jMenu4.add(collection);
+
+        menuBar.add(jMenu4);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,10 +228,16 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction(); 
         studentAdmission =new StudentAdmission(this.getSize());
          this.desktopPane.add(studentAdmission);
+<<<<<<< HEAD
+         studentAccount.show(true);
+         studentAccount.repaint();
+         System.out.printf("\nClick");
+=======
          studentAdmission.requestDefaultFocus();
 //         studentAccount.show(true);
 //         studentAccount.repaint();
          System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -209,10 +245,16 @@ public class Welcome extends javax.swing.JFrame {
        // this.closeFunction(); 
         studentAdmissionStage2 =new StudentAdmissionStage2(this.getSize());
          this.desktopPane.add(studentAdmissionStage2);
+<<<<<<< HEAD
+         studentAdmissionStage2.show(true);
+         studentAdmissionStage2.repaint();
+         System.out.printf("\nClick");
+=======
 //         studentAdmissionStage2.show(true);
 //         studentAdmissionStage2.repaint();
          studentAdmissionStage2.requestDefaultFocus();
          System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -220,11 +262,17 @@ public class Welcome extends javax.swing.JFrame {
         //this.closeFunction();
         studentAccount =new StudentAccount(this.getSize());
         this.desktopPane.add(studentAccount);
+<<<<<<< HEAD
+        studentAdmission.show(true);
+        studentAdmission.repaint();
+        System.out.printf("\nClick");
+=======
         studentAccount.requestFocus();
 //        studentAdmission.show(true);
 //        studentAdmission.repaint();
 
         System.out.printf("Click");
+>>>>>>> b7558bc008c58c9ae9cf0b12f8d0977e42d837c2
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -233,7 +281,7 @@ public class Welcome extends javax.swing.JFrame {
          this.desktopPane.add(employeEntry);
          employeEntry.show(true);
          employeEntry.repaint();
-         System.out.printf("Click");
+         System.out.printf("\nClick");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -242,7 +290,7 @@ public class Welcome extends javax.swing.JFrame {
         this.desktopPane.add(settingIFrame);
         settingIFrame.show(true);
         settingIFrame.repaint();
-        System.out.printf("Click");
+        System.out.printf("\nClick");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
   
     /**
@@ -313,8 +361,28 @@ public class Welcome extends javax.swing.JFrame {
         TransctionReport siframe = new TransctionReport(this.getSize());
         desktopPane.add(siframe);
         siframe.show(true);
-        System.out.printf("Click");
+        //System.out.printf("Click");
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void expenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenseActionPerformed
+         ReportIFrameExpence reportIFrameExpence = new ReportIFrameExpence(this.getSize());
+         this.desktopPane.add(reportIFrameExpence);
+         reportIFrameExpence.show();
+         System.out.printf("\nReportIFrameExpence");
+    }//GEN-LAST:event_expenseActionPerformed
+
+    private void collectionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_collectionKeyTyped
+          
+        
+         System.out.printf("\nReportIFrameExpence");
+    }//GEN-LAST:event_collectionKeyTyped
+
+    private void collectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collectionActionPerformed
+         ReportIFrameIncome reportIFrameIncome = new ReportIFrameIncome(this.getSize());
+         this.desktopPane.add(reportIFrameIncome);
+         reportIFrameIncome.show();
+         System.out.println("\nReportIFrameIncome");
+    }//GEN-LAST:event_collectionActionPerformed
 
     
     
@@ -354,10 +422,13 @@ public class Welcome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem collection;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenuItem expense;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
