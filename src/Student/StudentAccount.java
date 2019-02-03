@@ -551,6 +551,16 @@ public class StudentAccount extends javax.swing.JInternalFrame {
         
 //        filling second history table
         DefaultTableModel tmHis = (DefaultTableModel) jTable2.getModel();
+        try{
+            int rowCount = tmHis.getRowCount();
+            //Remove rows one by one from the end of the table
+            for (int i = rowCount - 1; i >= 0; i--) {
+                tmHis.removeRow(i);
+            }
+
+        }catch(Exception e){
+            System.out.println("reving failed");
+        }
         for(int k = 0 ; k < sfhList.size() ; k ++){
             StudentFeeHistory sfh = sfhList.get(k);
             Object objSfh[] = {
