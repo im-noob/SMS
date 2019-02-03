@@ -74,14 +74,14 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print("Select Me error");
-                System.out.print(ex);
+                System.out.println("Select Me error");
+                System.out.println(ex);
             }
             try {
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
          }
        
@@ -138,19 +138,19 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 stm.setString(17,student.getRefBy());
 
                 stm.setString(18,student.getRegID());
-                System.out.print(sql);
+                System.out.println(sql);
                 i = stm.executeUpdate();
                 
 //                return(i);
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
             try {
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
         }
         return i;
@@ -161,9 +161,12 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
     
     
     @Override
-    public int insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm,int SessionId) {
+    public String insertNewAdmission(String regno,int studstudclass,String studsec,int TransID,Admission adm,int SessionId) {
         
         int i=0;
+        int admno = 0 ;
+        int rollNo = 0 ;
+        int lastInsertID = 0 ;
         Connection con =new DBConnection().connectDB();
         if(con !=null ){
             try {
@@ -175,7 +178,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 rsCheckExist.next();
                 if(rsCheckExist.getInt("EXISTSRow") == 1){
                     System.out.println("check exists:"+rsCheckExist.getInt("EXISTSRow"));
-                    return(-485);
+                    return("-485:");
                 }
                     
                
@@ -207,7 +210,7 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 String sql = "INSERT INTO `admissiontable`(  `RegNo`,`AdmissionSlNo`, `ClassID`, `Sec`, `Roll`, `TransportID`, "
                         + "`Status`, `Session`, `transportFee`, `tutionFee`) "
                         + "VALUES (?,(select classtable.code FROM classtable WHERE ClassID = ?) + ?+1,?,?,?,?,?,"+SessionId+",?,? )";
-                System.out.print("this is sql :"+sql);
+                System.out.println("this is sql :"+sql);
                 PreparedStatement stm=con.prepareStatement(sql);
                 stm.setInt(1,Integer.valueOf(regno));
                 stm.setInt(2, studstudclass);
@@ -221,7 +224,11 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 stm.setInt(10, adm.getTutionFee());
 
                 i = stm.executeUpdate();
-               
+                ResultSet rsGetInsId = stm.executeQuery("select last_insert_id() as last_id from admissiontable");
+                rsGetInsId.next();
+                lastInsertID = rsGetInsId.getInt("last_id");
+                System.out.println("lastInsertID:"+lastInsertID);
+                System.out.println("I in admion stage 2 :"+i);
                 if(TransID != 0){
                     String sqlrouteTrans = "INSERT INTO `transportfeetable`("
                         + " `RegNo`, `session`, `routeID`) "
@@ -231,24 +238,33 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                     
                     Statement stmtTrans=con.createStatement(); 
                     stmtTrans.executeUpdate(sqlrouteTrans);
-                
-                    
-                    
+       
+                }
+                if(i!=0){
+                     String sqlGetAdmndRoll = "SELECT AdmissionSlNo,Roll FROM "
+                            + "admissiontable WHERE "
+                            + "AdmissionID = "+lastInsertID ;
+                    System.out.println("sql amdion nd roll no "+sqlGetAdmndRoll);
+                    ResultSet rsGetrollAdm = stm.executeQuery(sqlGetAdmndRoll);
+                    while(rsGetrollAdm.next()){
+                        admno = rsGetrollAdm.getInt("AdmissionSlNo");
+                        rollNo = rsGetrollAdm.getInt("Roll");
+                    }  
                 }
                 
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
             try {
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
          }
-        return i; 
+        return(i+":"+admno+":"+rollNo); 
     }
 
     List getNonTeachingList() {//getting class list
@@ -269,14 +285,14 @@ public class StudentAdmDaoImpl implements StudentAdmDao {
                 
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print("Select Me error");
-                System.out.print(ex);
+                System.out.println("Select Me error");
+                System.out.println(ex);
             }
             try {
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.print(ex);
+                System.out.println(ex);
             }
          }
        

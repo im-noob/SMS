@@ -133,6 +133,7 @@ public class StudentDaoImpl implements StudentDao {
                 stm.setString(18,student.getRegID());
                 i = stm.executeUpdate();
                 ResultSet rsGetInsId = stm.executeQuery("select last_insert_id() as last_id from studenttable");
+                rsGetInsId.next();
                 LastID = rsGetInsId.getInt("last_id");
                 return(LastID);
             } catch (SQLException ex) {
